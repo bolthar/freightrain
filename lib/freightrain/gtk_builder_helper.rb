@@ -11,8 +11,10 @@ module Freightrain
           instance_eval "def #{widget.name}; return @builder.get_object('#{widget.name}');end"
         end
         @builder.connect_signals do |handler|
-          if self.respond_to? :handler
-            return method(handler)
+          if self.respond_to? handler
+            method(handler) if self.respond_to? handler
+          else
+            p "#{handler} not implemented"
           end
         end
       end
