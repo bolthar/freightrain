@@ -20,10 +20,8 @@ class GtkBuilderHelperFixture < Test::Unit::TestCase
   end
 
   def test_loadFromFile_gtkbuilderfilepresent_addaClassMethodForeachWidget
-    dirname = File.dirname(__FILE__)
-    File.stubs(:dirname).returns(dirname)
     view = TestView.new
-    view.load_from_file("testview.glade")
+    view.load_from_file(File.dirname(__FILE__) + "/testview.glade")
     assert(view.respond_to? :window)
   end
 
