@@ -1,3 +1,3 @@
 
-require File.dirname(__FILE__) + '/gtk_builder_helper.rb'
-require File.dirname(__FILE__) + '/freight_view.rb'
+require File.dirname(__FILE__) + '/freightrain/gtk_builder_helper.rb'
+require File.dirname(__FILE__) + '/freightrain/freight_view.rb'

@@ -1,4 +1,3 @@
-require 'gtk_builder_helper.rb'
 
 class FreightView
   include GtkBuilderHelper
