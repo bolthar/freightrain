@@ -6,7 +6,7 @@ module Freightrain
     include GtkBuilderHelper
 
     def initialize
-      load_from_file(File.join(File.dirname(__FILE__), "#{self.class.name}.glade"))
+      load_from_file(File.join(Freightrain.APP_PATH,"views","#{self.class.name}.glade"))
     end
 
   end

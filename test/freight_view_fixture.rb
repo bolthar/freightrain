@@ -2,7 +2,7 @@
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
 require 'test/unit'
-require 'freightrain/freight_view.rb'
+require 'freightrain.rb'
 require 'mocha'
 
 include Freightrain
@@ -13,10 +13,14 @@ end
 
 class FreightViewFixture < Test::Unit::TestCase
 
+  def setup
+    Freightrain.APP_PATH = File.dirname(__FILE__)
+  end
+
   def test_ctor_always_callLoadFromFile
     dirname = File.dirname(__FILE__)
     File.stubs(:dirname).returns(dirname)
-    File.expects(:exists?).with(File.join(dirname,"DerivedTestView.glade"))
+    File.expects(:exists?).with(File.join(dirname,"views", "DerivedTestView.glade"))
     DerivedTestView.new
   end
 
