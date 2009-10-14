@@ -1,3 +1,4 @@
+require File.dirname(__FILE__) + "/gtk_builder_helper.rb"
 
 module Freightrain
 

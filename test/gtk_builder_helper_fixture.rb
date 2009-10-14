@@ -4,8 +4,10 @@
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
 require 'test/unit'
-require 'gtk_builder_helper.rb'
+require 'freightrain/gtk_builder_helper.rb'
 require 'mocha'
+
+include Freightrain
 
 class TestView
   include GtkBuilderHelper

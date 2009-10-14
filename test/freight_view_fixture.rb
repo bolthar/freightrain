@@ -2,8 +2,10 @@
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
 require 'test/unit'
-require 'freight_view.rb'
+require 'freightrain/freight_view.rb'
 require 'mocha'
+
+include Freightrain
 
 class DerivedTestView < FreightView
 
