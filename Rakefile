@@ -9,7 +9,7 @@ require 'spec/rake/spectask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'freightrain'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.has_rdoc = false
   s.summary = 'ruby desktop development made easy'
   s.description = s.summary
