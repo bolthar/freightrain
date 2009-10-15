@@ -5,6 +5,10 @@ module Freightrain
   class FreightView
     include GtkBuilderHelper
 
+    def toplevel
+      return @builder.objects.select { |widget| widget.kind_of? Gtk::Window}[0]
+    end
+
     def initialize
       load_from_file(File.join(Freightrain.APP_PATH,"views","#{self.class.name}.glade"))
     end

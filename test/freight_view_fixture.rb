@@ -30,4 +30,11 @@ class FreightViewFixture < Test::Unit::TestCase
     view = DerivedTestView.new
     assert view.respond_to? :vbox
   end
+
+  def test_toplevel_testview_returnWindow
+    dirname = File.dirname(__FILE__)
+    File.stubs(:dirname).returns(dirname)
+    view = DerivedTestView.new
+    assert_equal view.toplevel, view.window
+  end
 end
