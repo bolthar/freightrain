@@ -4,6 +4,7 @@ module Freightrain
 
   class FreightView
     include GtkBuilderHelper
+    include DialogHelper
 
     def toplevel
       return @builder.objects.select { |widget| widget.kind_of? Gtk::Window}[0]
