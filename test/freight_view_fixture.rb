@@ -17,6 +17,16 @@ class FreightViewFixture < Test::Unit::TestCase
     Freightrain.APP_PATH = File.dirname(__FILE__)
   end
 
+  def test_include_always_GtkBuilderHelper
+    view = DerivedTestView.new
+    assert view.kind_of? GtkBuilderHelper
+  end
+
+  def test_include_always_DialogHelper
+    view = DerivedTestView.new
+    assert view.kind_of? DialogHelper
+  end
+
   def test_ctor_always_callLoadFromFile
     dirname = File.dirname(__FILE__)
     File.stubs(:dirname).returns(dirname)
