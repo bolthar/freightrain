@@ -14,7 +14,7 @@ module Freightrain
           if self.respond_to? handler
             method(handler) if self.respond_to? handler
           else
-            p "#{handler} not implemented"
+            lambda {p "#{handler} not implemented"}
           end
         end
       end
