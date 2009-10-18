@@ -5,7 +5,6 @@ require 'rake/clean'
 require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/testtask'
-require 'spec/rake/spectask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'freightrain'
