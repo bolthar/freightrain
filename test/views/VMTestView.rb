@@ -1,0 +1,6 @@
+
+
+class VMTestView < FreightView
+
+  
+end
