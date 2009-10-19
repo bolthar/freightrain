@@ -9,6 +9,12 @@ module Freightrain
     return @app_path || ""
   end
 
+  def self.start(viewmodel)
+    viewmodel.new.show
+    Gtk.main
+  end
+
+
 end
 
 require File.dirname(__FILE__) + '/freightrain/freight_signal.rb'
