@@ -14,6 +14,14 @@ class TestViewModel < FreightViewModel
 
 end
 
+class TestViewModelSignal < FreightViewModel
+
+  def on_test()
+
+  end
+
+end
+
 class VMTestViewModel < FreightViewModel
 
   def get_view
@@ -37,8 +45,25 @@ class FreightViewModelFixture < Test::Unit::TestCase
   end
 
   def test_ctor_viewParamNotProvidedAndNoviewWithRightName_raise
-    assert_raise NameError do 
-      VMTestViewModel.new
+    assert_raise NoMethodError do
+      TestViewModel.new
     end
   end
+
+  def test_ctor_signalOnViewButNoCallback_doNotCallConnect
+    view = stub
+    signal = mock
+    signal.expects(:connect).never
+    view.stubs(:signals).returns({:test => signal})
+    TestViewModel.new(view)
+  end
+
+  def test_ctor_signalOnViewAndCallbackPresent_connectSignal
+    view = stub
+    signal = mock
+    signal.expects(:connect)
+    view.stubs(:signals).returns({:test => signal})
+    TestViewModelSignal.new(view)
+  end
+
 end
