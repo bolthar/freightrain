@@ -47,4 +47,5 @@ class FreightViewFixture < Test::Unit::TestCase
     view = DerivedTestView.new
     assert_equal view.toplevel, view.window
   end
+
 end

@@ -12,10 +12,6 @@ module Freightrain
       return @builder.objects.select { |widget| widget.kind_of? Gtk::Window}[0]
     end
     
-    def show
-      toplevel.visible = true
-    end
-
     def self.signal(signal_name)
       @@signals ||= []
       @@signals << signal_name.to_sym

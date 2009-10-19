@@ -66,4 +66,13 @@ class FreightViewModelFixture < Test::Unit::TestCase
     TestViewModelSignal.new(view)
   end
 
+  def test_show_always_setVisibletrueOnViewToplevel
+    view = stub
+    toplevel = mock
+    toplevel.expects(:visible=).with(true)
+    view.stubs(:toplevel).returns(toplevel)
+    view.stubs(:signals).returns([])
+    TestViewModel.new(view).show
+  end
+
 end

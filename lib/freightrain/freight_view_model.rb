@@ -15,5 +15,9 @@ module Freightrain
       end      
     end
 
+    def show
+      @view.toplevel.visible = true
+    end
+
   end
 end
