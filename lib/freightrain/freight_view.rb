@@ -26,7 +26,7 @@ module Freightrain
       @signals = {}
       @@signals ||= []
       @@signals.each do |signal|
-          @signals[signal] = FreightSignal.new
+        @signals[signal] = FreightSignal.new
       end     
     end
 

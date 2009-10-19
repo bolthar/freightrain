@@ -11,6 +11,13 @@ class DerivedTestView < FreightView
 
 end
 
+class SignalsTestView < FreightView
+
+  signal :test_one
+  signal :test_two
+
+end
+
 class FreightViewFixture < Test::Unit::TestCase
 
   def setup
@@ -47,5 +54,12 @@ class FreightViewFixture < Test::Unit::TestCase
     view = DerivedTestView.new
     assert_equal view.toplevel, view.window
   end
+
+  def test_selfSignal_always_addSignalsOnCtor
+    view = DerivedTestView.new
+    assert_equal 2,view.signals.length 
+  end
+
+
 
 end
