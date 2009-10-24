@@ -13,7 +13,7 @@ module Freightrain
 
     def initialize
       @@services.each do |service|
-        eval "@#{service} = Freightrain[:#{(service.to_s + "Service").to_sym}"
+        eval "@#{service} = Freightrain[:#{service.to_s + '_service'}]"
       end
     end
 
