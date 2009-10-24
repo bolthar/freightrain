@@ -13,6 +13,7 @@ class AutoRequirerFixture < Test::Unit::TestCase
   def test_onFTStart_always_callAutoRequire
     Gtk.stubs(:main)
     Freightrain.expects(:auto_require!)
+    Freightrain.stubs(:configure_container!)
     Freightrain.start(stub(:new => stub(:show)))
   end
   

@@ -32,20 +32,17 @@ end
 
 class FreightViewModelFixture < Test::Unit::TestCase
 
-  def test_ctor_viewParamProvided_callSignalsOnParam
+  def test_ctor_always_fetchViewFromFreightrain
     view = mock()
-    view.expects(:signals).returns(stub(:each => nil))
-    TestViewModel.new(view)
+    view.stubs(:signals).returns(stub(:each => nil))
+    Freightrain.expects(:[]).with(:TestView).returns(view)
+    TestViewModel.new()
   end
 
-  def test_ctor_viewParamNotProvided_initializeCorrectView
-    require File.dirname(__FILE__) + '/views/VMTestView.rb'
-    viewmodel = VMTestViewModel.new
-    assert_equal VMTestView, viewmodel.get_view.class
-  end
 
-  def test_ctor_viewParamNotProvidedAndNoviewWithRightName_raise
-    assert_raise NoMethodError do
+  def test_ctor_noViewWithRightName_bubbleException
+    Freightrain.expects(:[]).with(:TestView).raises(Exception)
+    assert_raise Exception do
       TestViewModel.new
     end
   end
@@ -55,7 +52,8 @@ class FreightViewModelFixture < Test::Unit::TestCase
     signal = mock
     signal.expects(:connect).never
     view.stubs(:signals).returns({:test => signal})
-    TestViewModel.new(view)
+    Freightrain.expects(:[]).with(:TestView).returns(view)
+    TestViewModel.new()
   end
 
   def test_ctor_signalOnViewAndCallbackPresent_connectSignal
@@ -63,7 +61,8 @@ class FreightViewModelFixture < Test::Unit::TestCase
     signal = mock
     signal.expects(:connect)
     view.stubs(:signals).returns({:test => signal})
-    TestViewModelSignal.new(view)
+    Freightrain.expects(:[]).with(:TestViewSignal).returns(view)
+    TestViewModelSignal.new()
   end
 
   def test_show_always_setVisibletrueOnViewToplevel
@@ -72,7 +71,8 @@ class FreightViewModelFixture < Test::Unit::TestCase
     toplevel.expects(:visible=).with(true)
     view.stubs(:toplevel).returns(toplevel)
     view.stubs(:signals).returns([])
-    TestViewModel.new(view).show
+    Freightrain.expects(:[]).with(:TestView).returns(view)
+    TestViewModel.new().show
   end
 
 end
