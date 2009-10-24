@@ -22,6 +22,7 @@ module Freightrain
 
 end
 
+require File.dirname(__FILE__) + '/freightrain/string_patch.rb'
 require File.dirname(__FILE__) + '/freightrain/container.rb'
 require File.dirname(__FILE__) + '/freightrain/container_hookable.rb'
 require File.dirname(__FILE__) + '/freightrain/freight_signal.rb'

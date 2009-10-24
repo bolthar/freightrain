@@ -1,9 +1,10 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
+
+
+
 
 module Freightrain
 
-  def configure_container!
+    def configure_container!
 
     @registry = Needle::Registry.new
     FreightView.subclasses.each do |view|
@@ -13,7 +14,7 @@ module Freightrain
       @registry.register(viewmodel.name.to_sym) { viewmodel.new }
     end
     FreightService.subclasses.each do |service|
-      @registry.register(service.name.to_sym) { service.new }
+      @registry.register(service.name.to_convention_sym) { service.new }
     end
 
   end

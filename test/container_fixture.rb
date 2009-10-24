@@ -30,7 +30,7 @@ class ContainerFixture < Test::Unit::TestCase
     FreightViewModel.stubs(:subclasses).returns([])
     FreightService.expects(:subclasses).returns([Object])
     Freightrain.configure_container!
-    assert Freightrain[:Object].kind_of? Object
+    assert Freightrain[:object].kind_of? Object
   end
 
   def test_indexer_servicenotregistered_raise
