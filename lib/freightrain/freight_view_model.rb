@@ -2,7 +2,9 @@
 # and open the template in the editor.
 
 module Freightrain
+
   class FreightViewModel
+    extend ContainerHookable
 
     def initialize(view = nil)
       if view

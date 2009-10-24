@@ -2,6 +2,7 @@
 # and open the template in the editor.
 
 class FreightService
+  extend ContainerHookable
 
   def self.service(name)
     @@services ||= []

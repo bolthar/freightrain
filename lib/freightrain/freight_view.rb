@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + "/gtk_builder_helper.rb"
 
 module Freightrain
+  extend ContainerHookable
 
   class FreightView
     include GtkBuilderHelper

@@ -11,6 +11,7 @@ module Freightrain
 
   def self.start(viewmodel)
     auto_require!
+    configure_container!
     viewmodel.new.show
     Gtk.main
   end
