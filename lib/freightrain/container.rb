@@ -20,6 +20,7 @@ module Freightrain
   end
 
   def [](class_name)
+    raise "registry not initialized" if !@registry
     return @registry[class_name]
   end
     
