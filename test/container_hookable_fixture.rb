@@ -25,4 +25,8 @@ class ContainerHookableFixture < Test::Unit::TestCase
     assert TestHookable.subclasses.include? A
     assert TestHookable.subclasses.include? B
   end
+
+  def test_subclasses_always_presentOnExtendingClasses
+    assert TestHookable.respond_to? :subclasses
+  end
 end

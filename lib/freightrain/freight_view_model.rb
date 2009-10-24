@@ -6,12 +6,8 @@ module Freightrain
   class FreightViewModel
     extend ContainerHookable
 
-    def initialize(view = nil)
-      if view
-        @view = view
-      else        
-        @view = eval("#{self.class.name.sub("Model","")}.new")
-      end     
+    def initialize()
+      @view = Freightrain[self.class.name.sub("Model","").to_sym]
       @view.signals.each do |key,signal|       
         signal.connect(method("on_" + key.to_s)) if self.respond_to? "on_" + key.to_s
       end      

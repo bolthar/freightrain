@@ -6,12 +6,12 @@ module Freightrain
   module ContainerHookable
 
       def inherited(subclass)
-        @@subclasses ||= []
-        @@subclasses << subclass
+        @subclasses ||= []
+        @subclasses << subclass
       end
 
       def subclasses
-        return @@subclasses
+        return @subclasses
       end   
       
   end
