@@ -10,6 +10,7 @@ module Freightrain
   end
 
   def self.start(viewmodel)
+    auto_require!
     viewmodel.new.show
     Gtk.main
   end
@@ -17,6 +18,7 @@ module Freightrain
 
 end
 
+require File.dirname(__FILE__) + '/freightrain/auto_requirer.rb'
 require File.dirname(__FILE__) + '/freightrain/freight_signal.rb'
 require File.dirname(__FILE__) + '/freightrain/gtk_builder_helper.rb'
 require File.dirname(__FILE__) + '/freightrain/dialog_helper.rb'
