@@ -8,12 +8,12 @@ module Freightrain
 
     def self.service(name)
       @@services ||= []
-      @@services << (name.to_s + "Service").to_sym
+      @@services << name.to_sym
     end
 
     def initialize
       @@services.each do |service|
-        eval "@#{service} = Freightrain[:#{service.to_s + '_service'}]"
+        eval "@#{service} = Freightrain[:#{service.to_s}_service]"
       end
     end
 
