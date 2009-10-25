@@ -15,8 +15,8 @@ module Freightrain
     end
     
     def self.signal(signal_name)
-      @@signals ||= []
-      @@signals << signal_name.to_sym
+      @signals ||= []
+      @signals << signal_name.to_sym
     end
 
     def fire(signal, *args)
@@ -26,8 +26,9 @@ module Freightrain
     def initialize
       load_from_file(File.join(Freightrain.APP_PATH,"views","#{self.class.name}.glade"))
       @signals = {}
-      @@signals ||= []
-      @@signals.each do |signal|
+      signals = self.class.instance_variable_get(:@signals)
+      signals ||= []
+      signals.each do |signal|
         @signals[signal] = FreightSignal.new
       end     
     end

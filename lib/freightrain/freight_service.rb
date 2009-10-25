@@ -7,12 +7,14 @@ module Freightrain
     extend ContainerHookable
 
     def self.service(name)
-      @@services ||= []
-      @@services << name.to_sym
+      @services ||= []
+      @services << name.to_sym
     end
 
     def initialize
-      @@services.each do |service|
+      services = self.class.instance_variable_get(:@services)
+      services ||= []
+      services.each do |service|
         eval "@#{service} = Freightrain[:#{service.to_s}_service]"
       end
     end

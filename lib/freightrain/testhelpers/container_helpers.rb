@@ -1,13 +1,11 @@
 
-module Freightrain
+require 'rubygems'
+require 'freightrain'
 
-  class Object
+class Object
 
-    def inject(name, object)
-      @registry ||= Needle::Registry.new
-      @registry.register(name) { object }
-    end
-
+  def inject_service(name, object)
+    Freightrain.inject(name.to_s + "_service", object)
   end
 
 end

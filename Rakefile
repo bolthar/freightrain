@@ -8,7 +8,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'freightrain'
-  s.version = '0.0.8'
+  s.version = '0.0.9'
   s.has_rdoc = false
   s.summary = 'ruby desktop development made easy'
   s.description = s.summary

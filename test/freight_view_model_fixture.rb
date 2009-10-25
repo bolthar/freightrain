@@ -35,13 +35,13 @@ class FreightViewModelFixture < Test::Unit::TestCase
   def test_ctor_always_fetchViewFromFreightrain
     view = mock()
     view.stubs(:signals).returns(stub(:each => nil))
-    Freightrain.expects(:[]).with(:TestView).returns(view)
+    Freightrain.expects(:[]).with(:test_view).returns(view)
     TestViewModel.new()
   end
 
 
   def test_ctor_noViewWithRightName_bubbleException
-    Freightrain.expects(:[]).with(:TestView).raises(Exception)
+    Freightrain.expects(:[]).with(:test_view).raises(Exception)
     assert_raise Exception do
       TestViewModel.new
     end
@@ -52,7 +52,7 @@ class FreightViewModelFixture < Test::Unit::TestCase
     signal = mock
     signal.expects(:connect).never
     view.stubs(:signals).returns({:test => signal})
-    Freightrain.expects(:[]).with(:TestView).returns(view)
+    Freightrain.expects(:[]).with(:test_view).returns(view)
     TestViewModel.new()
   end
 
@@ -61,7 +61,7 @@ class FreightViewModelFixture < Test::Unit::TestCase
     signal = mock
     signal.expects(:connect)
     view.stubs(:signals).returns({:test => signal})
-    Freightrain.expects(:[]).with(:TestViewSignal).returns(view)
+    Freightrain.expects(:[]).with(:test_view_signal).returns(view)
     TestViewModelSignal.new()
   end
 
@@ -71,7 +71,7 @@ class FreightViewModelFixture < Test::Unit::TestCase
     toplevel.expects(:visible=).with(true)
     view.stubs(:toplevel).returns(toplevel)
     view.stubs(:signals).returns([])
-    Freightrain.expects(:[]).with(:TestView).returns(view)
+    Freightrain.expects(:[]).with(:test_view).returns(view)
     TestViewModel.new().show
   end
 

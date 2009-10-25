@@ -56,8 +56,13 @@ class FreightViewFixture < Test::Unit::TestCase
   end
 
   def test_selfSignal_always_addSignalsOnCtor
-    view = DerivedTestView.new
+    view = SignalsTestView.new
     assert_equal 2,view.signals.length 
+  end
+
+  def test_selfSignal_always_addOnlyMySignals
+    view = DerivedTestView.new
+    assert_equal 0,view.signals.length
   end
 
 
