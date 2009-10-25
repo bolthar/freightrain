@@ -7,14 +7,23 @@ module Freightrain
     def configure_container!
 
     @registry = Needle::Registry.new
-    FreightView.subclasses.each do |view|
-      @registry.register(view.name.to_convention_sym) { view.new }
+
+    if FreightView.subclasses
+      FreightView.subclasses.each do |view|
+        @registry.register(view.name.to_convention_sym) { view.new }
+      end
     end
-    FreightViewModel.subclasses.each do |viewmodel|
-      @registry.register(viewmodel.name.to_convention_sym) { viewmodel.new }
+
+    if FreightViewModel.subclasses
+      FreightViewModel.subclasses.each do |viewmodel|
+        @registry.register(viewmodel.name.to_convention_sym) { viewmodel.new }
+      end
     end
-    FreightService.subclasses.each do |service|
-      @registry.register(service.name.to_convention_sym) { service.new }
+
+    if FreightService.subclasses
+      FreightService.subclasses.each do |service|
+        @registry.register(service.name.to_convention_sym) { service.new }
+      end
     end
 
   end
