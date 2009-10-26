@@ -11,23 +11,23 @@ class ContainerFixture < Test::Unit::TestCase
 
   def test_configurecontainer_always_registerAllViews
     FreightView.expects(:subclasses).returns([Object])
-    FreightViewModel.stubs(:subclasses).returns([])
-    FreightService.stubs(:subclasses).returns([])
+    FreightViewModel.stubs(:subclasses).returns(nil)
+    FreightService.stubs(:subclasses).returns(nil)
     Freightrain.configure_container!
     assert Freightrain[:object].kind_of? Object
   end
 
   def test_configurecontainer_always_askFreightViewModelForSublclasses
-    FreightView.stubs(:subclasses).returns([])
+    FreightView.stubs(:subclasses).returns(nil)
     FreightViewModel.expects(:subclasses).returns([Object])
-    FreightService.stubs(:subclasses).returns([])
+    FreightService.stubs(:subclasses).returns(nil)
     Freightrain.configure_container!
     assert Freightrain[:object].kind_of? Object
   end
 
   def test_configurecontainer_always_askFreightServiceForSublclasses
-    FreightView.stubs(:subclasses).returns([])
-    FreightViewModel.stubs(:subclasses).returns([])
+    FreightView.stubs(:subclasses).returns(nil)
+    FreightViewModel.stubs(:subclasses).returns(nil)
     FreightService.expects(:subclasses).returns([Object])
     Freightrain.configure_container!
     assert Freightrain[:object].kind_of? Object
