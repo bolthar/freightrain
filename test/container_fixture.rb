@@ -34,7 +34,7 @@ class ContainerFixture < Test::Unit::TestCase
   end
 
   def test_indexer_servicenotregistered_raise
-    assert_raise Needle::ServiceNotFound do
+    assert_raise RuntimeError do
       Freightrain[:Nonregistered]
     end
   end

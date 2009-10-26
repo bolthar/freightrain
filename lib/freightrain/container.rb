@@ -34,7 +34,11 @@ module Freightrain
 
   def [](class_name)
     raise "registry not initialized" if !@registry
+    begin
     return @registry[class_name]
+    rescue Needle::ServiceNotFound
+      raise "Could not resolve #{class_name}. Have you called configure_container already?"
+    end
   end
 
   def inject(name, object)
