@@ -8,13 +8,13 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'freightrain'
-  s.version = '0.0.9'
+  s.version = '0.0.10'
   s.has_rdoc = false
   s.summary = 'ruby desktop development made easy'
   s.description = s.summary
   s.author = 'Andrea Dallera'
   s.email = 'andrea@andreadallera.com'
-  s.files = %w(README Rakefile) + Dir.glob("{bin,lib}/**/*")
+  s.files = %w(README Rakefile) + Dir.glob("{bin,lib}/**/*" )
   s.require_path = "lib"
 end
 
