@@ -5,6 +5,7 @@ class String
 
   def to_convention_sym
     #TODO: use regexp instead
+    return nil if self.empty?
     clone = self
     first_letter = clone.slice!(0)
     result = first_letter.chr.downcase

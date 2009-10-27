@@ -5,6 +5,7 @@ $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 require 'rubygems'
 require 'spec'
 require 'mocha'
+require 'needle'
 require 'test/unit'
 require 'freightrain.rb'
 
