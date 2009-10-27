@@ -37,13 +37,8 @@ module Freightrain
     begin
     return @registry[class_name]
     rescue Needle::ServiceNotFound
-      raise "Could not resolve #{class_name}. Have you called configure_container already?"
+      raise "Could not resolve #{class_name}. Have you called 'configure_container!' already?"
     end
-  end
-
-  def inject(name, object)
-      @registry ||= Needle::Registry.new
-      @registry.register(name) { object }
   end
     
 end

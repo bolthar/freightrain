@@ -7,7 +7,7 @@ module Freightrain
     include GtkBuilderHelper
     include DialogHelper
     extend ContainerHookable
-
+    
     attr_reader :signals
 
     def toplevel
@@ -30,7 +30,8 @@ module Freightrain
       signals ||= []
       signals.each do |signal|
         @signals[signal] = FreightSignal.new
-      end     
+      end
+
     end
 
   end

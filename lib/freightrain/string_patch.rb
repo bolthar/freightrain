@@ -1,6 +1,5 @@
 
 require 'rubygems'
-require 'activesupport'
 
 class String
 
