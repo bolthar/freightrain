@@ -3,20 +3,20 @@ require 'libglade2'
 module Freightrain
   module GtkBuilderHelper
 
-    def load_from_file(file_path)
+    def load_from_file(file_path, builder = Gtk::Builder.new)
       if File.exists?(file_path)
-        @builder = Gtk::Builder.new
+        @builder = builder
         @builder.add_from_file(file_path)
         @builder.objects.each do |widget|
-          instance_eval "def #{widget.name}; return @builder.get_object('#{widget.name}');end"
+          method_name = widget.name
+          instance_eval "def #{method_name}; return @builder.get_object('#{method_name}');end"
         end
         @builder.connect_signals do |handler|
-          if self.respond_to? handler
-            method(handler) if self.respond_to? handler
-          else
-            lambda {p "#{handler} not implemented"}
-          end
+            return method(handler) if self.respond_to? handler
+            return lambda {p "#{handler} not implemented"}
         end
+      else
+        raise "glade file not found for view #{self.class}"
       end
     end
 
