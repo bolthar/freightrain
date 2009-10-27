@@ -1,5 +1,6 @@
 
 require 'rubygems'
+require 'spec/rake/spectask'
 require 'rake'
 require 'rake/clean'
 require 'rake/gempackagetask'
@@ -26,4 +27,9 @@ end
 
 Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/*.rb']
+end
+
+Spec::Rake::SpecTask.new do |t|
+  t.warning = true
+  t.spec_files = FileList['spec/**/*.rb']
 end
