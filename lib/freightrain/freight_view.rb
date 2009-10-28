@@ -6,13 +6,17 @@ module Freightrain
   class FreightView
     include GtkBuilderHelper
     include DialogHelper
-    include Bindable
+    include BindingHost
     extend ContainerHookable
     
     attr_reader :signals
 
     def toplevel
       return @builder.objects.first.toplevel
+    end
+
+    def widgets
+      return @builder.objects
     end
     
     def self.signal(signal_name)

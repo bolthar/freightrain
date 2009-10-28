@@ -8,7 +8,8 @@ module Freightrain
       @view = Freightrain[self.class.name.sub("Model","").to_convention_sym]
       @view.signals.each do |key,signal|       
         signal.connect(method("on_" + key.to_s)) if self.respond_to? "on_" + key.to_s
-      end      
+      end
+      @view.data_source = self
     end
 
     def show
