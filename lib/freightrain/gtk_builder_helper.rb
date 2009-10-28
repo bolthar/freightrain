@@ -11,8 +11,11 @@ module Freightrain
           instance_eval "def #{method_name}; return @builder.get_object('#{method_name}');end"
         end
         builder.connect_signals do |handler|
-            return method(handler) if self.respond_to? handler
-            return lambda {p "#{handler} not implemented"}
+          if self.respond_to? handler
+            method(handler) if self.respond_to? handler
+          else
+            lambda {p "#{handler} not implemented"}
+          end
         end
       end
     end
