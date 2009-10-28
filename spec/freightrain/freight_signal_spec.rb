@@ -9,7 +9,13 @@ describe FreightSignal do
     @signal = FreightSignal.new
   end
 
-  describe "connect" do 
+  describe "connect" do
+
+    it "should keep only last proc connected" do
+      @signal.connect lambda { return :first }
+      @signal.connect lambda { return :second }
+      @signal.instance_variable_get(:@proc).call.should == :second
+    end
 
   end
 
