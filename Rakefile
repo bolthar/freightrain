@@ -25,9 +25,7 @@ Rake::GemPackageTask.new(spec) do |p|
   p.need_zip = true
 end
 
-Rake::TestTask.new do |t|
-  t.test_files = FileList['test/**/*.rb']
-end
+task :test => [:spec]
 
 Spec::Rake::SpecTask.new do |t|
   t.warning = true
