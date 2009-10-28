@@ -19,8 +19,7 @@ describe String do
     
     it "should return symbol with letter downcase and underscore if uppercase letter in between" do
       "inBetween".to_convention_sym.should == :in_between
-    end
-    
+    end    
     
   end
 

@@ -6,6 +6,7 @@ module Freightrain
   class FreightView
     include GtkBuilderHelper
     include DialogHelper
+    include Bindable
     extend ContainerHookable
     
     attr_reader :signals
@@ -32,7 +33,6 @@ module Freightrain
       signals.each do |signal|
         @signals[signal] = FreightSignal.new
       end
-
     end
 
   end
