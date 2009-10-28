@@ -3,14 +3,16 @@ module Gtk
 
   class Widget
 
-    def bind(property)
+    def bind(binding_options)
       @bindings ||= {}
-      binding = FreightBinding.new(self, property)
-      @bindings[property] = binding
+      binding = FreightBinding.new(self, binding_options)
+      #TODO: send out warning if overriding?
+      @bindings[binding_options[:property]] = binding
       return binding
     end
 
     def bindings
+      @bindings ||= {}
       return @bindings.values
     end
 

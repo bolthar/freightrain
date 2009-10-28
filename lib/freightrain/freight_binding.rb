@@ -3,22 +3,19 @@ module Freightrain
  
   class FreightBinding
 
-    def initialize(widget, property)
-      @widget =   widget
-      @property = property
+    def initialize(widget, options)
+      @widget   = widget
+      @property = options[:property]
+      @path     = options[:path]
     end
 
     def data_source=(source)
       @data_source = source
     end
 
-    def to(path)
-      @path = path
-      return self
-    end
-
     def update()
       begin
+        p @path
         new_path = @path.to_s.split('.')
         source_value = get_source_value(new_path, @data_source)
         @widget.send(@property.to_s + "=",source_value)
