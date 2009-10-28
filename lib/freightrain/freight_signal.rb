@@ -4,7 +4,7 @@ module Freightrain
   class FreightSignal
 
     def fire(*args)
-      @proc.call *args if @proc
+      @proc.call(*args) if @proc
     end
 
     def connect(proc)

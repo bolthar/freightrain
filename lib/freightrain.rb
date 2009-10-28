@@ -9,7 +9,7 @@ module Freightrain
   end
 
   def self.APP_PATH()
-    return @app_path || ""
+    return @app_path
   end
 
   def self.start(viewmodel)
