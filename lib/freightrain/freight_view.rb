@@ -11,7 +11,7 @@ module Freightrain
     attr_reader :signals
 
     def toplevel
-      return @builder.objects.select { |widget| widget.kind_of? Gtk::Window}[0]
+      return @builder.objects.first.toplevel
     end
     
     def self.signal(signal_name)
@@ -23,8 +23,9 @@ module Freightrain
       @signals[signal.to_sym].fire(*args)
     end
 
-    def initialize
-      load_from_file(File.join(Freightrain.APP_PATH,"views","#{self.class.name}.glade"))
+    def initialize(builder = Gtk::Builder.new)
+      @builder = builder
+      load_from_file(File.join(Freightrain.APP_PATH,"views","#{self.class.name}.glade"),@builder)
       @signals = {}
       signals = self.class.instance_variable_get(:@signals)
       signals ||= []

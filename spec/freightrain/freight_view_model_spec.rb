@@ -1,10 +1,34 @@
 
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+
+$:.unshift File.join(File.dirname(__FILE__),'..','lib')
+
+require 'rubygems'
+require 'spec'
+require 'mocha'
+require 'needle'
+require 'test/unit'
+require 'freightrain/container_hookable.rb'
+require 'freightrain/freight_view_model.rb'
+require 'freightrain/string_patch.rb'
+
+include Freightrain
+
+Spec::Runner.configure do |config|
+    config.mock_with :mocha
+end
 
 describe FreightViewModel do
 
-  it "should call container for correctly named view" do
+  before :each do
     eval "class TestViewModel < FreightViewModel;end;"
+  end
+
+  after :each do
+     #HACK: shouldn't be needed
+    ContainerHookable.classes.clear #it avoids container specs to fail
+  end
+
+  it "should call container for correctly named view" do    
     view = stub()
     view.stubs(:signals).returns({})
     Freightrain.expects(:[]).with(:test_view).returns(view)
@@ -12,7 +36,6 @@ describe FreightViewModel do
   end
 
   it "should call connect on each signal registered on view if correct method is present" do
-    eval "class TestViewModel < FreightViewModel;end;"
     signal_one = mock()
     signal_one.expects(:connect)
     signal_two = mock()
@@ -40,7 +63,6 @@ describe FreightViewModel do
   describe "show" do
 
     it "should always set view toplevel as visible" do
-      eval "class TestViewModel < FreightViewModel;end;"
       toplevel = mock()
       toplevel.expects(:visible=).with(true)
       view = stub()
