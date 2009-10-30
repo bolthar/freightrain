@@ -3,8 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe BindingHost do
 
-  before :each do
-    
+  before :each do    
     klass = Class.new
     klass.instance_eval("include BindingHost")
     @instance = klass.new    

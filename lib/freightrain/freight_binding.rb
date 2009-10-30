@@ -15,20 +15,17 @@ module Freightrain
 
     def update()
       begin
-        p @path
         new_path = @path.to_s.split('.')
         source_value = get_source_value(new_path, @data_source)
         @widget.send(@property.to_s + "=",source_value)
-      rescue Exception => e
-        p e.message
+      rescue Exception 
       end
     end
 
     def commit()
       begin
         set_source_value(@path.to_s.split('.'), @data_source, @widget.send(@property))
-      rescue Exception => e
-        p e.message
+      rescue Exception 
       end
     end
 
