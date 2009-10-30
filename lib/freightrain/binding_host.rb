@@ -4,9 +4,8 @@ module Freightrain
   module BindingHost
 
     def data_source=(source)
-      @data_source = source
       bindings.each do |binding|
-        binding.data_source = @data_source
+        binding.data_source = source
         binding.update
       end
     end
