@@ -31,6 +31,7 @@ describe FreightViewModel do
   it "should call container for correctly named view" do    
     view = stub()
     view.stubs(:signals).returns({})
+    view.stubs(:data_source=)
     Freightrain.expects(:[]).with(:test_view).returns(view)
     TestViewModel.new
   end
@@ -42,6 +43,7 @@ describe FreightViewModel do
     signal_two.expects(:connect)
     view = stub()
     view.stubs(:signals).returns({:test_one => signal_one, :test_two => signal_two})
+    view.stubs(:data_source=)
     Freightrain.stubs(:[]).returns(view)
     TestViewModel.class_eval("def on_test_one;end;")
     TestViewModel.class_eval("def on_test_two;end;")
@@ -56,6 +58,7 @@ describe FreightViewModel do
     signal_two.expects(:connect).never
     view = stub()
     view.stubs(:signals).returns({:test_one => signal_one, :test_two => signal_two})
+    view.stubs(:data_source=)
     Freightrain.stubs(:[]).returns(view)
     NoMethodsTestViewModel.new
   end
@@ -68,6 +71,7 @@ describe FreightViewModel do
       view = stub()
       view.stubs(:toplevel).returns(toplevel)
       view.stubs(:signals).returns({})
+      view.stubs(:data_source=)
       Freightrain.stubs(:[]).returns(view)
       TestViewModel.new.show
     end
