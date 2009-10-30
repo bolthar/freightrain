@@ -78,7 +78,22 @@ describe FreightView do
       view.instance_variable_set(:@signals, {:my_signal => signal})
       view.fire :my_signal, :a, :b
     end
+
   end
+
+ describe "widgets" do
+
+    it "should return all objects in builder who derive from Gtk::Widget" do
+      builder = stub()
+      builder.stubs(:objects).returns([
+          stub(:kind_of? => Gtk::Widget),
+          nil,
+          nil])
+      view = TestView.new(builder)
+      view.widgets.length.should == 1
+    end
+    
+ end
 
 
 

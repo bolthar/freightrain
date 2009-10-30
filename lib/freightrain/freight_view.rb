@@ -16,7 +16,7 @@ module Freightrain
     end
 
     def widgets
-      return @builder.objects
+      return @builder.objects.select { |widget| widget.kind_of? Gtk::Widget }
     end
     
     def self.signal(signal_name)
