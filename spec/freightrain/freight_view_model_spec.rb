@@ -21,6 +21,10 @@ describe FreightViewModel do
 
   before :each do
     eval "class TestViewModel < FreightViewModel;end;"
+    @view = stub()
+    @view.stubs(:signals).returns({})
+    @view.stubs(:data_source=)
+    Freightrain.stubs(:[]).returns(@view)
   end
 
   after :each do
@@ -29,10 +33,7 @@ describe FreightViewModel do
   end
 
   it "should call container for correctly named view" do    
-    view = stub()
-    view.stubs(:signals).returns({})
-    view.stubs(:data_source=)
-    Freightrain.expects(:[]).with(:test_view).returns(view)
+    Freightrain.expects(:[]).with(:test_view).returns(@view)
     TestViewModel.new
   end
 
@@ -41,10 +42,7 @@ describe FreightViewModel do
     signal_one.expects(:connect)
     signal_two = mock()
     signal_two.expects(:connect)
-    view = stub()
-    view.stubs(:signals).returns({:test_one => signal_one, :test_two => signal_two})
-    view.stubs(:data_source=)
-    Freightrain.stubs(:[]).returns(view)
+    @view.stubs(:signals).returns({:test_one => signal_one, :test_two => signal_two})    
     TestViewModel.class_eval("def on_test_one;end;")
     TestViewModel.class_eval("def on_test_two;end;")
     TestViewModel.new
@@ -56,11 +54,13 @@ describe FreightViewModel do
     signal_one.expects(:connect).never
     signal_two = mock()
     signal_two.expects(:connect).never
-    view = stub()
-    view.stubs(:signals).returns({:test_one => signal_one, :test_two => signal_two})
-    view.stubs(:data_source=)
-    Freightrain.stubs(:[]).returns(view)
+    @view.stubs(:signals).returns({:test_one => signal_one, :test_two => signal_two})
     NoMethodsTestViewModel.new
+  end
+
+  it "should always set view data source to self" do
+    @view.expects(:data_source=).with(kind_of(TestViewModel))
+    TestViewModel.new
   end
 
   describe "show" do
@@ -68,11 +68,7 @@ describe FreightViewModel do
     it "should always set view toplevel as visible" do
       toplevel = mock()
       toplevel.expects(:visible=).with(true)
-      view = stub()
-      view.stubs(:toplevel).returns(toplevel)
-      view.stubs(:signals).returns({})
-      view.stubs(:data_source=)
-      Freightrain.stubs(:[]).returns(view)
+      @view.stubs(:toplevel).returns(toplevel)
       TestViewModel.new.show
     end
 
