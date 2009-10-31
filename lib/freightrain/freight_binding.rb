@@ -4,9 +4,10 @@ module Freightrain
   class FreightBinding
 
     def initialize(widget, options)
-      @widget   = DataSourceShell.new(widget)
-      @property = options[:property].to_s
-      @path     = options[:path].to_s.split('.')
+      @widget    = DataSourceShell.new(widget)
+      @property  = options[:property].to_s
+      @path      = options[:path].to_s.split('.')
+      @converter = options[:converter]
     end
 
     def data_source=(source)
@@ -15,7 +16,11 @@ module Freightrain
 
     def update()
       begin
-        @widget.set(@property, @data_source.get(@path))
+        if @converter
+          @widget.set(@property, @converter.from(@data_source.get(@path)))
+        else
+          @widget.set(@property, @data_source.get(@path))
+        end
       rescue Exception => ex
         p ex.message if @property == "property"
       end
