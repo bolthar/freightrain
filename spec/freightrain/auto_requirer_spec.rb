@@ -17,7 +17,7 @@ describe Freightrain do
     end
 
     it "should call require for every rb file in views" do
-      Freightrain.APP_PATH = "testpath"
+      Freightrain.app_path = "testpath"
       File.stubs(:join).with("testpath", "views", "**/*.rb").returns("viewspath")
       Dir.stubs(:glob).with("viewspath").returns(["file1","file2"])
       Freightrain.expects(:require).with("file1")
@@ -26,7 +26,7 @@ describe Freightrain do
     end
 
     it "should call require for every rb file in viewmodels" do
-      Freightrain.APP_PATH = "testpath"
+      Freightrain.app_path = "testpath"
       File.stubs(:join).with("testpath", "views", "**/*.rb").returns("viewsmodelpath")
       Dir.stubs(:glob).with("viewsmodelpath").returns(["file1","file2"])
       Freightrain.expects(:require).with("file1")
@@ -35,7 +35,7 @@ describe Freightrain do
     end
 
     it "should call require for every rb file in services" do
-      Freightrain.APP_PATH = "testpath"
+      Freightrain.app_path = "testpath"
       File.stubs(:join).with("testpath", "views", "**/*.rb").returns("servicespath")
       Dir.stubs(:glob).with("servicespath").returns(["file1","file2"])
       Freightrain.expects(:require).with("file1")
@@ -44,7 +44,7 @@ describe Freightrain do
     end
 
     it "should call require for every rb file in domain" do
-      Freightrain.APP_PATH = "testpath"
+      Freightrain.app_path = "testpath"
       File.stubs(:join).with("testpath", "views", "**/*.rb").returns("modelspath")
       Dir.stubs(:glob).with("modelspath").returns(["file1","file2"])
       Freightrain.expects(:require).with("file1")

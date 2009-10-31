@@ -32,7 +32,7 @@ module Freightrain
 
     def initialize(builder = Gtk::Builder.new)
       @builder = builder
-      load_from_file(File.join(Freightrain.APP_PATH,"views","#{self.class.name}.glade"),@builder)
+      load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}.glade"),@builder)
       @signals = {}
       signals = self.class.instance_variable_get(:@signals)
       signals ||= []

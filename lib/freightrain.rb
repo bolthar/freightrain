@@ -4,13 +4,7 @@ require 'needle'
 
 module Freightrain
 
-  def self.APP_PATH= (value)
-    @app_path = value
-  end
-
-  def self.APP_PATH()
-    return @app_path
-  end
+  attr_accessor :app_path
 
   def self.start(viewmodel)
     auto_require!
