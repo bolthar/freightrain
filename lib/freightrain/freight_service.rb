@@ -5,6 +5,7 @@ module Freightrain
 
   class FreightService
     extend ContainerHookable
+    include ServiceHost
 
     def self.service(name)
       @services ||= []
@@ -12,11 +13,7 @@ module Freightrain
     end
 
     def initialize
-      services = self.class.instance_variable_get(:@services)
-      services ||= []
-      services.each do |service|
-        eval "@#{service} = Freightrain[:#{service.to_s}_service]"
-      end
+      get_services
     end
 
   end
