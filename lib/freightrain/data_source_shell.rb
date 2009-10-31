@@ -20,4 +20,5 @@ module Freightrain
     end
 
   end
+  
 end

@@ -6,19 +6,18 @@ module Freightrain
     def initialize(widget, options)
       @widget   = DataSourceShell.new(widget)
       @property = options[:property].to_s
-      @path     = options[:path].to_s
+      @path     = options[:path].to_s.split('.')
     end
 
     def data_source=(source)
-      source.instance_eval("include DataSourceExtension") unless source.kind_of? DataSourceExtension
-      @data_source = source
+      @data_source = DataSourceShell.new(source)
     end
 
     def update()
-      begin        
+      begin
         @widget.set(@property, @data_source.get(@path))
       rescue Exception => ex
-        p ex.message
+        p ex.message if @property == "property"
       end
     end
 

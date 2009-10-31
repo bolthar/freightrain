@@ -28,32 +28,11 @@ require File.dirname(__FILE__) + '/freightrain/freight_signal.rb'
 require File.dirname(__FILE__) + '/freightrain/gtk_builder_helper.rb'
 require File.dirname(__FILE__) + '/freightrain/dialog_helper.rb'
 require File.dirname(__FILE__) + '/freightrain/freight_binding.rb'
+require File.dirname(__FILE__) + '/freightrain/data_source_shell.rb'
 require File.dirname(__FILE__) + '/freightrain/rubygnome_extensions/gtk_widget.rb'
 require File.dirname(__FILE__) + '/freightrain/rubygnome_extensions/gtk_entry.rb'
-require File.dirname(__FILE__) + '/freightrain/data_source_shell.rb'
 require File.dirname(__FILE__) + '/freightrain/binding_host.rb'
 require File.dirname(__FILE__) + '/freightrain/freight_view.rb'
 require File.dirname(__FILE__) + '/freightrain/freight_view_model.rb'
 require File.dirname(__FILE__) + '/freightrain/freight_service.rb'
 require File.dirname(__FILE__) + '/freightrain/auto_requirer.rb'
-
-module M
-
-  def test
-    p "test"
-  end
-
-end
-
-class A
-
-
-
-end
-
-one = A.new
-two = A.new
-
-one.class.instance_eval("include M")
-
-one.test
