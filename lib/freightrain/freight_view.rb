@@ -9,8 +9,6 @@ module Freightrain
     include BindingHost
     extend ContainerHookable
     
-    attr_reader :signals
-
     def toplevel
       return @builder.objects.first.toplevel
     end
@@ -26,6 +24,10 @@ module Freightrain
 
     def fire(signal, *args)
       @signals[signal.to_sym].fire(*args)
+    end
+
+    def signals()
+      return @signals
     end
 
     def initialize(builder = Gtk::Builder.new)
