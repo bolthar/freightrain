@@ -19,6 +19,10 @@ module Freightrain
       set(path, value, source.send(target))
     end
 
+    def object
+      return @data_source
+    end
+
   end
   
 end
