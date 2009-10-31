@@ -17,13 +17,23 @@ describe BindingHost do
       @instance.stubs(:bindings).returns([@binding_one, @binding_two])
     end
 
+    it "should wrap assigned data source into a DataSourceShell" do
+      DataSourceShell.expects(:new).with(:test).returns(:test_wrapped)
+      @binding_one.stubs(:data_source=)
+      @binding_one.stubs(:update)
+      @binding_two.expects(:data_source=)
+      @binding_two.stubs(:update)
+      @instance.data_source = :test
+    end
+
     it "should set data source assigned param on each binding" do
       data_source = :test
+      DataSourceShell.stubs(:new).returns(data_source)
       @binding_one.expects(:data_source=).with(data_source)
       @binding_one.stubs(:update)
       @binding_two.expects(:data_source=).with(data_source)
       @binding_two.stubs(:update)
-      @instance.data_source = data_source
+      @instance.data_source = :test_not_shelled
     end
 
     it "should call update on each binding" do
