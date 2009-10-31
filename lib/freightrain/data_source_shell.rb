@@ -7,16 +7,16 @@ module Freightrain
       @data_source = data_source
     end
 
-    def get(path)
-      return @data_source.send(path[0]) if path.length == 1
+    def get(path, source = @data_source)
+      return source.send(path[0]) if path.length == 1
       target = path.shift
-      get(path,@data_source.send(target))
+      get(path,source.send(target))
     end
 
-    def set(path, value)
-      return @data_source.send(path[0].to_s + "=",value) if path.length == 1
+    def set(path, value, source = @data_source)
+      return source.send(path[0].to_s + "=",value) if path.length == 1
       target = path.shift
-      set(path, @data_source.send(target), value)
+      set(path, value, source.send(target))
     end
 
   end
