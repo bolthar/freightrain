@@ -10,7 +10,6 @@ module Freightrain
     end
 
     def from(value)
-      FileUtils.rm(File.join(Dir.tmpdir,"tempimg#{@identifier}.jpg"))
       file = File.new(File.join(Dir.tmpdir,"tempimg#{@identifier}.jpg"),'w')
       file << value
       file.close
