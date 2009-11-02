@@ -24,7 +24,7 @@ module Gtk
 
     def bind(options)
       if options[:property] == :elements
-        options[:converter] ||= ElementsConverter.new(self, Freightrain[options[:control].to_convention.sym)
+        options[:converter] ||= ElementsConverter.new(self, Freightrain["#{options[:control].to_s}View".to_convention_sym])
       end
     end
 
