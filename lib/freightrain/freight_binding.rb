@@ -1,5 +1,13 @@
 
 module Freightrain
+
+  class DefaultConverter
+
+    def from(value)
+      return value
+    end
+
+  end
  
   class FreightBinding
 
@@ -7,13 +15,14 @@ module Freightrain
       @widget    = widget
       @property  = options[:property].to_s.split('.')
       @path      = options[:path].to_s.split('.')
-      @converter = options[:converter]
+      @converter = options[:converter] || DefaultConverter.new
     end
 
     def get(source, path)
-      return source.send(path[0]) if path.length == 1
-      target = path.shift
-      get(source.send(target), path)
+      my_path = path.clone
+      return source.send(my_path[0]) if my_path.length == 1
+      target = my_path.shift
+      get(source.send(target), my_path)
     end
 
     def set(path, value, source)
@@ -28,10 +37,10 @@ module Freightrain
 
     def update()
       begin
-        if @converter
-          set(@property, @converter.from(get(@data_source, @path)), @widget)
-        else
-          set(@property, get(@data_source, @path), @widget)
+        value = get(@data_source, @path)
+        if value != @cache
+          set(@property, @converter.from(value), @widget)
+          @cache = value
         end
       rescue Exception => ex
         p "#{@widget.name}: #{ex.message}"

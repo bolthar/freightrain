@@ -13,10 +13,7 @@ module Freightrain
 
   end
 
-  def [](class_name)
-
-    raise "registry not initialized" if !@registry
-    
+  def [](class_name)    
     begin
       return @registry[class_name]
     rescue Needle::ServiceNotFound
