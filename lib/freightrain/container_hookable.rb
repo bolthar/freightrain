@@ -15,18 +15,17 @@ module Freightrain
 
     def inherited(subclass)
       @subclasses ||= []
-      @subclasses << subclass
+      @subclasses << subclass      
+    end
+
+    def container_options
+      return {}
     end
 
     def subclasses
       return @subclasses || []
     end
-
-    def container_options
-      @container_options ||= {}
-      return @container_options
-    end
-      
+     
   end
 
 end

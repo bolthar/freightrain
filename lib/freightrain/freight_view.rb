@@ -9,7 +9,11 @@ module Freightrain
     extend ContainerHookable
 
     container_options[:model] = :prototype
-    
+
+    def self.container_options
+      return {:model => :prototype}
+    end
+
     def toplevel
       return @builder.objects.first.toplevel
     end
