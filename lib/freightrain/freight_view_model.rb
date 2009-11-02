@@ -24,6 +24,7 @@ module Freightrain
     end
 
     def hide
+      @view.toplevel.visible = false
       @view = nil
     end
 
