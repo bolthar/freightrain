@@ -2,7 +2,7 @@
 module Freightrain
 
   module ContainerHookable
-    
+
     def self.extended(extending_class)
       @@classes ||= []
       @@classes << extending_class
@@ -20,7 +20,12 @@ module Freightrain
 
     def subclasses
       return @subclasses || []
-    end   
+    end
+
+    def container_options
+      @container_options ||= {}
+      return @container_options
+    end
       
   end
 

@@ -7,6 +7,8 @@ module Freightrain
     include DialogHelper
     include BindingHost
     extend ContainerHookable
+
+    container_options[:model] = :prototype
     
     def toplevel
       return @builder.objects.first.toplevel
