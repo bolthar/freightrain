@@ -10,8 +10,7 @@ module Freightrain
       selected_callback   = @signals[:selected]
       @signals[:selected] = lambda { |value| @layout.elements.each do |item|
                               item.set_ui_selection(item.value == value)
-                              @selected_item = item
-                              p @selected_item
+                              @layout.selected_item = item
                             end
                             selected_callback.call(value) if selected_callback
                             }
@@ -22,7 +21,9 @@ module Freightrain
       enumerable.each do |value|
         ui_element = @element_class.new
         ui_element.value = value
-        ui_element.set_ui_selection(ui_element.value == @selected_item.value)
+        if @selected_item
+          ui_element.set_ui_selection(ui_element.value == @selected_item.value)
+        end
         ui_element.signals.each do |key,signal|
           signal.connect(@signals[key]) if @signals[key]
         end
@@ -38,6 +39,10 @@ module Gtk
 
   class Layout
 
+    def selected_item=(value)
+      @selected_item = value
+    end
+
     def elements=(ui_items)
       @elements = []
       if ui_items.length != 0
@@ -48,6 +53,9 @@ module Gtk
         height = 0
         ui_items.each do |item|
           self.put(item.control, 0, height * height_factor)
+          if @selected_item && @selected_item.value == item.value
+            item.set_ui_selection(true)
+          end
           @elements << item
           height += 1
         end
