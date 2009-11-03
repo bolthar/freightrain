@@ -40,7 +40,11 @@ module Freightrain
         value = get(@data_source, @path)
         if value != @cache
           set(@property, @converter.from(value), @widget)
-          @cache = value
+#          if value.kind_of? Enumerable
+#            @cache = value.clone
+#          else
+            @cache = value
+#          end
         end
       rescue Exception => ex
         p "#{@widget.name}: #{ex.message}"
