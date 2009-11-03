@@ -7,10 +7,11 @@ module Freightrain
       @layout             = layout
       @element_class      = element_class
       @signals            = signals
+      selected_callback   = @signals[:selected]
       @signals[:selected] = lambda { |value| @layout.elements.each do |item|
-                              item.selected = (item.value == value)
-                            end 
-                            @signals[:selected].call(value) if @signals[:selected]
+                              item.set_ui_selection(item.value == value)
+                            end
+                            selected_callback.call(value) if selected_callback
                             }
     end
 
