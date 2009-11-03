@@ -3,7 +3,9 @@ module Freightrain
 
   class FreightElementView < FreightView
     
-    signal :selected
+    def self.inherited(subclass)
+#      subclass.signal(:selected)
+    end
 
     def value
       return @value
@@ -25,6 +27,11 @@ module Freightrain
 
     def selected(bool)
       raise "selected is not overridden. You should override the selected method on your #{self.class.name} control"
+    end
+
+    def initialize()
+      super()
+      @signals[:selected] = FreightSignal.new
     end
 
 

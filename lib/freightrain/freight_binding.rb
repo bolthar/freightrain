@@ -16,6 +16,7 @@ module Freightrain
       @property  = options[:property].to_s.split('.')
       @path      = options[:path].to_s.split('.')
       @converter = options[:converter] || DefaultConverter.new
+      @force     = options[:force]
     end
 
     def get(source, path)
@@ -38,7 +39,7 @@ module Freightrain
     def update()
       begin
         value = get(@data_source, @path)
-        if value != @cache
+        if @force || value != @cache
           set(@property, @converter.from(value), @widget)
           if value.kind_of? Enumerable
             @cache = value.clone
