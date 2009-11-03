@@ -7,9 +7,11 @@ module Freightrain
       @layout             = layout
       @element_class      = element_class
       @signals            = signals
-      @signals[:__SELECT] = lambda { |value| @layout.elements.each do |item|
-                              item.unselect unless item.value == value
-                            end }
+      @signals[:selected] = lambda { |value| @layout.elements.each do |item|
+                              item.selected = (item.value == value)
+                            end 
+                            @signals[:selected].call(value) if @signals[:selected]
+                            }
     end
 
     def from(enumerable)
