@@ -7,7 +7,7 @@ module Freightrain
       @layout = layout
     end
 
-    def from(enumerable, control)
+    def from(enumerable)
       
     end
 
