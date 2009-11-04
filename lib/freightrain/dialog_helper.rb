@@ -21,6 +21,27 @@ module Freightrain
       return result
     end
 
+    def yes_no_dialog(description)
+      raise "toplevel not implemented. If you want to use " +
+             "DialogHelper inside your class you should provide " +
+             "a toplevel widget via the toplevel method" unless respond_to? :toplevel
+        result = false
+        dialog = Gtk::MessageDialog.new(
+        toplevel,
+        Gtk::Dialog::MODAL,
+        Gtk::MessageDialog::QUESTION,
+        Gtk::MessageDialog::BUTTONS_YES_NO,
+        description)
+        dialog.title = "Attenzione!"
+        dialog.secondary_text = "Non sara' possibile recuperare i dati eliminati"
+        dialog.run do |response|
+            result = (response == Gtk::Dialog::RESPONSE_YES)
+        end
+        dialog.destroy
+        return result
+
+    end
+
   end
 
 end

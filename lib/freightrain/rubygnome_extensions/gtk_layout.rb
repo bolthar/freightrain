@@ -53,7 +53,9 @@ module Gtk
           @elements << item
           height += 1
         else
-          self.remove(@elements.pop.control)
+          item = self.children.last
+          self.remove(item)
+          @elements.delete_if {|element| element.control == item }
         end
       end
       self.height = @elements.length * @height_factor
