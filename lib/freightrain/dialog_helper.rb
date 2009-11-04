@@ -21,7 +21,7 @@ module Freightrain
       return result
     end
 
-    def yes_no_dialog(description)
+    def yes_no_dialog(description, title = "Warning!", secondary_text = "It will not be possible to recover the deleted item")
       raise "toplevel not implemented. If you want to use " +
              "DialogHelper inside your class you should provide " +
              "a toplevel widget via the toplevel method" unless respond_to? :toplevel
@@ -32,8 +32,8 @@ module Freightrain
         Gtk::MessageDialog::QUESTION,
         Gtk::MessageDialog::BUTTONS_YES_NO,
         description)
-        dialog.title = "Attenzione!"
-        dialog.secondary_text = "Non sara' possibile recuperare i dati eliminati"
+        dialog.title = title
+        dialog.secondary_text = secondary_text
         dialog.run do |response|
             result = (response == Gtk::Dialog::RESPONSE_YES)
         end
