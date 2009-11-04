@@ -40,7 +40,7 @@ module Gtk
   class Layout
 
     def elements=(enumerable)
-      delta = enumerable.length - @elements.length
+      delta = enumerable.length - @elements.length      
       height = @elements.length
       delta.abs.times do
         if delta > 0
@@ -55,11 +55,14 @@ module Gtk
           self.remove(@elements.pop.control)
         end
       end
+      first_element = @elements.first
+      self.height = @elements.length * first_element.control.height_request if first_element
+      p @elements.length
+      p @elements.length * first_element.control.height_request if first_element
+      p self.height
       (0..enumerable.length).each do |index|
         @elements[index].value = enumerable[index]
       end
-      
-
       
     end
 
@@ -69,14 +72,14 @@ module Gtk
 
     def bind(options)
       if options[:property] == :elements
+        @elements = []
         options[:force] = true
         @control = options[:control]
-        selected_callback   = @signals[:selected]
         @signals = options[:signals]
+        selected_callback = @signals[:selected]
         @signals[:selected] = lambda do |value|
                                 elements.each do |item|
                                   item.set_ui_selection(item.value == value)
-                                  @layout.selected_item = item
                                 end
                                 selected_callback.call(value) if selected_callback
                               end
