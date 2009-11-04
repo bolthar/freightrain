@@ -1,84 +1,90 @@
 
-module Freightrain
-
-  class ElementsConverter
-
-    def initialize(layout, element_class, signals)
-      @layout             = layout
-      @element_class      = element_class
-      @signals            = signals
-      selected_callback   = @signals[:selected]
-      @signals[:selected] = lambda { |value| @layout.elements.each do |item|
-                              item.set_ui_selection(item.value == value)
-                              @layout.selected_item = item
-                            end
-                            selected_callback.call(value) if selected_callback
-                            }
-    end
-
-    def from(enumerable)
-      ui_elements = []
-      enumerable.each do |value|
-        ui_element = @element_class.new
-        ui_element.value = value
-        if @selected_item
-          ui_element.set_ui_selection(ui_element.value == @selected_item.value)
-        end
-        ui_element.signals.each do |key,signal|
-          signal.connect(@signals[key]) if @signals[key]
-        end
-        ui_elements << ui_element
-      end
-      return ui_elements
-    end
-
-  end
-end
+#module Freightrain
+#
+#  class ElementsConverter
+#
+#    def initialize(layout, element_class, signals)
+#      @layout             = layout
+#      @element_class      = element_class
+#      @signals            = signals
+#      selected_callback   = @signals[:selected]
+#      @signals[:selected] = lambda { |value| @layout.elements.each do |item|
+#                              item.set_ui_selection(item.value == value)
+#                              @layout.selected_item = item
+#                            end
+#                            selected_callback.call(value) if selected_callback
+#                            }
+#    end
+#
+#    def from(enumerable)
+#      ui_elements = []
+#      enumerable.each do |value|
+#        ui_element = @element_class.new
+#        ui_element.value = value
+#        if @selected_item
+#          ui_element.set_ui_selection(ui_element.value == @selected_item.value)
+#        end
+#        ui_element.signals.each do |key,signal|
+#          signal.connect(@signals[key]) if @signals[key]
+#        end
+#        ui_elements << ui_element
+#      end
+#      return ui_elements
+#    end
+#
+#  end
+#end
 
 module Gtk
 
   class Layout
 
-    def selected_item=(value)
-      @selected_item = value
-    end
-
-    def elements=(ui_items)
-      @elements = []
-      if ui_items.length != 0
-        self.children.each do |child|
-          self.remove(child)
-        end
-        height_factor = ui_items.first.control.height_request        
-        height = 0
-        ui_items.each do |item|
-          self.put(item.control, 0, height * height_factor)
-          if @selected_item && @selected_item.value == item.value
-            item.set_ui_selection(true)
+    def elements=(enumerable)
+      delta = enumerable.length - @elements.length
+      height = @elements.length
+      delta.abs.times do
+        if delta > 0
+          item = @control.new
+          item.signals.each do |key, signal|
+            signal.connect(@signals[key]) if @signals[key]
           end
+          self.put(item.control, 0, item.control.height_request * height)
           @elements << item
           height += 1
+        else
+          self.remove(@elements.pop.control)
         end
-        self.height = height * height_factor
       end
+      (0..enumerable.length).each do |index|
+        @elements[index].value = enumerable[index]
+      end
+      
+
+      
     end
 
-    def elements
+    def elements()
       return @elements
     end
-      
+
     def bind(options)
       if options[:property] == :elements
-        options[:converter] ||= ElementsConverter.new(
-          self,
-          options[:control],
-          options[:signals]
-        )
         options[:force] = true
+        @control = options[:control]
+        selected_callback   = @signals[:selected]
+        @signals = options[:signals]
+        @signals[:selected] = lambda do |value|
+                                elements.each do |item|
+                                  item.set_ui_selection(item.value == value)
+                                  @layout.selected_item = item
+                                end
+                                selected_callback.call(value) if selected_callback
+                              end
       end
       super(options)
     end
-
+      
   end
 
 end
+
