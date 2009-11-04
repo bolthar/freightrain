@@ -40,7 +40,8 @@ module Gtk
   class Layout
 
     def elements=(enumerable)
-      delta = enumerable.length - @elements.length      
+      delta = enumerable.length - @elements.length
+      @height_factor = @control.new.control.height_request unless @height_factor
       height = @elements.length
       delta.abs.times do
         if delta > 0
@@ -55,11 +56,7 @@ module Gtk
           self.remove(@elements.pop.control)
         end
       end
-      first_element = @elements.first
-      self.height = @elements.length * first_element.control.height_request if first_element
-      p @elements.length
-      p @elements.length * first_element.control.height_request if first_element
-      p self.height
+      self.height = @elements.length * @height_factor
       (0..enumerable.length).each do |index|
         @elements[index].value = enumerable[index]
       end
