@@ -70,7 +70,6 @@ module Gtk
     def bind(options)
       if options[:property] == :elements
         @elements = []
-        options[:force] = true
         @control = options[:control]
         @signals = options[:signals]
         selected_callback = @signals[:selected]

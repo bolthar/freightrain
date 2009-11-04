@@ -12,11 +12,16 @@ module Freightrain
   class FreightBinding
 
     def initialize(widget, options)
-      @widget    = widget
-      @property  = options[:property].to_s.split('.')
-      @path      = options[:path].to_s.split('.')
-      @converter = options[:converter] || DefaultConverter.new
-      @force     = options[:force]
+      @widget         = widget
+      @property       = options[:property].to_s.split('.')
+      @path           = options[:path].to_s.split('.')
+      @converter      = options[:converter] || DefaultConverter.new
+      @element_source = options[:source]
+      @force          = options[:force]
+    end
+
+    def data_source
+      return @element_source || @data_source
     end
 
     def get(source, path)
@@ -27,9 +32,10 @@ module Freightrain
     end
 
     def set(path, value, source)
-      return source.send(path[0].to_s + "=",value) if path.length == 1
-      target = path.shift
-      set(path, value, source.send(target))
+      my_path = path.clone
+      return source.send(my_path[0].to_s + "=",value) if my_path.length == 1
+      target = my_path.shift
+      set(my_path, value, source.send(target))
     end
 
     def data_source=(source)
@@ -38,9 +44,9 @@ module Freightrain
 
     def update()
       begin
-        value = get(@data_source, @path)
+        value = get(data_source, @path)
         if @force || value != @cache
-          set(@property, @converter.from(value), @widget)
+         set(@property, @converter.from(value), @widget)
           if value.kind_of? Enumerable
             @cache = value.clone
           else
@@ -54,7 +60,7 @@ module Freightrain
 
     def commit()
       begin
-        @data_source.set(@path, @widget.get(@property))
+        data_source.set(@path, @widget.get(@property))
       rescue Exception => ex
         p ex.message
       end
