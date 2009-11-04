@@ -1,14 +1,6 @@
 
 module Freightrain
 
-  class DefaultConverter
-
-    def from(value)
-      return value
-    end
-
-  end
- 
   class FreightBinding
 
     def initialize(widget, options)
@@ -24,6 +16,32 @@ module Freightrain
       return @element_source || @data_source
     end
 
+    def data_source=(source)
+      @data_source = source
+    end
+
+    def update()
+      begin
+        value = get(data_source, @path)
+        if @force || value != @cache
+         set(@property, @converter.from(value), @widget)
+         @cache = value
+        end
+      rescue Exception => ex
+#        p "#{@widget.name}: #{ex.message}"
+      end
+    end
+
+    def commit()
+      begin
+        value = get(@widget, @property)
+        set(@path, @converter.to(value), data_source)
+      rescue Exception => ex
+#        p ex.message
+      end
+    end
+
+    private
     def get(source, path)
       my_path = path.clone
       return source.send(my_path[0]) if my_path.length == 1
@@ -36,35 +54,7 @@ module Freightrain
       return source.send(my_path[0].to_s + "=",value) if my_path.length == 1
       target = my_path.shift
       set(my_path, value, source.send(target))
-    end
-
-    def data_source=(source)
-      @data_source = source
-    end
-
-    def update()
-      begin
-        value = get(data_source, @path)
-        if @force || value != @cache
-         set(@property, @converter.from(value), @widget)
-          if value.kind_of? Enumerable
-            @cache = value.clone
-          else
-            @cache = value
-          end
-        end
-      rescue Exception => ex
-        p "#{@widget.name}: #{ex.message}"
-      end
-    end
-
-    def commit()
-      begin
-        data_source.set(@path, @widget.get(@property))
-      rescue Exception => ex
-        p ex.message
-      end
-    end
+    end 
     
   end
 
