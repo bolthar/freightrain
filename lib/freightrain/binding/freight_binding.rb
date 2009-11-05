@@ -13,7 +13,8 @@ module Freightrain
     end
 
     def data_source
-      return @element_source || @data_source
+      return @element_source if @element_source
+      return @data_source
     end
 
     def data_source=(source)
@@ -28,7 +29,7 @@ module Freightrain
          @cache = value
         end
       rescue Exception => ex
-#        p "#{@widget.name}: #{ex.message}"
+        p "#{@widget.name}: #{ex.message}"
       end
     end
 
