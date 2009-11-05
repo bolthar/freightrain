@@ -13,7 +13,7 @@ module Freightrain
 
     def self.region(name, options = {})
       @regions ||= {}
-      @regions[:name] = options
+      @regions[name.to_sym] = options
     end
 
     def initialize()
@@ -28,6 +28,9 @@ module Freightrain
 
     def show      
       @view.toplevel.visible = true
+      @regions.values.each do |region|
+        region.on_show(@view)
+      end
       return @view.toplevel
     end
 

@@ -1,16 +1,16 @@
 
 module Freightrain
-  ù
+  
   class FreightRegion
 
     def initialize(name, options)
-      @container       = name.to_s + "_region"
-      @viewmodel_class = Freightrain[(name + "_view_model").to_sym]
+      @container = name.to_s + "_region"
+      @viewmodel = Freightrain[(name.to_s + "_view_model").to_sym]
     end
 
-    def on_show(view)
-      @viewmodel = @viewmodel_class.new
-      view.send(@container) << @viewmodel.show
+    def on_show(view)     
+      container = @viewmodel.show      
+      view.send(@container) << container
     end
 
   end
