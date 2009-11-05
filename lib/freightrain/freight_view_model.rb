@@ -4,6 +4,7 @@ module Freightrain
   class FreightViewModel
     extend ContainerHookable
     include ServiceHost
+    include RegionHost
 
     def self.service(name)
       @services ||= []
