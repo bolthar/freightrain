@@ -3,7 +3,7 @@ module Freightrain
   ù
   class FreightRegion
 
-    def initialize(name, options = {})
+    def initialize(name, options)
       @container       = name.to_s + "_region"
       @viewmodel_class = Freightrain[(name + "_view_model").to_sym]
     end

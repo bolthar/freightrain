@@ -10,7 +10,7 @@ module Freightrain
       @services << name.to_sym
     end
 
-    def self.region(name, options)
+    def self.region(name, options = {})
       @regions ||= {}
       @regions[:name] = options
     end
