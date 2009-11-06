@@ -23,7 +23,7 @@ module Gtk
         end
       end
       self.height = @elements.length * @height_factor
-      (0..enumerable.length).each do |index|
+      (0...enumerable.length).each do |index|
         @elements[index].value = enumerable[index]
       end
       
