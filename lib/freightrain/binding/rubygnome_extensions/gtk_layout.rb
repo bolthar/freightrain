@@ -23,8 +23,8 @@ module Gtk
         end
       end
       self.height = @elements.length * @height_factor
-      (0...enumerable.length).each do |index|
-        @elements[index].value = enumerable[index]
+      @elements.each do |element|
+        element.value = enumerable[@elements.index(element)]
       end
       
     end
@@ -38,6 +38,7 @@ module Gtk
         @elements           = []
         @control            = options[:control]
         @signals            = options[:signals]
+        options[:force]     = true
         selected_callback   = @signals[:selected]
         @signals[:selected] = lambda do |value|
                                 elements.each do |item|
