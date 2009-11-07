@@ -15,6 +15,7 @@ module Freightrain
       @view.data_source = self
       get_services
       build_regions
+      create_signals
       @regions.each do |name, region|
         region.viewmodel.signals.each do |key, signal|
           signal.connect(method("#{name.to_s}_on_#{key.to_s}".to_sym)) if self.respond_to? "#{name.to_s}_on_#{key.to_s}".to_sym

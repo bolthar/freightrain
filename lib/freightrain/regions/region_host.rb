@@ -12,7 +12,7 @@ module RegionHost
     end
   end
 
-  def self.region(name, options = {})
+  def region(name, options = {})
     @regions ||= {}
     @regions[name.to_sym] = options
   end
