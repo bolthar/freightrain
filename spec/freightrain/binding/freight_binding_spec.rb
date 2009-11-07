@@ -11,16 +11,9 @@ describe FreightBinding do
 
   describe "data source" do
 
-    it "should return data source if element source is nil" do
+    it "should always return data source variable" do
       binding = FreightBinding.new(:widget, {})
       binding.instance_variable_set(:@data_source, :value)
-      binding.data_source.should == :value
-    end
-
-    it "should return element source if element source is not nil" do
-      binding = FreightBinding.new(:widget, {})
-      binding.instance_variable_set(:@data_source, :no_good)
-      binding.instance_variable_set(:@element_source, :value)
       binding.data_source.should == :value
     end
 

@@ -15,6 +15,10 @@ include Freightrain
 
 describe Freightrain do
 
+  before :each do
+    ContainerHookable.classes.clear
+  end
+
   describe "configure container!" do
 
     it "should call register on container once for every subclass" do

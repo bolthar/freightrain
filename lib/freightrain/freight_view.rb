@@ -6,6 +6,7 @@ module Freightrain
     include GtkBuilderHelper
     include DialogHelper
     include BindingHost
+    extend SignalHost
     extend ContainerHookable
 
     container_options[:model] = :prototype
@@ -20,21 +21,8 @@ module Freightrain
 
     def widgets
       return @builder.objects.select { |widget| widget.kind_of? Gtk::Widget }
-    end
+    end   
     
-    def self.signal(signal_name)
-      @signals ||= []
-      @signals << signal_name.to_sym
-    end
-
-    def fire(signal, *args)
-      @signals[signal.to_sym].fire(*args)
-    end
-
-    def signals()
-      return @signals
-    end
-
     def initialize(builder = Gtk::Builder.new)
       @builder = builder
       load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}.glade"),@builder)

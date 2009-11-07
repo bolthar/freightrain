@@ -3,39 +3,11 @@ module Freightrain
 
   class FreightViewModel
     extend ContainerHookable
-    include ServiceHost
-    include RegionHost
-
-    def self.service(name)
-      @services ||= []
-      @services << name.to_sym
-    end
-
-    def self.region(name, options = {})
-      @regions ||= {}
-      @regions[name.to_sym] = options
-    end
-
-    def self.signal(signal_name)
-      @signals ||= []
-      @signals << signal_name.to_sym
-    end
-
-    def fire(signal, *args)
-      @signals[signal.to_sym].fire(*args)
-    end
-
-    def signals()
-      return @signals
-    end
+    extend ServiceHost
+    extend RegionHost
+    extend SignalHost
 
     def initialize()
-      @signals = {}
-      signals = self.class.instance_variable_get(:@signals)
-      signals ||= []
-      signals.each do |signal|
-        @signals[signal] = FreightSignal.new
-      end
       @view = Freightrain[self.class.name.sub("Model","").to_convention_sym]
       @view.signals.each do |key,signal|
         signal.connect(method("on_" + key.to_s)) if self.respond_to? "on_" + key.to_s
