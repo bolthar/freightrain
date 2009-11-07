@@ -1,5 +1,6 @@
 
 require 'rubygems'
+require 'libglade2'
 require 'needle'
 require 'require_all'
 

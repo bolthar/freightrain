@@ -3,10 +3,6 @@ module Freightrain
 
   class FreightElementView < FreightView
     
-    def self.inherited(subclass)
-#      subclass.signal(:selected)
-    end
-
     def value
       return @value
     end
