@@ -7,7 +7,7 @@ require 'spec'
 require 'mocha'
 require 'needle'
 require 'test/unit'
-require 'freightrain/container_hookable.rb'
+require 'freightrain/ioc/container_hookable.rb'
 require 'freightrain/freight_view_model.rb'
 require 'freightrain/string_patch.rb'
 

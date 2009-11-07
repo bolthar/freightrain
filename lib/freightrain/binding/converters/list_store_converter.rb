@@ -10,9 +10,8 @@ module Freightrain
     def from(enumerable)
       types = []
       types << Object
-      #temporary : it will inject each column's type
-      @columns.length.times do
-        types << String
+      @columns.each do |column|
+        types << column.type
       end
       list_store = Gtk::ListStore.new(*types)
       enumerable.each do |item|
