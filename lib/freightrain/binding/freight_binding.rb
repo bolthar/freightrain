@@ -8,12 +8,10 @@ module Freightrain
       @property       = options[:property].to_s.split('.')
       @path           = options[:path].to_s.split('.')
       @converter      = options[:converter] || DefaultConverter.new
-      @element_source = options[:source]
       @force          = options[:force]
     end
 
     def data_source
-      return @element_source if @element_source
       return @data_source
     end
 
