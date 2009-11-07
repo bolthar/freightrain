@@ -9,4 +9,5 @@ module Freightrain
     require_all File.join(self.app_path, "domain")
     
   end
+  
 end

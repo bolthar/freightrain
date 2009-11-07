@@ -12,7 +12,7 @@ module Freightrain
   def self.start(viewmodel)
     auto_require!
     configure_container!
-    viewmodel.new.show
+    Freightrain[(viewmodel.to_s + "_view_model").to_sym].show
     Gtk.main
   end
 
