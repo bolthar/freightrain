@@ -10,7 +10,7 @@ module Freightrain
   attr_accessor :app_path
 
   def self.start(viewmodel)
-    require_all @app_path
+    auto_require!
     configure_container!
     viewmodel.new.show
     Gtk.main
