@@ -1,8 +1,8 @@
 
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
-require File.dirname(__FILE__) + '/../../lib/freightrain/container_hookable.rb'
-require File.dirname(__FILE__) + '/../../lib/freightrain/container.rb'
+require File.dirname(__FILE__) + '/../../lib/freightrain/ioc/container_hookable.rb'
+require File.dirname(__FILE__) + '/../../lib/freightrain/ioc/container.rb'
 require File.dirname(__FILE__) + '/../../lib/freightrain/string_patch.rb'
 require 'rubygems'
 require 'mocha'

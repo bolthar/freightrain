@@ -1,7 +1,7 @@
 
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
-require File.dirname(__FILE__) + '/../../lib/freightrain/container_hookable.rb'
+require File.dirname(__FILE__) + '/../../lib/freightrain/ioc/container_hookable.rb'
 
 include Freightrain
 
