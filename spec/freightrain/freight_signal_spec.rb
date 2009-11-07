@@ -35,8 +35,29 @@ describe FreightSignal do
       @result.should == 6
     end
 
-#    it "should call proc passing block if block passed"
+    it "should not call proc if is inactive" do
+      @signal.instance_variable_set(:@inactive, true)
+      @signal.fire
+      @called.should == nil
+    end
 
+  end
+
+  describe "stifle" do
+
+    it "should set @inactive to true" do
+      @signal.stifle
+      @signal.instance_variable_get(:@inactive).should == true
+    end
+
+  end
+
+  describe "unleash" do
+
+    it "should set @inactive to false" do
+      @signal.unleash
+      @signal.instance_variable_get(:@inactive).should == false
+    end
   end
 
 end

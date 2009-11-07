@@ -4,7 +4,7 @@ module Freightrain
   class FreightSignal
 
     def fire(*args)
-      @proc.call(*args) if @proc && !@stifle
+      @proc.call(*args) if @proc && !@inactive
     end
 
     def connect(proc)
@@ -12,11 +12,11 @@ module Freightrain
     end
 
     def stifle
-      @stifle = true
+      @inactive = true
     end
 
     def unleash
-      @stifle = false
+      @inactive = false
     end
     
   end
