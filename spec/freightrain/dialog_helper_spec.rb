@@ -142,8 +142,20 @@ describe DialogHelper do
       @extender.yes_no_dialog("dummy")
     end
 
-    it "should return false if user does not click yes"
-    it "should return true if user clicks yes"
+    it "should return false if user does not click yes" do
+      dialog = stub_everything()
+      dialog.stubs(:run).yields(Gtk::Dialog::RESPONSE_NO)
+      dialog.stubs(:destroy)
+      Gtk::MessageDialog.stubs(:new).returns(dialog)
+      @extender.yes_no_dialog("dummy").should == false
+    end
+    it "should return true if user clicks yes" do
+      dialog = stub_everything()
+      dialog.stubs(:run).yields(Gtk::Dialog::RESPONSE_YES)
+      dialog.stubs(:destroy)
+      Gtk::MessageDialog.stubs(:new).returns(dialog)
+      @extender.yes_no_dialog("dummy").should == true
+    end
 
   end
 end
