@@ -151,8 +151,6 @@ describe FreightViewModel do
       instance.instance_variable_get(:@view).should == nil
     end
 
-
   end
-
 
 end

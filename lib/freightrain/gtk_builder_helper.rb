@@ -1,4 +1,3 @@
-require 'libglade2'
 
 module Freightrain
   module GtkBuilderHelper
@@ -12,11 +11,9 @@ module Freightrain
             instance_eval "def #{method_name}; return @builder.get_object('#{method_name}');end"
           end
         end
-        builder.connect_signals do |handler|
+        builder.connect_signals do |handler|          
           if self.respond_to? handler
-            method(handler) if self.respond_to? handler
-          else
-            lambda {p "#{handler} not implemented"}
+            method(handler)
           end
         end
       end
