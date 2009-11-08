@@ -7,8 +7,8 @@ module Gtk
     attr_accessor :path
     attr_accessor :type
 
-    def initialize
-      super
+    def initialize(title, renderer, options)
+      super(title, renderer, options)
       @type = String
     end    
 

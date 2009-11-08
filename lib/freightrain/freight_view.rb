@@ -11,9 +11,9 @@ module Freightrain
 
     container_options[:model] = :prototype
 
-    def self.container_options
-      return {:model => :prototype}
-    end
+#    def self.container_options
+#      return {:model => :prototype}
+#    end
 
     def toplevel
       return @builder.objects.first.toplevel
