@@ -5,6 +5,8 @@ describe FreightViewModel do
 
   before :each do
     @class = Class.new(FreightViewModel)
+    @view = stub(:signals => [], :data_source= => nil)
+    Freightrain.stubs(:[]).returns(@view)
   end
 
   after :each do
@@ -29,11 +31,6 @@ describe FreightViewModel do
   end
 
   describe "ctor" do
-
-    before :each do
-      @view = stub(:signals => [], :data_source= => nil)
-      Freightrain.stubs(:[]).returns(@view)
-    end
 
     it "should call get services" do
       @class.send(:define_method, :get_services) do
@@ -113,6 +110,47 @@ describe FreightViewModel do
       end
       @class.new
     end
+
+  end
+
+  describe "show" do
+
+    it "should set visible to true on toplevel" do
+      toplevel = mock()
+      toplevel.expects(:visible=).with(true)
+      @view.stubs(:toplevel).returns(toplevel)
+      @class.new.show
+    end
+
+    it "should call on_show on each region passing view" do
+      @view.stubs(:toplevel).returns(stub(:visible= => nil))
+      region = stub
+      region.stubs(:viewmodel => stub(:signals => {}))
+      region.expects(:on_show).with(@view)
+      @class.send(:define_method, :build_regions) do
+        @regions = {:region => region}
+      end
+      @class.new.show
+    end
+
+  end
+
+  describe "hide" do
+
+    it "should set visible to false on toplevel" do
+      toplevel = mock()
+      toplevel.expects(:visible=).with(false)
+      @view.stubs(:toplevel).returns(toplevel)
+      @class.new.hide
+    end
+
+    it "should set view as nil" do
+      @view.stubs(:toplevel).returns(stub(:visible=))
+      instance = @class.new
+      instance.hide
+      instance.instance_variable_get(:@view).should == nil
+    end
+
 
   end
 
