@@ -31,8 +31,8 @@ describe FreightViewModel do
   describe "ctor" do
 
     before :each do
-      view = stub(:signals => [], :data_source= => nil)
-      Freightrain.stubs(:[]).returns(view)
+      @view = stub(:signals => [], :data_source= => nil)
+      Freightrain.stubs(:[]).returns(@view)
     end
 
     it "should call get services" do
@@ -61,14 +61,31 @@ describe FreightViewModel do
     
     it "should ask container for correct view" do
       @class.stubs(:name).returns("TestViewModel")
-      view = stub(:signals => [], :data_source= => nil)
-      Freightrain.expects(:[]).with(:test_view).returns(view)
+      Freightrain.expects(:[]).with(:test_view).returns(@view)
       @class.new
     end
     
-    it "should connect to view's signal if correct method is defined"
-    it "should not connect to view's signal if no correct method defined"
-    it "should set view's datasource to self"
+    it "should connect to view's signal if correct method is defined" do
+      @class.send(:define_method, :on_signal) do
+        #do nothing
+      end
+      signal = mock(:connect)
+      @view.stubs(:signals).returns({:signal => signal})
+      @class.new
+    end
+    
+    it "should not connect to view's signal if no correct method defined" do
+      signal = mock()
+      signal.expects(:connect).never
+      @view.stubs(:signals).returns({:signal => signal})
+      @class.new
+    end
+    
+    it "should set view's datasource to self" do 
+      @view.expects(:data_source=).with(kind_of(@class))
+      @class.new
+    end
+
     it "should connect to region's signal if correct method is defined"
     it "should not connect to region's signal if no correct method defined"
 
