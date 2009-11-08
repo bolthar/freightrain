@@ -86,8 +86,33 @@ describe FreightViewModel do
       @class.new
     end
 
-    it "should connect to region's signal if correct method is defined"
-    it "should not connect to region's signal if no correct method defined"
+    it "should connect to region's signal if correct method is defined" do
+      @class.send(:define_method, :region_on_signal) do
+        #do nothing
+      end
+      signal = mock(:connect)
+      viewmodel = stub
+      viewmodel.stubs(:signals).returns({:signal => signal})
+      region = stub
+      region.stubs(:viewmodel => viewmodel)
+      @class.send(:define_method, :build_regions) do
+        @regions = {:region => region}
+      end      
+      @class.new
+    end
+
+    it "should not connect to region's signal if no correct method defined" do
+      signal = mock()
+      signal.expects(:connect).never
+      viewmodel = stub
+      viewmodel.stubs(:signals).returns({:signal => signal})
+      region = stub
+      region.stubs(:viewmodel => viewmodel)
+      @class.send(:define_method, :build_regions) do
+        @regions = {:region => region}
+      end
+      @class.new
+    end
 
   end
 
