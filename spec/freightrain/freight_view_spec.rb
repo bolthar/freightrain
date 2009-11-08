@@ -4,7 +4,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe FreightView do
 
   before :each do
-    eval "class TestView < FreightView;end;"
+    @class = Class.new(FreightView)
     File.stubs(:join).returns("nofile")
   end
 
@@ -13,33 +13,58 @@ describe FreightView do
     ContainerHookable.classes.clear #it avoids container specs to fail
   end
 
-  it "should always call load_from_file with right params" do
-    #TODO: assert on load_from_file, not just on File.exists?
-    File.expects(:exists?).with("nofile")
-    TestView.new
+  it "should always include BindingHost" do
+    @class.included_modules.include?(BindingHost).should == true
   end
 
-  it "should add a signal for each signal registered" do
-    TestView.signal(:first)
-    TestView.signal(:second)
-    view = TestView.new
-    view.signals.length.should == 2
-    view.signals.include?(:first).should == true
-    view.signals.include?(:second).should == true
-    TestView.instance_variable_set(:@signals,[]) #cleaning up
+  it "should always include DialogHelper" do
+    @class.included_modules.include?(DialogHelper).should == true
   end
 
-  it "should add no signal if no signals registered" do
-    view = TestView.new
-    view.signals.length.should == 0
+  it "should always include GtkBuilderHelper" do
+    @class.included_modules.include?(GtkBuilderHelper).should == true
   end
 
-  it "should not add the same signal twice" do
-    TestView.signal(:clone)
-    TestView.signal(:clone)
-    view = TestView.new
-    view.signals.length.should == 1
-    TestView.instance_variable_set(:@signals,[]) #cleaning up
+  it "should always extend SignalHost" do
+    @class.kind_of?(SignalHost).should == true
+  end
+
+  it "should always extend ContainerHookable" do
+    @class.kind_of?(ContainerHookable).should == true
+  end
+
+  describe "ctor" do
+
+    before :each do
+      @class.send(:define_method, :called) do
+        return @called
+      end
+    end
+
+    it "should always call load_from_file with right params" do
+      @class.stubs(:name).returns("myname")
+      File.stubs(:join).with(anything, "views", "myname.glade").returns(:correct)
+      @class.send(:define_method, :load_from_file) do |path, builder|
+        @called = true if (path == :correct && builder == :builder)
+      end
+      @class.new(:builder).called.should == true
+    end
+
+    it "should always call create_signals" do
+      @class.send(:define_method, :create_signals) do
+        @called = true
+      end
+      @class.new.called.should == true
+    end
+
+  end
+  
+  describe "container options" do
+
+    it "should always return an hash with model == prototype" do
+      @class.container_options[:model].should == :prototype
+    end
+
   end
 
   describe "toplevel" do
@@ -49,39 +74,13 @@ describe FreightView do
       builder.stubs(:objects).returns(
         stub(:first => stub(
           :toplevel => :correct)))
-      view = TestView.new(builder)
+      view = @class.new(builder)
       view.toplevel.should == :correct
     end
 
   end
 
-  describe "fire" do
-
-    it "should raise if called with non existing signal" do
-      view = TestView.new
-      lambda do
-        view.fire :no_signal
-      end.should raise_error
-    end
-
-    it "should call fire on signal if existing" do
-      signal = mock(:fire)
-      view = TestView.new
-      view.instance_variable_set(:@signals, {:my_signal => signal})
-      view.fire :my_signal
-    end
-
-    it "should call fire on signal with right arguments" do
-      signal = mock()
-      signal.expects(:fire).with(:a, :b)
-      view = TestView.new
-      view.instance_variable_set(:@signals, {:my_signal => signal})
-      view.fire :my_signal, :a, :b
-    end
-
-  end
-
- describe "widgets" do
+  describe "widgets" do
 
     it "should return all objects in builder who derive from Gtk::Widget" do
       builder = stub()
@@ -89,11 +88,15 @@ describe FreightView do
           stub(:kind_of? => Gtk::Widget),
           nil,
           nil])
-      view = TestView.new(builder)
+      view = @class.new(builder)
       view.widgets.length.should == 1
     end
-    
+
  end
+
+  
+
+ 
 
 
 

@@ -7,7 +7,8 @@ module Freightrain
 
     ContainerHookable.classes.each do |klass|
       klass.subclasses.each do |subclass|
-        @registry.register(subclass.name.to_convention_sym, subclass.container_options) { subclass.new }
+        @registry.register(
+          subclass.name.to_convention_sym, subclass.container_options) { subclass.new }
       end
     end
 

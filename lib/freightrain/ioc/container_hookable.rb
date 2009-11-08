@@ -6,6 +6,7 @@ module Freightrain
     def self.extended(extending_class)
       @@classes ||= []
       @@classes << extending_class
+      extending_class.instance_variable_set(:@container_options, {})
     end
 
     def self.classes

@@ -5,12 +5,18 @@ module Gtk
   class TreeViewColumn
 
     attr_accessor :path
-    attr_accessor :type
+    
+    attr_writer   :type
 
-    def initialize(title, renderer, options)
-      super(title, renderer, options)
-      @type = String
-    end    
+    def type
+      return @type if @type
+      return String
+    end
+
+
+
+
+
 
   end
 
