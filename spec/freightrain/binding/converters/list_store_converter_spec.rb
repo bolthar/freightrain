@@ -56,7 +56,6 @@ describe ListStoreConverter do
       converter = ListStoreConverter.new([@column_one, @column_two])
       converter.from([item])
     end
-
     
   end
 end

@@ -3,6 +3,7 @@ require 'rubygems'
 require 'libglade2'
 require 'needle'
 require 'require_all'
+require 'tmpdir'
 
 require_all File.dirname(__FILE__) + '/freightrain' #thanks Tony!
 
