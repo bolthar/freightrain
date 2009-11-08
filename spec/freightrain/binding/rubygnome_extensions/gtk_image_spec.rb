@@ -15,6 +15,8 @@ describe Gtk::Image do
       image.bind(options)
       options[:converter].should be_a_kind_of(PixbufConverter)
     end
+    
   end
+  
 end
 
