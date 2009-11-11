@@ -6,13 +6,23 @@ module Freightrain
     def initialize
       @builder = Gtk::Builder.new
     end
+
+    def extension
+      return "glade"
+    end
     
     def add_from_file(file_path)
       @builder.add_from_file(file_path)
     end
 
+    def toplevel
+      return objects.first.toplevel
+    end
+
     def objects
-      return @builder.objects
+      return @builder.objects.select do |widget|
+        widget.respond_to?(:name) && widget.kind_of?(Gtk::Widget)
+      end
     end
 
     def get_object(name)

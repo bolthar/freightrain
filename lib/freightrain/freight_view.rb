@@ -2,7 +2,7 @@
 module Freightrain
 
   class FreightView
-    include GtkBuilderHelper
+    include InterfaceBuilder
     include DialogHelper
     include BindingHost
     extend SignalHost
@@ -13,16 +13,16 @@ module Freightrain
     end
 
     def toplevel
-      return @builder.objects.first.toplevel
+      return @builder.toplevel
     end
 
     def widgets
-      return @builder.objects.select { |widget| widget.kind_of? Gtk::Widget }
+      return @builder.objects
     end   
     
-    def initialize(builder = Gtk::Builder.new)
+    def initialize(builder = GtkInterfaceBuilder.new)
       @builder = builder
-      load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}.glade"),@builder)
+      load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}"),@builder)
       create_signals
     end
 

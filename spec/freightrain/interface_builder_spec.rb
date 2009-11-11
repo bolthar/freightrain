@@ -1,7 +1,7 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe GtkBuilderHelper do
+describe InterfaceBuilder do
   
   describe "load from file" do
 
@@ -10,8 +10,9 @@ describe GtkBuilderHelper do
       @builder.stubs(:add_from_file)
       @builder.stubs(:objects).returns([])
       @builder.stubs(:connect_signals)
+      @builder.stubs(:extension).returns("dmy")
       @class = Class.new()
-      @class.instance_eval("include GtkBuilderHelper")
+      @class.instance_eval("include InterfaceBuilder")
     end
 
     it "should not create a view definition if file is not found" do
@@ -39,17 +40,6 @@ describe GtkBuilderHelper do
       instance.respond_to?(:my_name_two).should == true
     end
 
-    it "should not create the accessor method if widget does not respond to name" do
-      File.stubs(:exists?).returns(true)
-      widget_one = stub()
-      widget_two = stub()
-      @builder.stubs(:objects).returns([widget_one, widget_two])
-      instance = @class.new
-      instance.load_from_file("dummy", @builder)
-      instance.respond_to?(:my_name_one).should == false
-      instance.respond_to?(:my_name_two).should == false
-    end
-    
     it "should attach correct handler to widget if method is present" do
       @class.send(:define_method, :on_widget_clicked) { }
       @builder.stubs(:connect_signals).yields("on_widget_clicked")      

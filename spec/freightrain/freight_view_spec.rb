@@ -22,7 +22,7 @@ describe FreightView do
   end
 
   it "should always include GtkBuilderHelper" do
-    @class.included_modules.include?(GtkBuilderHelper).should == true
+    @class.included_modules.include?(InterfaceBuilder).should == true
   end
 
   it "should always extend SignalHost" do
@@ -43,7 +43,7 @@ describe FreightView do
 
     it "should always call load_from_file with right params" do
       @class.stubs(:name).returns("myname")
-      File.stubs(:join).with(anything, "views", "myname.glade").returns(:correct)
+      File.stubs(:join).with(anything, "views", "myname").returns(:correct)
       @class.send(:define_method, :load_from_file) do |path, builder|
         @called = true if (path == :correct && builder == :builder)
       end
@@ -71,9 +71,8 @@ describe FreightView do
 
     it "should always return first object's toplevel" do
       builder = stub()
-      builder.stubs(:objects).returns(
-        stub(:first => stub(
-          :toplevel => :correct)))
+      builder.stubs(:extension).returns("dmy")
+      builder.stubs(:toplevel).returns(:correct)
       view = @class.new(builder)
       view.toplevel.should == :correct
     end
@@ -82,14 +81,12 @@ describe FreightView do
 
   describe "widgets" do
 
-    it "should return all objects in builder who derive from Gtk::Widget" do
+    it "should return all objects in builder" do
       builder = stub()
-      builder.stubs(:objects).returns([
-          stub(:kind_of? => Gtk::Widget),
-          nil,
-          nil])
+      builder.stubs(:extension).returns("dmy")
+      builder.stubs(:objects).returns([:a, :b, :c])
       view = @class.new(builder)
-      view.widgets.length.should == 1
+      view.widgets.length.should == 3
     end
 
  end
