@@ -7,10 +7,10 @@ module Freightrain
       if File.exists?(definition_file_path)
         builder.add_from_file(definition_file_path)
         builder.objects.each do |widget|
-          method_name = widget.name
+          method_name = builder.get_widget_name(widget)
           instance_eval "def #{method_name}; return @builder.get_object('#{method_name}');end;"
         end
-        builder.connect_signals do |handler|          
+        builder.connect_signals do |handler|
           if self.respond_to? handler
             method(handler)
           end

@@ -19,6 +19,10 @@ module Freightrain
       return objects.first.toplevel
     end
 
+    def get_widget_name(widget)
+      return widget.name
+    end
+
     def objects
       return @builder.objects.select do |widget|
         widget.respond_to?(:name) && widget.kind_of?(Gtk::Widget)

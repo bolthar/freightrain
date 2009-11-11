@@ -31,16 +31,19 @@ module Freightrain
   end
 
   private
-  def start_toolkit_mainloop(viewmodel)    
-    if !@toolkit || @toolkit.to_sym == :gtk
+  def start_toolkit_mainloop(viewmodel)
+    @toolkit ||= :gtk
+    
+    if @toolkit == :gtk
       Freightrain[(viewmodel.to_s + "_view_model").to_sym].show
       Gtk.main
     end
-    if @toolkit.to_sym == :qt
+    if @toolkit == :qt
       app = Qt::Application.new([])
       Freightrain[(viewmodel.to_s + "_view_model").to_sym].show
       app.exec()
     end
+    
   end
 
 end
