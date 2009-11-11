@@ -5,7 +5,7 @@ require 'needle'
 require 'require_all'
 require 'tmpdir'
 
-require_all File.dirname(__FILE__) + '/freightrain' #thanks Tony!
+require_all File.dirname(__FILE__) + '/freightrain'
 
 module Freightrain
 

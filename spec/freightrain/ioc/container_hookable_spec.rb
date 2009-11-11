@@ -9,6 +9,10 @@ describe ContainerHookable do
 
   describe "subclasses" do
 
+    before :each do
+      ContainerHookable.classes.clear
+    end
+
     it "should return an empty array if never extended" do
       ContainerHookable.classes.length.should == 0
     end

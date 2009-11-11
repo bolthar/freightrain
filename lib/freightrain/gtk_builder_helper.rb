@@ -2,7 +2,7 @@
 module Freightrain
   module GtkBuilderHelper
 
-    def load_from_file(file_path,builder = Gtk::Builder.new)
+    def load_from_file(file_path,builder = GtkInterfaceBuilder.new)
       if File.exists?(file_path)
         builder.add_from_file(file_path)
         builder.objects.each do |widget|
