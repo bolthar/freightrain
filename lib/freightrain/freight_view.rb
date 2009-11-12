@@ -14,10 +14,6 @@ module Freightrain
       return {:model => :prototype}
     end
 
-    def toplevel
-      return @builder.toplevel || @widgets.first.toplevel
-    end  
-    
     def initialize(builder = GtkExtensions::InterfaceBuilder.new)
       @builder = builder
       load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}"),@builder)
