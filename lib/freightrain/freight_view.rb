@@ -14,6 +14,22 @@ module Freightrain
       return {:model => :prototype}
     end
 
+    def self.wrap_container(widget)
+      if Freightrain.toolkit == :qt
+        return QtExtensions::RegionContainer.new(widget)
+      else
+        return GtkExtensions::RegionContainer.new(widget)
+      end
+    end
+
+    def toplevel
+      if Freightrain.toolkit == :qt
+        @builder.toplevel
+      else
+        @widgets.first.toplevel
+      end
+    end
+
     def initialize(builder = GtkExtensions::InterfaceBuilder.new)
       @builder = builder
       load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}"),@builder)
