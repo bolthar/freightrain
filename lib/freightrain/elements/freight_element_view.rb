@@ -30,6 +30,5 @@ module Freightrain
       @signals[:selected] = FreightSignal.new
     end
 
-
   end
 end

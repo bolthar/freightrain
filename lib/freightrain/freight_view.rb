@@ -13,7 +13,7 @@ module Freightrain
     end
 
     def toplevel
-      return @builder.toplevel
+      return @builder.objects.first.toplevel
     end
 
     def widgets
