@@ -8,19 +8,17 @@ module Freightrain
     extend SignalHost
     extend ContainerHookable
 
+    attr_reader :widgets
+
     def self.container_options
       return {:model => :prototype}
     end
 
     def toplevel
-      return @builder.objects.first.toplevel
-    end
-
-    def widgets
-      return @builder.objects
-    end   
+      return @widgets.first.toplevel
+    end  
     
-    def initialize(builder = GtkInterfaceBuilder.new)
+    def initialize(builder = GtkExtensions::InterfaceBuilder.new)
       @builder = builder
       load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}"),@builder)
       create_signals
