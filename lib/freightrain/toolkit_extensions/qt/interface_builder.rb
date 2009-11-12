@@ -5,50 +5,47 @@ module Freightrain
 
     class InterfaceBuilder
 
+      attr_reader :toplevel
+
       def initialize
         @builder = Qt::UiLoader.new
       end
 
-      def extension
-        return "ui"
+      def file_found?(file_path)
+         p file_path + ".ui"
+        return File.exists?(file_path + ".ui")
+       
       end
 
-      def toplevel
-        return @toplevel
-      end
-
-      def add_from_file(file_path)
-        file = Qt::File.new(file_path)
+      def create_objects_from_file(file_path)
+        file = Qt::File.new(file_path + ".ui")
         file.open(Qt::File::ReadOnly)
         @toplevel = @builder.load(file)
         file.close
-      end
-
-      def objects
         return get_all_objects(@toplevel).select do |widget|
           widget.objectName && widget.objectName != ""
+        end.map
+      end
+
+      def create_object_accessors(widgets, view)
+        widgets.each do |widget|
+          name = widget.objectName
+          view.instance_eval "def #{name}; @widgets.select { |w| w.objectName == '#{name}'  }.first ;end;"
         end
       end
 
-      def get_object(name)
-        return objects.select { |widget| widget.objectName == name}.first
-      end
-
-      def get_widget_name(widget)
-        return widget.objectName
-      end
-
-      def connect_signals
+      def connect_signals()
         @lightning_rod = Class.new(Qt::Widget)
-        get_all_objects(@toplevel).select { |object| object.kind_of? Qt::Action}.each do |object|
-          @lightning_rod.slots(object.objectName + "()")
-          @lightning_rod.send(:define_method, object.objectName.to_sym) do
-            yield("on_" + object.objectName).call
+        actions = get_all_objects(@toplevel).select { |action| action.kind_of? Qt::Action}
+        actions.each do |action|
+          @lightning_rod.slots(action.objectName + "()")
+          @lightning_rod.send(:define_method, action.objectName.to_sym) do
+            yield(action.objectName).call
           end
         end
         @decoy = @lightning_rod.new
-        get_all_objects(@toplevel).select { |object| object.kind_of? Qt::Action}.each do |object|
-          Qt::Object.connect(object, SIGNAL('triggered()'), @decoy, SLOT(object.objectName + "()"))
+        actions.each do |action|
+          Qt::Object.connect(action, SIGNAL('triggered()'), @decoy, SLOT(action.objectName + "()"))
         end
       end
 

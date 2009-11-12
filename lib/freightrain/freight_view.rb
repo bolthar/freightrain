@@ -15,7 +15,7 @@ module Freightrain
     end
 
     def toplevel
-      return @widgets.first.toplevel
+      return @builder.toplevel || @widgets.first.toplevel
     end  
     
     def initialize(builder = GtkExtensions::InterfaceBuilder.new)
