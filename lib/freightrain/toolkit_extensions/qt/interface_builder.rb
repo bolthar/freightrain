@@ -11,12 +11,12 @@ module Freightrain
         @builder = Qt::UiLoader.new
       end
 
-      def file_found?(file_path)
-        return File.exists?(file_path + ".ui")       
+      def file_found?(file_name)
+        return get_ui_files(file_name)
       end
 
-      def create_objects_from_file(file_path)
-        file = Qt::File.new(file_path + ".ui")
+      def create_objects_from_file(file_name)
+        file = Qt::File.new(get_ui_files(file_name))
         file.open(Qt::File::ReadOnly)
         @toplevel = @builder.load(file)
         file.close
@@ -48,6 +48,12 @@ module Freightrain
 #          Qt::Object.connect(action, SIGNAL('activated()'), decoy, SLOT("action.objectName" + "()"))
           action.connect(SIGNAL('activated()'), decoy, SLOT(action.objectName))
         end
+      end
+
+      def get_ui_files(file_name)
+        search_path = File.join(Freightrain.app_path, "views", "**", file_name + ".ui")
+        results = Dir.glob(search_path)
+        return results.first
       end
 
       private
