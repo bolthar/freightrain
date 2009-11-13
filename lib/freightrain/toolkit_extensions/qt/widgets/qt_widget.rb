@@ -5,7 +5,6 @@ module Qt
   class Widget
 
     def elements=(enumerable)
-      begin
       delta = enumerable.length - @elements.length
       @height_factor = @control.new.control.height unless @height_factor
       height = @elements.length
@@ -36,10 +35,6 @@ module Qt
       self.show
       @elements.each do |element|
         element.value = enumerable[@elements.index(element)]
-      end
-      rescue Exception => ex
-        p ex.message
-        p ex.backtrace
       end
     end
 
