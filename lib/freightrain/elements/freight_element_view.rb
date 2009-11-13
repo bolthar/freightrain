@@ -25,8 +25,8 @@ module Freightrain
       raise "selected is not overridden. You should override the selected method on your #{self.class.name} control"
     end
 
-    def initialize(builder = GtkExtensions::InterfaceBuilder.new)
-      super(builder)
+    def initialize
+      super
       @signals[:selected] = FreightSignal.new
     end
 

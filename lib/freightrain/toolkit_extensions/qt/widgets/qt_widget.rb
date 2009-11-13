@@ -6,6 +6,8 @@ module Qt
 
     def elements=(enumerable)
       delta = enumerable.length - @elements.length
+      p @control.new.control
+      p @control.new.widgets
       @height_factor = @control.new.control.height unless @height_factor
       height = @elements.length
       delta.abs.times do
