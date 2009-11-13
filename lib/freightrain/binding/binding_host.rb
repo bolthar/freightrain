@@ -11,6 +11,7 @@ module Freightrain
     end
     
     def bindings
+      p Thread.current
       return widgets.each.map { |widget| widget.bindings }.flatten
     end
 
