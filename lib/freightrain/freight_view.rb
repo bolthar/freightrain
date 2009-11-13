@@ -32,7 +32,7 @@ module Freightrain
 
     def initialize(builder = GtkExtensions::InterfaceBuilder.new)
       @builder = builder
-      load_from_file(File.join(Freightrain.app_path,"views","#{self.class.name}"),@builder)
+      load_from_file(self.class.name, @builder)
       create_signals
     end
 

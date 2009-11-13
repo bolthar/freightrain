@@ -9,12 +9,12 @@ module Freightrain
         @builder = Gtk::Builder.new
       end
 
-      def file_found?(file_path)
-        return File.exists?(file_path + ".glade")
+      def file_found?(file_name)
+        return get_glade_file(file_name)
       end
 
-      def create_objects_from_file(file_path)
-        @builder.add_from_file(file_path + ".glade")
+      def create_objects_from_file(file_name)
+        @builder.add_from_file(get_glade_file(file_name))
         return @builder.objects.select do
           |obj| obj.respond_to?(:name) && obj.kind_of?(Gtk::Widget)
         end.map
@@ -31,6 +31,12 @@ module Freightrain
         @builder.connect_signals do |signal|
           yield(signal)
         end
+      end
+
+      def get_glade_file(file_name)
+        search_path = File.join(Freightrain.app_path, "views", "**", file_name + ".glade")
+        results = Dir.glob(search_path)
+        return results.first
       end
 
     end
