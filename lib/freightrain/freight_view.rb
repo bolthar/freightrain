@@ -30,8 +30,13 @@ module Freightrain
       end
     end
 
-    def initialize(builder = GtkExtensions::InterfaceBuilder.new)
-      @builder = builder
+    def initialize()
+      @widgets = []
+      if Freightrain.toolkit == :qt
+        @builder = QtExtensions::InterfaceBuilder.new
+      else
+        @builder = GtkExtensions::InterfaceBuilder.new
+      end
       load_from_file(self.class.name, @builder)
       create_signals
     end

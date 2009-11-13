@@ -8,13 +8,17 @@ module Freightrain
     services_folder   = File.join(self.app_path, "services")
     domain_folder     = File.join(self.app_path, "domain")
 
-    require_all File.join(views_folder)
-    require_all File.join(viewmodels_folder)
+    if Dir.glob(File.join(views_folder, @toolkit.to_s)).empty?
+      require_all views_folder
+    else
+      require_all File.join(views_folder, @toolkit.to_s)
+    end
+    require_all viewmodels_folder
     if File.directory?(services_folder) && !Dir.entries(services_folder).empty?
-      require_all File.join(services_folder)
+      require_all services_folder
     end
     if File.directory?(domain_folder) && !Dir.entries(domain_folder).empty?
-      require_all File.join(domain_folder)
+      require_all domain_folder
     end
     
   end
