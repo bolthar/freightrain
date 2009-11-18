@@ -3,6 +3,11 @@ module Freightrain
 
   module BindingHost
 
+    def load_bindings_from_file(widgets)
+      loader = BindingLoader.new(self.class.name)
+      loader.bind_widgets(widgets)
+    end
+    
     def data_source=(source)      
       bindings.each do |binding|
         binding.data_source = source
@@ -21,8 +26,6 @@ module Freightrain
     def update
       bindings.each { |binding| binding.update}
     end
-
-
 
   end
 

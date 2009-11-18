@@ -26,6 +26,7 @@ module Freightrain
       @widgets = []
       @builder = Toolkit::InterfaceBuilder.new
       load_from_file(self.class.name, @builder)
+      load_bindings_from_file(@widgets)
       create_signals
     end
 
