@@ -1,4 +1,12 @@
 
+require 'libglade2'
+require File.dirname(__FILE__) + "/widgets/gtk_image.rb"
+require File.dirname(__FILE__) + "/widgets/gtk_widget.rb"
+require File.dirname(__FILE__) + "/widgets/gtk_treeview.rb"
+require File.dirname(__FILE__) + "/widgets/gtk_treeviewcolumn.rb"
+require File.dirname(__FILE__) + "/widgets/gtk_layout.rb"
+require File.dirname(__FILE__) + "/interface_builder.rb"
+require File.dirname(__FILE__) + "/region_container.rb"
 
 module Freightrain
   
