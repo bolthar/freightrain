@@ -4,7 +4,7 @@ module Freightrain
   
   module Toolkit
 
-    def start_main_loop()
+    def self.start_main_loop
       Gtk.main
     end
 

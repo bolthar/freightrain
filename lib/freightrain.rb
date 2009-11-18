@@ -17,7 +17,7 @@ module Freightrain
     load_extensions!
     auto_require!
     configure_container!    
-    start_toolkit_mainloop(viewmodel_name)
+    start_toolkit_mainloop!(viewmodel_name)
   end
 
   private

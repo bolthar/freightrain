@@ -15,7 +15,7 @@ module Freightrain
     end
 
     def self.wrap_container(widget)
-      return Extensions::RegionContainer.new(widget)
+      return Toolkit::RegionContainer.new(widget)
     end
 
     def toplevel
@@ -28,7 +28,7 @@ module Freightrain
 
     def initialize()
       @widgets = []
-      @builder = Extensions::InterfaceBuilder.new     
+      @builder = Toolkit::InterfaceBuilder.new
       load_from_file(self.class.name, @builder)
       create_signals
     end

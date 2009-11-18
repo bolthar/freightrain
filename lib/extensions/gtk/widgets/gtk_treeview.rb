@@ -17,13 +17,13 @@ module Gtk
 
     def elements=(enumerable)
       types = [::Object]
-      types.concat @columns.map { |column| column.type}
+      types.concat columns.map { |column| column.type}
       list_store = Gtk::ListStore.new(*types)
       enumerable.each do |item|
         iterator = list_store.append
         iterator[0] = item
-        (0...@columns.length).each do |index|
-          iterator[index+1] = item.send(@columns[index].path)
+        (0...columns.length).each do |index|
+          iterator[index+1] = item.send(columns[index].path)
         end
       end
       self.model = list_store
