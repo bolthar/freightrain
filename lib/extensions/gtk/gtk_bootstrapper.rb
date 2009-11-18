@@ -13,6 +13,7 @@ module Freightrain
   module Toolkit
 
     def self.start_main_loop
+      yield
       Gtk.main
     end
 

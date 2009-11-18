@@ -20,8 +20,9 @@ module Freightrain
     load_extensions!
     auto_require!
     configure_container!
-    Freightrain[(viewmodel_name.to_s + "_view_model").to_sym].show
-    Toolkit.start_main_loop
+    Toolkit.start_main_loop do
+      Freightrain[(viewmodel_name.to_s + "_view_model").to_sym].show
+    end
   end
   
 end
