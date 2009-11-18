@@ -51,7 +51,11 @@ module Freightrain
       end
 
       def get_ui_files(file_name)
-        search_path = File.join(Freightrain.app_path, "views", "**", file_name + ".ui")
+        search_path = File.join(
+          Freightrain.app_path,
+          "views",
+          "**",
+          file_name.to_convention + ".ui")
         results = Dir.glob(search_path)
         return results.first
       end

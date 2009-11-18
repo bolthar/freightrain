@@ -3,10 +3,10 @@ require 'rubygems'
 
 class String
 
-  def to_convention_sym
+  def to_convention
     #TODO: use regexp instead
     return nil if self.empty?
-    clone = self
+    clone = self.clone
     first_letter = clone.slice!(0)
     result = first_letter.chr.downcase
     clone.each_char do |letter|
@@ -17,6 +17,10 @@ class String
         result += letter
       end
     end
-    return result.downcase.to_sym
+    return result.downcase
+  end
+
+  def to_convention_sym
+    return self.to_convention.to_sym
   end
 end

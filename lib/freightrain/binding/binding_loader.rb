@@ -11,7 +11,7 @@ module Freightrain
         "views",
         Freightrain.toolkit.to_s,
         "**",
-        class_name + ".bnd.yml")
+        class_name.to_convention + ".bnd.yml")
       result = Dir.glob(search_path)
       @filename = result[0] if !result.empty?
     end
@@ -19,8 +19,12 @@ module Freightrain
     def bind_widgets(widgets)
       if @filename
         bindings = YAML.load_file(@filename)
-        bindings.each do |widget, options|
+        bindings.each do |widget, yaml_options|
           target = widgets.select { |w| w.name == widget}.first
+          options = {}
+          yaml_options.each do |key, value|
+            options[key.to_sym] = value
+          end
           target.bind(options)
         end
       end

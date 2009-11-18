@@ -34,7 +34,11 @@ module Freightrain
       end
 
       def get_glade_file(file_name)
-        search_path = File.join(Freightrain.app_path, "views", "**", file_name + ".glade")
+        search_path = File.join(
+          Freightrain.app_path,
+          "views",
+          "**",
+          file_name.to_convention + ".glade")
         results = Dir.glob(search_path)
         return results.first
       end
