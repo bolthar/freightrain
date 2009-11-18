@@ -6,7 +6,6 @@ module Freightrain
 
   def load_extensions!()
     begin
-#      p File.dirname(__FILE__) + "/../extensions/#{@toolkit.to_s}"
       require File.dirname(__FILE__) + "/../extensions/#{@toolkit.to_s}/#{@toolkit.to_s}_bootstrapper.rb"
     rescue Exception => ex
       p "Could not load #{@toolkit}. Have you installed all the required libraries?"
