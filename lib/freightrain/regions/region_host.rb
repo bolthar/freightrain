@@ -8,8 +8,13 @@ module RegionHost
       @regions = {}
       regions.each do |name, options|
         @regions[name] = FreightRegion.new(name, options)
+        klass.send(:define_method, name) do
+          return @regions[name].viewmodel
+        end
       end
     end
+
+
   end
 
   def region(name, options = {})
