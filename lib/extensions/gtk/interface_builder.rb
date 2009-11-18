@@ -39,6 +39,10 @@ module Freightrain
         return results.first
       end
 
+      def toplevel
+        return @builder.objects.first.toplevel
+      end
+
     end
 
   end

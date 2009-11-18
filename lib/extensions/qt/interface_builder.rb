@@ -56,6 +56,10 @@ module Freightrain
         return results.first
       end
 
+      def toplevel
+        return @toplevel
+      end
+
       private
       def get_all_objects(parent, objects = [])
         objects << parent

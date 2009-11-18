@@ -19,11 +19,7 @@ module Freightrain
     end
 
     def toplevel
-      if Freightrain.toolkit == :qt
-        @builder.toplevel
-      else
-        @widgets.first.toplevel
-      end
+      return @builder.toplevel
     end
 
     def initialize()
