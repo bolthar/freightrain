@@ -1,7 +1,7 @@
 
 module Freightrain
 
-  module QtExtensions
+  module Toolkit
 
     class InterfaceBuilder
 

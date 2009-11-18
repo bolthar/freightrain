@@ -15,11 +15,7 @@ module Freightrain
     end
 
     def self.wrap_container(widget)
-      if Freightrain.toolkit == :qt
-        return QtExtensions::RegionContainer.new(widget)
-      else
-        return GtkExtensions::RegionContainer.new(widget)
-      end
+      return Extensions::RegionContainer.new(widget)
     end
 
     def toplevel
@@ -32,11 +28,7 @@ module Freightrain
 
     def initialize()
       @widgets = []
-      if Freightrain.toolkit == :qt
-        @builder = QtExtensions::InterfaceBuilder.new
-      else
-        @builder = GtkExtensions::InterfaceBuilder.new
-      end
+      @builder = Extensions::InterfaceBuilder.new     
       load_from_file(self.class.name, @builder)
       create_signals
     end

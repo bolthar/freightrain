@@ -1,8 +1,7 @@
 
-
 module Freightrain
 
-  module GtkExtensions
+  module Toolkit
 
     class RegionContainer
 
@@ -11,7 +10,8 @@ module Freightrain
       end
 
       def plug_in(region_widget)
-        @widget << region_widget
+        region_widget.setParent(@widget)
+        region_widget.show
       end
       
     end

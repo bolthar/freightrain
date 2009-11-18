@@ -1,7 +1,8 @@
 
+
 module Freightrain
 
-  module QtExtensions
+  module Toolkit
 
     class RegionContainer
 
@@ -10,8 +11,7 @@ module Freightrain
       end
 
       def plug_in(region_widget)
-        region_widget.setParent(@widget)
-        region_widget.show
+        @widget << region_widget
       end
       
     end

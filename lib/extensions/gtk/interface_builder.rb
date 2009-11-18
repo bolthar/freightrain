@@ -1,7 +1,7 @@
 
 module Freightrain
 
-  module GtkExtensions
+  module Toolkit
 
     class InterfaceBuilder
 
