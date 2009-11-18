@@ -19,7 +19,10 @@ module Freightrain
     def bind_widgets(widgets)
       if @filename
         bindings = YAML.load_file(@filename)
-        p bindings
+        bindings.each do |widget, options|
+          target = widgets.select { |w| w.name == widget}.first
+          target.bind(options)
+        end
       end
     end
 
