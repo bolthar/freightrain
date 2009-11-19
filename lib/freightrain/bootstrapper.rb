@@ -19,6 +19,7 @@ module Freightrain
     load_extensions!
     auto_require!
     configure_container!
+    yield if block_given?
     Toolkit.start_main_loop do
       Freightrain[(viewmodel_name.to_s + "_view_model").to_sym].show
     end

@@ -1,0 +1,7 @@
+
+class FreightElementViewModel < FreightViewModel
+
+
+
+
+end

@@ -16,6 +16,10 @@ describe InterfaceBuilder do
     end
 
     it "should not create a view definition if file is not found" do
+      @builder.stubs(:add_from_file)
+      @builder.stubs(:objects).returns([])
+      @builder.stubs(:connect_signals)
+      @builder.stubs(:extension).returns("dmy")
       File.stubs(:exists?).returns(false)
       @builder.expects(:add_from_file).never
       instance = @class.new
