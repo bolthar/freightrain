@@ -2,15 +2,12 @@
 module Freightrain
 
   class FreightElementView < FreightView
+    extend ContainerHookable
+
+    def self.container_options
+      return { :model => :prototype }
+    end
     
-    def value
-      return @value
-    end
-
-    def value=(val)
-      @value = val
-    end
-
     def control
       return toplevel
     end

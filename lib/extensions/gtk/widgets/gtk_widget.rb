@@ -16,6 +16,11 @@ module Gtk
       return @bindings.values
     end
 
+    def background=(color)
+      self.modify_bg(Gtk::STATE_NORMAL, Freightrain::Color.rgb(color)) if color.kind_of? String
+      self.modify_bg(Gtk::STATE_NORMAL, color) if color.kind_of? Gdk::Color
+    end
+
   end
 
 

@@ -19,13 +19,18 @@ module Freightrain
     def bind_widgets(widgets)
       if @filename
         bindings = YAML.load_file(@filename)
-        bindings.each do |widget, yaml_options|
+        bindings.each do |widget, binding_data|
           target = widgets.select { |w| w.name == widget}.first
           options = {}
-          yaml_options.each do |key, value|
-            options[key.to_sym] = value
+          if binding_data.kind_of? Hash
+            binding_data = [binding_data]
           end
-          target.bind(options)
+          binding_data.each do |bind|
+            bind.each do |key, value|              
+              options[key.to_sym] = value              
+            end
+            target.bind(options)
+          end
         end
       end
     end

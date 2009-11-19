@@ -5,11 +5,11 @@ module Gtk
 
     def elements=(enumerable)
       delta = enumerable.length - @elements.length
-      @height_factor = @control.new.control.height_request unless @height_factor
+      @height_factor = Freightrain[@viewmodel].control.height_request unless @height_factor
       height = @elements.length
       delta.abs.times do
         if delta > 0
-          item = @control.new
+          item = Freightrain[@viewmodel]
           item.signals.each do |key, signal|
             signal.connect(@signals[key]) if @signals[key]
           end
@@ -23,10 +23,11 @@ module Gtk
         end
       end
       self.height = @elements.length * @height_factor
-      @elements.each do |element|
-        element.value = enumerable[@elements.index(element)]
+      (0...@elements.length).each do |index|
+        p "i am nil! " if @elements[index] == nil
+        p "value is nil" if enumerable[index] == nil
+        @elements[index].value = enumerable[index]
       end
-      
     end
 
     def elements()
@@ -36,13 +37,14 @@ module Gtk
     def bind(options)
       if options[:property] == :elements
         @elements           = []
-        @control            = options[:control]
+        @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
         @signals            = options[:signals]
         options[:force]     = true
         selected_callback   = @signals[:selected]
         @signals[:selected] = lambda do |value|
                                 elements.each do |item|
-                                  item.set_ui_selection(item.value == value)
+                                  p item.object_id
+                                  item.set_selection(item.value == value)
                                 end
                                 selected_callback.call(value) if selected_callback
                               end
