@@ -23,12 +23,12 @@ module Freightrain
       begin
         value = get(data_source, @path)
         if @force || value != @cache
-         set(@property, @converter.from(value), @widget)
-         @cache = value
+          set(@property, @converter.from(value), @widget)
+          @cache = value
         end
       rescue Exception => ex
-        p @widget
-        p ex.message
+#        p @widget
+#        p ex.message
       end
     end
 
