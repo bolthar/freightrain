@@ -13,7 +13,13 @@ module RegionHost
         end
       end
     end
-
+    klass.send(:define_method, :change_region) do |region_name, viewmodel_name|
+      @regions[region_name] = FreightRegion.new(region_name, {:viewmodel => viewmodel_name})
+      @regions[region_name].viewmodel.signals.each do |key, signal|
+        signal.connect(method("#{region_name.to_s}_on_#{key.to_s}".to_sym)) if self.respond_to? "#{region_name.to_s}_on_#{key.to_s}".to_sym
+      end
+      @regions[region_name].on_show(@view)
+    end
 
   end
 

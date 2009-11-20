@@ -24,6 +24,7 @@ module Freightrain
       end      
     end
 
+
     def show      
       @view.toplevel.visible = true
       @regions.values.each do |region|
