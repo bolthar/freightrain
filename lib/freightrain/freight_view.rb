@@ -23,6 +23,8 @@ module Freightrain
     end
 
     def initialize()
+      #HACK!
+      self.class.instance_eval("include Toolkit::DialogHelper")
       @widgets = []
       @builder = Toolkit::InterfaceBuilder.new
       load_from_file(self.class.name, @builder)
