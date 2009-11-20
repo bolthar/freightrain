@@ -11,6 +11,7 @@ module Freightrain
       end
 
       def plug_in(region_widget)
+        @widget.remove(@widget.children.first)
         @widget << region_widget
       end
       

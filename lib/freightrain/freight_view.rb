@@ -18,6 +18,8 @@ module Freightrain
     end
 
     def toplevel
+      p self.class.name
+      p "#{self.class.name} toplevel is nil" if !@builder.toplevel
       return @builder.toplevel
     end
 
