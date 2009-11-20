@@ -14,16 +14,13 @@ module Freightrain
     end
 
     def on_show(view)
-      p "#{@viewmodel.class.name} in #{view.class.name}"
       container = view.send(@container)
       view.class.wrap_container(container).plug_in(@viewmodel.show)
-      p "end #{@viewmodel.class.name}"
     end
 
     def change(viewmodel, view)
       new_viewmodel = Freightrain[(viewmodel.to_s + "_view_model").to_sym]
       if new_viewmodel != @viewmodel
-        p new_viewmodel
         @viewmodel = new_viewmodel
         container = view.send(@container)
         view.class.wrap_container(container).plug_in(@viewmodel.show)
