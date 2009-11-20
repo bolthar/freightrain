@@ -3,7 +3,6 @@ module Freightrain
 
   class FreightView
     include InterfaceBuilder
-    include Toolkit::DialogHelper
     include BindingHost
     extend SignalHost
     extend ContainerHookable

@@ -7,6 +7,7 @@ require File.dirname(__FILE__) + "/widgets/gtk_treeviewcolumn.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_layout.rb"
 require File.dirname(__FILE__) + "/interface_builder.rb"
 require File.dirname(__FILE__) + "/region_container.rb"
+require File.dirname(__FILE__) + "/dialog_helper.rb"
 
 module Freightrain
   
