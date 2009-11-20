@@ -15,7 +15,6 @@ module Freightrain
     end
     require_all viewmodels_folder
     if File.directory?(services_folder) && !Dir.entries(services_folder).empty?
-      p Dir.entries(services_folder)
       require_all services_folder
     end
     if File.directory?(domain_folder) && !Dir.entries(domain_folder).empty?

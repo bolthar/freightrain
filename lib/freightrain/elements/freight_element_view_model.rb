@@ -11,8 +11,6 @@ module Freightrain
 
     def value=(val)
       @value = val
-      p val.name if val
-      p "nil value" if !val
       @view.update
     end
 

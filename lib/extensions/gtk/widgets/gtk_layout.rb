@@ -2,6 +2,7 @@
 module Gtk
 
   class Layout
+    include Freightrain::LayoutWidget
 
     def elements=(enumerable)
       delta = enumerable.length - @elements.length
@@ -24,8 +25,6 @@ module Gtk
       end
       self.height = @elements.length * @height_factor
       (0...@elements.length).each do |index|
-        p "i am nil! " if @elements[index] == nil
-        p "value is nil" if enumerable[index] == nil
         @elements[index].value = enumerable[index]
       end
     end
@@ -35,15 +34,14 @@ module Gtk
     end
 
     def bind(options)
-      if options[:property] == :elements
+      if options[:property].to_s == "elements"
         @elements           = []
         @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
-        @signals            = options[:signals]
+        @signals ||= {}
         options[:force]     = true
         selected_callback   = @signals[:selected]
         @signals[:selected] = lambda do |value|
                                 elements.each do |item|
-                                  p item.object_id
                                   item.set_selection(item.value == value)
                                 end
                                 selected_callback.call(value) if selected_callback
