@@ -29,15 +29,6 @@ module Freightrain
       @signals ||= []
       @signals << signal_name.to_sym
     end
-
-#    def fire(signal, *args)
-#      @signals[signal.to_sym].fire(*args)
-#    end
-#
-#    def signals()
-#      return @signals
-#    end
-
     
   end
 

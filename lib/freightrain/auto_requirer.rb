@@ -14,10 +14,10 @@ module Freightrain
       require_all File.join(views_folder, @toolkit.to_s)
     end
     require_all viewmodels_folder
-    if File.directory?(services_folder) && !Dir.entries(services_folder).empty?
+    if File.directory?(services_folder) && !Dir.entries(services_folder).length > 2
       require_all services_folder
     end
-    if File.directory?(domain_folder) && !Dir.entries(domain_folder).empty?
+    if File.directory?(domain_folder) && !Dir.entries(domain_folder).length > 2
       require_all domain_folder
     end
     
