@@ -34,7 +34,6 @@ module Freightrain
 
     def hide
       @view.control.visible = false
-      @view = nil
     end
 
   end
