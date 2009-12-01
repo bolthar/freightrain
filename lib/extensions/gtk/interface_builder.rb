@@ -15,7 +15,7 @@ module Freightrain
 
       def create_objects_from_file(file_name)
         @builder.add_from_file(get_glade_file(file_name))
-        @toplevel = @builder.objects.first.toplevel
+        @control = @builder.objects.first.toplevel
         return @builder.objects.select do
           |obj| obj.respond_to?(:name) && obj.kind_of?(Gtk::Widget)
         end.map
@@ -44,8 +44,8 @@ module Freightrain
         return results.first
       end
 
-      def toplevel
-        return @toplevel
+      def control
+        return @control
       end
 
     end

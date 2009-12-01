@@ -8,10 +8,6 @@ module Freightrain
       return { :model => :prototype }
     end
     
-    def control
-      return toplevel
-    end
-
     def set_ui_selection(bool)
       @signals.values.each { |s| s.stifle }
       selected(bool)

@@ -24,17 +24,16 @@ module Freightrain
       end      
     end
 
-
     def show      
-      @view.toplevel.visible = true
+      @view.control.visible = true
       @regions.values.each do |region|
         region.on_show(@view)
       end
-      return @view.toplevel
+      return @view.control
     end
 
     def hide
-      @view.toplevel.visible = false
+      @view.control.visible = false
       @view = nil
     end
 

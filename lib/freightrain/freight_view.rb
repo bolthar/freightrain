@@ -17,8 +17,12 @@ module Freightrain
       return Toolkit::RegionContainer.new(widget)
     end
 
+    def control
+      return @builder.control
+    end
+
     def toplevel
-      return @builder.toplevel
+      return control.toplevel
     end
 
     def initialize()
