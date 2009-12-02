@@ -7,9 +7,7 @@ module Freightrain
     
     def initialize(class_name)
       search_path = File.join(
-        Freightrain.app_path,
-        "views",
-        Freightrain.toolkit.to_s,
+        Freightrain.views_path,
         "**",
         class_name.to_convention + ".bnd.yml")
       result = Dir.glob(search_path)

@@ -17,7 +17,7 @@ module Freightrain
         @builder.add_from_file(get_glade_file(file_name))
         @control = @builder.objects.first.toplevel
         return @builder.objects.select do
-          |obj| obj.respond_to?(:name) && obj.kind_of?(Gtk::Widget)
+          |obj| obj.respond_to?(:name)
         end.map
       end
 

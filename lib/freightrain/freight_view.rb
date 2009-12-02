@@ -7,8 +7,6 @@ module Freightrain
     extend SignalHost
     extend ContainerHookable
 
-    attr_reader :widgets
-
     def self.container_options
       return {:model => :prototype}
     end
@@ -23,6 +21,11 @@ module Freightrain
 
     def toplevel
       return control.toplevel
+    end
+
+    #HACK : not compatible with other toolkits
+    def widgets
+      return @widgets.select { |widget| widget.kind_of? Gtk::Widget }
     end
 
     def initialize()

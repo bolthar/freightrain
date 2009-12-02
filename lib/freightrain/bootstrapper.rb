@@ -4,6 +4,13 @@ module Freightrain
   attr_accessor :toolkit
   attr_accessor :app_path
 
+  def views_path
+    base_path = File.join(@app_path, "views")
+    toolkit_path = File.join(base_path, @toolkit.to_s)
+    return toolkit_path if File.exist?(toolkit_path)
+    return base_path
+  end
+
   def load_extensions!()
     begin
       require File.dirname(__FILE__) + "/../extensions/#{@toolkit.to_s}/#{@toolkit.to_s}_bootstrapper.rb"
