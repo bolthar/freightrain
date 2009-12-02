@@ -9,7 +9,7 @@ module Freightrain
 
     def initialize()     
       @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
-      @data = Freightrain[self.class.name.sub("Model", "Data").to_convention.sym]
+      @data = Freightrain[self.class.name.sub("View", "Data").to_convention.sym]
       get_services
       build_regions
       create_signals

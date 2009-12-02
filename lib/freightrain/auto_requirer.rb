@@ -3,7 +3,7 @@ module Freightrain
 
   def self.auto_require!
 
-    views_folder      = File.join(self.views_path, "views")
+    views_folder      = self.views_path
     viewmodels_folder = File.join(self.app_path, "viewmodels")
     datamodels_folder = File.join(self.app_path, "datamodels")
     services_folder   = File.join(self.app_path, "services")
