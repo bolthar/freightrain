@@ -22,6 +22,10 @@ module Freightrain
       return control.toplevel
     end
 
+    def data=(data_model)
+      @data = data_model
+    end
+
     #HACK : not compatible with other toolkits
     def widgets
       return @widgets.select { |widget| widget.kind_of? Gtk::Widget }

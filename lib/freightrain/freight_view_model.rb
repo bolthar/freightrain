@@ -9,14 +9,14 @@ module Freightrain
 
     def initialize()     
       @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
-      @data = Freightrain[self.class.name.sub("View", "Data").to_convention.sym]
+      @data = Freightrain[self.class.name.sub("View", "Data").to_convention_sym] rescue nil
       get_services
       build_regions
       create_signals
       @view.signals.each do |key,signal|
         signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
       end
-      @view.data_source = @data
+      @view.data = @data
       @regions ||= {}
       @regions.each do |name, region|
         region.viewmodel.signals.each do |key, signal|
