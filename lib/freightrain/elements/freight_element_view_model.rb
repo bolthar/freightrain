@@ -5,21 +5,16 @@ module Freightrain
   class FreightElementViewModel < FreightViewModel
     extend ContainerHookable
 
-    def self.container_options
-      return {:model => :prototype }
-    end
-
     def value=(val)
-      @value = val
-      @view.update
+      @data.value = val
     end
 
     def value
-      return @value
+      return @data.value
     end
 
     def on_selected
-      fire :selected, @value
+      fire :selected, @data
     end
 
     def control

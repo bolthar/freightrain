@@ -3,7 +3,6 @@ module Freightrain
 
   class FreightView
     include InterfaceBuilder
-    include BindingHost
     extend SignalHost
     extend ContainerHookable
 
@@ -35,7 +34,6 @@ module Freightrain
       @builder = Toolkit::InterfaceBuilder.new
       load_from_file(self.class.name, @builder)
       hook_to_layout_widgets()
-      load_bindings_from_file(@widgets)
       create_signals
     end
 

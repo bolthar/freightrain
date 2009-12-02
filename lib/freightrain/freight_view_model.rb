@@ -8,18 +8,19 @@ module Freightrain
     extend SignalHost
 
     def initialize()     
-      @view = Freightrain[self.class.name.sub("Model","").to_convention_sym]
+      @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
+      @data = Freightrain[self.class.name.sub("Model", "Data").to_convention.sym]
       get_services
       build_regions
       create_signals
       @view.signals.each do |key,signal|
-        signal.connect(method("on_" + key.to_s)) if self.respond_to? "on_" + key.to_s
+        signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
       end
-      @view.data_source = self
+      @view.data_source = @data
       @regions ||= {}
       @regions.each do |name, region|
         region.viewmodel.signals.each do |key, signal|
-          signal.connect(method("#{name.to_s}_on_#{key.to_s}".to_sym)) if self.respond_to? "#{name.to_s}_on_#{key.to_s}".to_sym
+          signal.connect(method("#{name.to_s}_on_#{key.to_s}")) if self.respond_to? "#{name.to_s}_on_#{key.to_s}"
         end
       end      
     end
