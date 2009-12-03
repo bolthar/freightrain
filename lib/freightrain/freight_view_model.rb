@@ -12,19 +12,14 @@ module Freightrain
     end
 
     def initialize()     
-      @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
-      @data = Freightrain[self.class.name.sub("View", "Data").to_convention_sym] rescue nil
-      if @data
-        @data.set_update_proc(lambda { @view.update })
-        @data.set_commit_proc(lambda { commit })
-      end
+      @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]      
       get_services
       build_regions
       create_signals
       @view.signals.each do |key,signal|
         signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
       end
-      @view.data = @data
+      @view.data = self
       @regions ||= {}
       @regions.each do |name, region|
         region.viewmodel.signals.each do |key, signal|
