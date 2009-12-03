@@ -5,6 +5,10 @@ module Freightrain
   class FreightElementViewModel < FreightViewModel
     extend ContainerHookable
 
+    def self.container_options
+      return { :model => :prototype }
+    end
+
     def value=(val)
       @data.value = val if @data
     end
