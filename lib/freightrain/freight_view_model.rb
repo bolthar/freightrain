@@ -7,6 +7,10 @@ module Freightrain
     extend RegionHost
     extend SignalHost
 
+    def self.container_options
+      return { :model => :prototype }
+    end
+
     def initialize()     
       @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
       @data = Freightrain[self.class.name.sub("View", "Data").to_convention_sym] rescue nil

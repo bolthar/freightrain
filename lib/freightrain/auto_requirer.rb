@@ -11,11 +11,15 @@ module Freightrain
 
     require_all views_folder
     require_all viewmodels_folder
-    require_all datamodels_folder
+
+    if File.directory?(datamodels_folder) && Dir.entries(datamodels_folder).length > 2
+      require_all datamodels_folder
+    end
 
     if File.directory?(services_folder) && Dir.entries(services_folder).length > 2
       require_all services_folder
     end
+    
     if File.directory?(domain_folder) && Dir.entries(domain_folder).length > 2
       require_all domain_folder
     end
