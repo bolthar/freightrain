@@ -6,11 +6,11 @@ module Freightrain
     extend ContainerHookable
 
     def value=(val)
-      @data.value = val
+      @data.value = val if @data
     end
 
     def value
-      return @data.value
+      return @data.value if @ðata
     end
 
     def on_selected
