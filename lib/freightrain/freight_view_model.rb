@@ -14,6 +14,10 @@ module Freightrain
     def initialize()     
       @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
       @data = Freightrain[self.class.name.sub("View", "Data").to_convention_sym] rescue nil
+      if @data
+        @data.set_update_proc(lambda { @view.update })
+        @data.set_commit_proc(lambda { commit })
+      end
       get_services
       build_regions
       create_signals
@@ -27,6 +31,10 @@ module Freightrain
           signal.connect(method("#{name.to_s}_on_#{key.to_s}")) if self.respond_to? "#{name.to_s}_on_#{key.to_s}"
         end
       end      
+    end
+
+    def commit
+      #to be overridden
     end
 
     def show      

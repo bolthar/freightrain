@@ -14,6 +14,10 @@ module Freightrain
       return Toolkit::RegionContainer.new(widget)
     end
 
+    def update
+      #to be overridden
+    end
+
     def control
       return @builder.control
     end
