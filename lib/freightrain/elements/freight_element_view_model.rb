@@ -10,15 +10,16 @@ module Freightrain
     end
 
     def value=(val)
-      @data.value = val if @data
+      @value = val
+      @view.update
     end
 
     def value
-      return @data.value if @ðata
+      return @value
     end
 
     def on_selected
-      fire :selected, @data
+      fire :selected, @value
     end
 
     def control
