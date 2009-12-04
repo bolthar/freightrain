@@ -12,9 +12,10 @@ module Freightrain
     end
 
     def dialog(viewmodel_name, *args)
-      dialog = Freightrain["#{viewmodel_name}_view_model".to_sym]
-      dialog.on_close = lambda { |*params| yield(*params)}
-      dialog.show_dialog(*args)      
+      dialog = Freightrain["#{viewmodel_name}_view_model".to_sym]      
+      dialog.show_dialog(*args) do |*params|
+        yield(*params)
+      end
     end
 
     def initialize()     

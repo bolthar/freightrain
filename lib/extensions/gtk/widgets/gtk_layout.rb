@@ -43,7 +43,11 @@ module Gtk
       (0...@elements.length).each do |index|
         @elements[index].value = enumerable[index]
       end
-    end   
+    end
+
+    def elements
+      return @elements
+    end
 
 #    def bind(options)
 #      if options[:property].to_s == "elements"
