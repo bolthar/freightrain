@@ -48,23 +48,6 @@ module Gtk
     def elements
       return @elements
     end
-
-#    def bind(options)
-#      if options[:property].to_s == "elements"
-#        @elements           = []
-#        @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
-#        @signals ||= {}
-#        options[:force]     = true
-#        selected_callback   = @signals[:selected]
-#        @signals[:selected] = lambda do |value|
-#                                elements.each do |item|
-#                                  item.set_selection(item.value == value)
-#                                end
-#                                selected_callback.call(value) if selected_callback
-#                              end
-#      end
-#      super(options)
-#    end
       
   end
 
