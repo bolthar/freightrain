@@ -3,6 +3,7 @@ module Freightrain
 
   class FreightView
     include InterfaceBuilder
+    include BindingHost
     extend SignalHost
     extend ContainerHookable
 
@@ -12,10 +13,6 @@ module Freightrain
 
     def self.wrap_container(widget)
       return Toolkit::RegionContainer.new(widget)
-    end
-
-    def update
-      #to be overridden
     end
 
     def control
