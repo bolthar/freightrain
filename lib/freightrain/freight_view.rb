@@ -7,6 +7,8 @@ module Freightrain
     extend SignalHost
     extend ContainerHookable
 
+    attr_reader :widgets
+    
     def self.container_options
       return {:model => :prototype}
     end
