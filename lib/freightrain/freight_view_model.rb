@@ -11,6 +11,12 @@ module Freightrain
       return { :model => :prototype }
     end
 
+    def dialog(viewmodel_name, *args)
+      dialog = Freightrain["#{viewmodel_name}_view_model".to_sym]
+      dialog.on_close = lambda { |*params| yield(*params)}
+      dialog.show_dialog(*args)      
+    end
+
     def initialize()     
       @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]      
       get_services
@@ -28,9 +34,7 @@ module Freightrain
       end      
     end
 
-    def commit
-      #to be overridden
-    end
+
 
     def show      
       @view.control.visible = true
