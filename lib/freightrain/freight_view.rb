@@ -28,12 +28,7 @@ module Freightrain
 
     def data=(data_model)
       @data = data_model
-    end
-
-    #HACK : not compatible with other toolkits
-    def widgets
-      return @widgets.select { |widget| widget.kind_of? Gtk::Widget }
-    end
+    end  
 
     def initialize()
       #HACK!
@@ -42,6 +37,7 @@ module Freightrain
       @builder = Toolkit::InterfaceBuilder.new
       load_from_file(self.class.name, @builder)
       hook_to_layout_widgets()
+      load_bindings_from_file(@widgets)
       create_signals
     end
 

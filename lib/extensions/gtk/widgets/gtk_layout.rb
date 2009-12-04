@@ -48,6 +48,14 @@ module Gtk
     def elements
       return @elements
     end
+
+     def bind(options)
+      if options[:property].to_s == "elements"
+        @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
+        options[:force]     = true
+      end
+      super(options)
+    end
       
   end
 
