@@ -27,6 +27,7 @@ module Freightrain
         signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
       end
       @view.data = self
+      @view.data_source = self
       @regions ||= {}
       @regions.each do |name, region|
         region.viewmodel.signals.each do |key, signal|
