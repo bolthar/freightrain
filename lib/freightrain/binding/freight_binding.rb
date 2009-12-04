@@ -7,7 +7,7 @@ module Freightrain
       @widget         = widget
       @property       = options[:property].to_s.split('.')
       @path           = options[:path].to_s.split('.')
-      @converter      = options[:converter] || DefaultConverter.new
+      @converter      = ConverterFactory.create(options[:converter]) || DefaultConverter.new
       @force          = options[:force]
     end
 
@@ -27,8 +27,8 @@ module Freightrain
           @cache = value
         end
       rescue Exception => ex
-#        p @widget
-#        p ex.message
+        p @widget
+        p ex.message
       end
     end
 
@@ -37,7 +37,7 @@ module Freightrain
         value = get(@widget, @property)
         set(@path, @converter.to(value), data_source)
       rescue Exception => ex
-#        p ex.message
+        p ex.message
       end
     end
 
