@@ -6,7 +6,6 @@ module Freightrain
     def self.create(converter_name)
       name = converter_name.to_s.capitalize
       #first try to get one of the standard converters
-      p name
       if Freightrain.const_defined? "#{name}Converter"
         return Freightrain.const_get("#{name}Converter").new
       end

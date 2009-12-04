@@ -1,17 +1,16 @@
 
-
 module Gtk
 
   class Calendar
 
     def date
-      return DateTime.civil(year, month+1, day)
+      return DateTime.civil(self.year, self.month + 1, self.day)      
     end
 
     def date=(val)
-      day   = val.day
-      month = val.month
-      year  = val.year
+      self.day   = val.day
+      self.month = val.month - 1
+      self.year  = val.year
     end
     
   end
