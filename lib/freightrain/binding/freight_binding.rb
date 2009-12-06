@@ -4,6 +4,7 @@ module Freightrain
   class FreightBinding
 
     def initialize(widget, options)
+      @cache          = :__NOVALUE
       @widget         = widget
       @property       = options[:property].to_s.split('.')
       @path           = options[:path].to_s.split('.')
@@ -27,8 +28,9 @@ module Freightrain
           @cache = value
         end
       rescue Exception => ex
-        p @widget
+        p @widget.name
         p ex.message
+        p @path
       end
     end
 
@@ -38,6 +40,7 @@ module Freightrain
         set(@path, @converter.to(value), data_source)
       rescue Exception => ex
         p ex.message
+        p ex.backtrace
       end
     end
 

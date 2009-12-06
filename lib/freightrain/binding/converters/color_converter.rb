@@ -1,14 +1,13 @@
 
 module Freightrain
-
-  class BooleanConverter
+  class ColorConverter
 
     def from(val)
-      return val != nil
+      return Freightrain::Color.rgb(val)
     end
 
     def to(val)
-      return val == true #dummy
+      return nil
     end
 
   end
