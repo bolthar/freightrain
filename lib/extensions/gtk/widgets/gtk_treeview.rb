@@ -16,7 +16,6 @@ module Gtk
 
     def bind(options)
       if options[:property].to_sym == :elements
-#        options[:force] = true
         (0...options[:columns].length).each do |index|
           create_text_column(
             options[:columns][index]['name'],
@@ -35,7 +34,7 @@ module Gtk
         iterator = list_store.append
         iterator[0] = item
         (0...columns.length).each do |index|
-          iterator[index+1] = item.send(columns[index].path.to_s)
+          iterator[index+1] = item.send(columns[index].path).to_s
         end
       end
       self.model = list_store
