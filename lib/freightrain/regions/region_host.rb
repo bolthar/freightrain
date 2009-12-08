@@ -26,7 +26,7 @@ module RegionHost
       end
 
     end
-
+    
   end
 
   def region(name, options = {})

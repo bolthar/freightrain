@@ -28,10 +28,6 @@ module Freightrain
       return control.toplevel
     end
 
-    def data=(data_model)
-      @data = data_model
-    end  
-
     def initialize()
       #HACK!
       self.class.instance_eval("include Toolkit::DialogHelper")
