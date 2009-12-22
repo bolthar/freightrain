@@ -4,7 +4,6 @@ require 'rubygems'
 class String
 
   def to_convention
-    #TODO: use regexp instead
     return nil if self.empty?
     clone = self.clone
     first_letter = clone.slice!(0)

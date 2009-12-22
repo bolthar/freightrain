@@ -22,13 +22,6 @@ describe Freightrain do
       Freightrain.auto_require!
     end
 
-    it "should call require_all for services folder if exists and contains files" do
-      File.stubs(:directory?).with("testpath/services").returns(true)
-      Dir.stubs(:entries).with("testpath/services").returns([1])
-      Freightrain.expects(:require_all).with("testpath/services")
-      Freightrain.auto_require!
-    end
-
     it "should not call require_all for services folder if does not exist" do
       Freightrain.expects(:require_all).with("testpath/services").never
       Freightrain.auto_require!
@@ -36,17 +29,17 @@ describe Freightrain do
 
     it "should not call require_all for services folder if folder is empty" do
       File.stubs(:directory?).with("testpath/services").returns(true)
-      Dir.stubs(:entries).with("testpath/services").returns([])
+      Dir.stubs(:entries).with("testpath/services").returns(['.','..'])
       Freightrain.expects(:require_all).with("testpath/services").never
       Freightrain.auto_require!
     end
 
-    it "should call require_all for domain folder" do
-      File.stubs(:directory?).with("testpath/domain").returns(true)
-      Dir.stubs(:entries).with("testpath/domain").returns([1])
-      Freightrain.expects(:require_all).with("testpath/domain")
+    it "should call require_all for services folder if exists and contains files" do
+      File.stubs(:directory?).with("testpath/services").returns(true)
+      Dir.stubs(:entries).with("testpath/services").returns(['.','..',1])
+      Freightrain.expects(:require_all).with("testpath/services")
       Freightrain.auto_require!
-    end
+    end    
 
     it "should not call require_all for domain folder if does not exist" do
       Freightrain.expects(:require_all).with("testpath/domain").never
@@ -55,10 +48,19 @@ describe Freightrain do
 
     it "should not call require_all for domain folder if folder is empty" do
       File.stubs(:directory?).with("testpath/domain").returns(true)
-      Dir.stubs(:entries).with("testpath/domain").returns([])
+      Dir.stubs(:entries).with("testpath/domain").returns(['.','..'])
       Freightrain.expects(:require_all).with("testpath/domain").never
       Freightrain.auto_require!
     end
+
+    it "should call require_all for domain folder if folder contains files" do
+      File.stubs(:directory?).with("testpath/domain").returns(true)
+      Dir.stubs(:entries).with("testpath/domain").returns(['.','..',1])
+      Freightrain.expects(:require_all).with("testpath/domain")
+      Freightrain.auto_require!
+    end
+
+    
 
   end
 

@@ -5,16 +5,11 @@ module Freightrain
 
     views_folder      = self.views_path
     viewmodels_folder = File.join(self.app_path, "viewmodels")
-    datamodels_folder = File.join(self.app_path, "datamodels")
     services_folder   = File.join(self.app_path, "services")
     domain_folder     = File.join(self.app_path, "domain")
 
     require_all views_folder
     require_all viewmodels_folder
-
-    if File.directory?(datamodels_folder) && Dir.entries(datamodels_folder).length > 2
-      require_all datamodels_folder
-    end
 
     if File.directory?(services_folder) && Dir.entries(services_folder).length > 2
       require_all services_folder
