@@ -5,7 +5,10 @@ module Freightrain
 
     def load_bindings_from_file(widgets)
       loader = BindingLoader.new(self.class.name)
-      loader.bind_widgets(widgets)
+      loader.get_bindings do |widget_name, options|
+        widget = widgets.select { |widget| widget.name == widget_name }.first
+        widget.bind(options) if widget
+      end
     end
     
     def data_source=(source)      
