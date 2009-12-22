@@ -14,14 +14,13 @@ module RegionHost
           self.class.send(:define_method, name) do
             return @regions[name].viewmodel
           end
-        end
+          @regions[name].connect_to(self)
+        end        
       end
 
       def change_region(region_name, viewmodel_name)
         @regions[region_name] = FreightRegion.new(region_name, {:viewmodel => viewmodel_name})
-        @regions[region_name].viewmodel.signals.each do |key, signal|
-          signal.connect(method("#{region_name.to_s}_on_#{key.to_s}".to_sym)) if self.respond_to? "#{region_name.to_s}_on_#{key.to_s}".to_sym
-        end
+        @regions[region_name].connect_to(self)
         @regions[region_name].on_show(@view)
       end
 
