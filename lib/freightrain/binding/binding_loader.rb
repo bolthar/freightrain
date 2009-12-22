@@ -15,20 +15,17 @@ module Freightrain
     end
 
     def bind_widgets(widgets)
-      if @filename
-        bindings = YAML.load_file(@filename)
-        bindings.each do |widget, binding_data|
-          target = widgets.select { |w| w.name == widget}.first
-          options = {}
-          if binding_data.kind_of? Hash
-            binding_data = [binding_data]
+      return nil unless @filename
+      binding_collection = YAML.load_file(@filename)
+      binding_collection.each do |widget, binding|
+        target  = widgets.select { |w| w.name == widget}.first
+        #create array if there's only one binding
+        binding = [binding_data] if binding.kind_of? Hash
+        binding.each do |binding_options|
+          binding_options.each do |key, value|
+            options[key.to_sym] = value
           end
-          binding_data.each do |bind|
-            bind.each do |key, value|              
-              options[key.to_sym] = value              
-            end
-            target.bind(options)
-          end
+          target.bind(options) if target
         end
       end
     end
