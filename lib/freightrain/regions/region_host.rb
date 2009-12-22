@@ -19,9 +19,10 @@ module RegionHost
       end
 
       def change_region(region_name, viewmodel_name)
-        @regions[region_name] = FreightRegion.new(region_name, {:viewmodel => viewmodel_name})
-        @regions[region_name].connect_to(self)
-        @regions[region_name].on_show(@view)
+        region  = FreightRegion.new(region_name, {:viewmodel => viewmodel_name})
+        region.connect_to(self)
+        region.on_show
+        @regions[region_name] = region
       end
 
     end
