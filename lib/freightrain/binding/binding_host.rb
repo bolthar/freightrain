@@ -5,8 +5,8 @@ module Freightrain
 
     def load_bindings_from_file(widgets)
       loader = BindingLoader.new(self.class.name)
-      loader.get_bindings do |widget_name, options|
-        widget = widgets.select { |widget| widget.name == widget_name }.first
+      loader.each_binding do |widget_name, options|
+        widget = widgets.select { |widget| widget.name == widget_name }
         widget.bind(options) if widget
       end
     end
