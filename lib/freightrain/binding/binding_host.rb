@@ -6,12 +6,12 @@ module Freightrain
     def load_bindings_from_file(widgets)
       loader = BindingLoader.new(self.class.name)
       loader.each_binding do |widget_name, options|
-        widget = widgets.select { |widget| widget.name == widget_name }
+        widget = widgets.select { |widget| widget.name == widget_name }.first
         widget.bind(options) if widget
       end
     end
     
-    def data_source=(source)      
+    def data_source=(source)
       bindings.each do |binding|
         binding.data_source = source
         binding.update
