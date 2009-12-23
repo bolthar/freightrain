@@ -30,8 +30,6 @@ module Freightrain
 #      @view.update
     end
 
-
-
     def show      
       @view.control.visible = true
       @regions.values.each do |region|
