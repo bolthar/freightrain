@@ -1,5 +1,5 @@
 
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe SignalHost do
 
@@ -22,7 +22,6 @@ describe SignalHost do
       @class.signal(:signal) # to check that same signals are still added
       @class.instance_variable_get(:@signals).length.should == 3
     end
-
     
   end
   
