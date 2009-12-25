@@ -9,6 +9,41 @@ describe BindingHost do
     @instance = klass.new    
   end
 
+  describe "load bindings from file" do
+
+    it "should always call BindingLoader with class name" do
+      loader = stub()
+      loader.stubs(:each_binding)
+      @instance.class.stubs(:name).returns("testname")
+      BindingLoader.expects(:new).with("testname").returns(loader)
+      @instance.load_bindings_from_file(nil)
+    end
+
+    it "should call bind on widget if widget is not nil" do      
+      widgets = []
+      widget = stub()
+      widget.stubs(:name).returns('widget_one')
+      widget.expects(:bind).with(1)
+      widgets << widget
+      loader = stub()
+      loader.stubs(:each_binding).yields('widget_one',1)
+      BindingLoader.stubs(:new).returns(loader)
+      @instance.load_bindings_from_file(widgets)
+    end
+
+    it "should not call bind on widget if widget is nil" do
+      widgets = []
+      widget = stub()
+      widget.stubs(:name).returns('widget_one')
+      widget.expects(:bind).never
+      widgets << widget
+      loader = stub()
+      loader.stubs(:each_binding).yields('widget_not_one',1)
+      BindingLoader.stubs(:new).returns(loader)
+      @instance.load_bindings_from_file(widgets)
+    end
+  end
+
   describe "data source =" do
 
     before :each do
