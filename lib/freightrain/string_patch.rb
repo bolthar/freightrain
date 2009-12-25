@@ -4,7 +4,7 @@ require 'rubygems'
 class String
 
   def to_convention
-    return nil if self.empty?
+    return "" if self.empty?
     clone = self.clone
     first_letter = clone.slice!(0)
     result = first_letter.chr.downcase
@@ -20,6 +20,7 @@ class String
   end
 
   def to_convention_sym
+    return nil if self.to_convention.empty?
     return self.to_convention.to_sym
   end
 end
