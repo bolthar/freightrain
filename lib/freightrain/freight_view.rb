@@ -17,7 +17,7 @@ module Freightrain
     end
 
     def widgets
-      return @widgets.select { |widget| widget.kind_of? Gtk::Widget}
+      return @widgets
     end
 
     def control
