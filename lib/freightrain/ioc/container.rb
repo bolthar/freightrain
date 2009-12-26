@@ -15,12 +15,7 @@ module Freightrain
   end
 
   def [](class_name)    
-    begin
-      return @registry[class_name]
-    rescue Needle::ServiceNotFound
-      raise "Could not resolve #{class_name}. Have you called 'configure_container!' already?"
-    end
-    
+    return @registry.send(class_name)
   end
     
 end

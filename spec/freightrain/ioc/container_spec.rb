@@ -43,22 +43,22 @@ describe Freightrain do
       end.should raise_error
     end
 
-    it "should raise if called with a service name not registered" do
+    it "should return registered service if present" do
       registry = stub()
-      registry.stubs(:[]).with(:not_registered).raises
+      registry.stubs(:send).with(:registered_service).returns(1)
+      Freightrain.configure_container!(registry)
+      Freightrain[:registered_service].should == 1
+    end
+
+    it "should throw if requested service is not registered" do
+      registry = stub()
       Freightrain.configure_container!(registry)
       lambda do
-        Freightrain[:not_registered]
+        Freightrain[:registered_service]
       end.should raise_error
     end
 
-    it "should return correct service when service name is registered" do
-      registry = stub()
-      registry.stubs(:[]).with(:registered).returns(:service)
-      Freightrain.configure_container!(registry)
-      Freightrain[:registered].should == :service
-    end
-    
+
   end
 
 end
