@@ -28,5 +28,57 @@ describe BindingLoader do
     end
 
   end
+
+  describe "each_binding" do
+
+    it "should not yield if filename is nil" do
+      loader = BindingLoader.new("Noclass")
+      loader.each_binding do
+        raise "never yield"
+      end
+    end
+
+    it "should yield once if only one binding in file" do
+      times = 0
+      loader = BindingLoader.new("MyClass")
+      Dir.stubs(:glob).returns([1])
+      YAML.stubs(:load_file).returns({:widget => {:dummy => true}})
+      loader.each_binding do
+        times += 1
+      end
+      times.should == 1
+    end
+
+    it "should yield twice if two bindings in file" do
+      times = 0
+      loader = BindingLoader.new("MyClass")
+      Dir.stubs(:glob).returns([1])
+      YAML.stubs(:load_file).returns({:widget => [{:dummy => true}, {:dummy => true}]})
+      loader.each_binding do
+        times += 1
+      end
+      times.should == 2
+    end
+
+    it "should always yield with right options" do
+      loader = BindingLoader.new("MyClass")
+      Dir.stubs(:glob).returns([1])
+      YAML.stubs(:load_file).returns({:widget => {:opt1 => "a", :opt2 => "b"}})
+      loader.each_binding do |widget_name, options|
+        options[:opt1].should == "a"
+        options[:opt2].should == "b"
+      end
+    end
+
+    it "should always yield with right widget name" do
+      loader = BindingLoader.new("MyClass")
+      Dir.stubs(:glob).returns([1])
+      YAML.stubs(:load_file).returns({:my_name => {:opt1 => "a", :opt2 => "b"}})
+      loader.each_binding do |widget_name, options|
+        widget_name.should == :my_name
+      end
+    end
+
+  end
 end
 
