@@ -6,12 +6,15 @@ module Freightrain
   class BindingLoader
     
     def initialize(class_name)
-      search_path = File.join(
+      @search_path = File.join(
         Freightrain.views_path,
         "**",
-        class_name.to_convention + ".bnd.yml")
-      result = Dir.glob(search_path)
-      @filename = result[0] if !result.empty?
+        class_name.to_convention + ".bnd.yml")      
+    end
+
+    def filename
+      result = Dir.glob(@search_path)
+      return result[0] || nil
     end
 
     def each_binding
