@@ -19,10 +19,10 @@ module Freightrain
       container.plug_in(@viewmodel.show)
     end
 
-    def connect_to(viewmodel)
+    def connect_to(host)
       @viewmodel.signals.each do |key, signal|
-        if viewmodel.respond_to? "#{@name.to_s}_on_#{key.to_s}".to_sym
-          signal.connect(viewmodel.method("#{@name.to_s}_on_#{key.to_s}".to_sym))
+        if host.respond_to? "#{@name.to_s}_on_#{key.to_s}".to_sym
+          signal.connect(host.method("#{@name.to_s}_on_#{key.to_s}".to_sym))
         end
       end
     end

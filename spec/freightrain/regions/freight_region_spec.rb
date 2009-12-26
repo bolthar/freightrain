@@ -43,6 +43,34 @@ describe FreightRegion do
       region = FreightRegion.new(:test, {})
       region.on_show(view)
     end
+
+  end
+
+  describe "connect to" do
+
+    it "should not connect signal if method is not present on host" do
+      signal = mock()
+      signal.expects(:connect).never
+      viewmodel = stub()
+      viewmodel.stubs(:signals).returns({:signal => signal})
+      Freightrain.stubs(:[]).with(:test_view_model).returns(viewmodel)
+      region = FreightRegion.new(:test, {})
+      region.connect_to(nil)
+    end
+
+    it "should connect to signal if method is present on host" do
+      signal = mock()
+      signal.expects(:connect).with(1)
+      viewmodel = stub()
+      viewmodel.stubs(:signals).returns({:signal => signal})
+      host = stub()
+      host.stubs(:respond_to?).with(:test_on_signal).returns(true)
+      host.stubs(:method).returns(1)
+      Freightrain.stubs(:[]).with(:test_view_model).returns(viewmodel)
+      region = FreightRegion.new(:test, {})
+      region.connect_to(host)
+    end
+    
   end
 
 end
