@@ -12,7 +12,11 @@ describe FreightElementView do
     instance = klass.new
     instance.signals[:selected].should be_a_kind_of(FreightSignal)
   end
-  
+
+  it "should always extend ContainerHookable" do
+    klass = Class.new(FreightElementView)
+    klass.is_a?(ContainerHookable).should == true
+  end
   describe "self.ContainerOptions" do 
     
     it "should always be a prototype model" do 
