@@ -11,7 +11,7 @@ module Freightrain
     end
 
     def on_show(*args)
-      #to override
+      #to be overridden
     end
 
     def close(*args)

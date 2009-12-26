@@ -27,7 +27,6 @@ module Freightrain
         signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
       end
       @view.data_source = self     
-#      @view.update
     end
 
     def show      

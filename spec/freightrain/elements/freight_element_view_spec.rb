@@ -17,6 +17,7 @@ describe FreightElementView do
     klass = Class.new(FreightElementView)
     klass.is_a?(ContainerHookable).should == true
   end
+
   describe "self.ContainerOptions" do 
     
     it "should always be a prototype model" do 
