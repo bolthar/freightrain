@@ -2,7 +2,7 @@
 module Freightrain
   module InterfaceBuilder
 
-    def load_from_file(file_name, builder = GtkInterfaceBuilder.new)
+    def load_from_file(file_name, builder)
       if builder.file_found?(file_name)
         @widgets = builder.create_objects_from_file(file_name)
         builder.create_object_accessors(@widgets, self)

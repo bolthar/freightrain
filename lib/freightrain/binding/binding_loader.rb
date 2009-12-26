@@ -5,7 +5,7 @@ module Freightrain
 
   class BindingLoader
     
-    def initialize(class_name)
+    def initialize(class_name)      
       @search_path = File.join(
         Freightrain.views_path,
         "**",

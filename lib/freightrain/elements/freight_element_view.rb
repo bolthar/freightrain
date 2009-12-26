@@ -15,7 +15,7 @@ module Freightrain
     end
 
     def selected(bool)
-      raise "selected is not overridden. You should override the selected method on your #{self.class.name} control"
+      #should be overridden
     end
 
     def initialize

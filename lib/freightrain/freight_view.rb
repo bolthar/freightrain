@@ -29,11 +29,12 @@ module Freightrain
     end
 
     def initialize()
-      #HACK!
-      self.class.instance_eval("include Toolkit::DialogHelper")
       @widgets = []
-      @builder = Toolkit::InterfaceBuilder.new
-      load_from_file(self.class.name, @builder)
+      if defined?(Freightrain::Toolkit)
+        self.class.instance_eval("include Toolkit::DialogHelper")
+        @builder = Toolkit::InterfaceBuilder.new
+        load_from_file(self.class.name, @builder)
+      end
       hook_to_layout_widgets()
       load_bindings_from_file(@widgets)
       create_signals

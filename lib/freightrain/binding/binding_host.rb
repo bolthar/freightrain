@@ -3,8 +3,8 @@ module Freightrain
 
   module BindingHost
 
-    def load_bindings_from_file(widgets)
-      loader = BindingLoader.new(self.class.name)
+    def load_bindings_from_file(widgets)      
+      loader = BindingLoader.new(self.class.name)      
       loader.each_binding do |widget_name, options|
         widget = widgets.select { |widget| widget.name == widget_name }.first
         widget.bind(options) if widget
