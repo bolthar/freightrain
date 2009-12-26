@@ -21,6 +21,12 @@ module Gtk
       self.modify_bg(Gtk::STATE_NORMAL, color) if color.kind_of? Gdk::Color
     end
 
+    def plug_in(region_widget)
+      self.remove(self.children.first) unless self.children.empty?
+      self << region_widget
+    end
+
+
   end
 
 

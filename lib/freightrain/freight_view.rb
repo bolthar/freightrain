@@ -7,17 +7,10 @@ module Freightrain
     extend SignalHost
     extend ContainerHookable
 
-   
+    attr_reader :widgets
+
     def self.container_options
       return {:model => :prototype}
-    end
-
-    def self.wrap_container(widget)
-      return Toolkit::RegionContainer.new(widget)
-    end
-
-    def widgets
-      return @widgets
     end
 
     def control
