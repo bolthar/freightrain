@@ -6,53 +6,36 @@ describe InterfaceBuilder do
   describe "load from file" do
 
     before :each do
-      File.stubs(:exists?).returns(true)
-      @builder.stubs(:add_from_file)
-      @builder.stubs(:objects).returns([])
+      klass = Class.new
+      klass.instance_eval("include InterfaceBuilder")
+      @instance = klass.new
+      @builder = stub()
+      @builder.stubs(:file_found?).returns(true)
+      @builder.stubs(:create_objects_from_file)
+      @builder.stubs(:create_object_accessors)
       @builder.stubs(:connect_signals)
-      @builder.stubs(:extension).returns("dmy")
-      @class = Class.new()
-      @class.instance_eval("include InterfaceBuilder")
     end
 
-    it "should not create a view definition if file is not found" do
-      @builder.stubs(:add_from_file)
-      @builder.stubs(:objects).returns([])
-      @builder.stubs(:connect_signals)
-      @builder.stubs(:extension).returns("dmy")
-      File.stubs(:exists?).returns(false)
-      @builder.expects(:add_from_file).never
-      instance = @class.new
-      instance.load_from_file("nofile", @builder)
+    it "should do nothing if file is not found" do
+      @instance.load_from_file(:nofile, stub(:file_found? => false))
+    end
+    
+    it "should call create_objects_from_file if file found" do
+      @builder.expects(:create_objects_from_file).with(:filename)      
+      @instance.load_from_file(:filename, @builder)
     end
 
-    it "should call add from file on builder if file is found" do
-      File.stubs(:exists?).returns(true)
-      @builder.expects(:add_from_file)
-      instance = @class.new
-      instance.load_from_file("yesfile", @builder)
+    it "should call create_object_accessors with widgets if file found" do
+      @builder.stubs(:create_objects_from_file).returns(:widgets)
+      @builder.expects(:create_object_accessors).with(:widgets, @instance)
+      @instance.load_from_file(:filename, @builder)
     end
 
-    it "should create an accessor method for every widget if widget responds to name" do
-      File.stubs(:exists?).returns(true)
-      widget_one = stub(:name => "my_name_one")
-      widget_two = stub(:name => "my_name_two")
-      @builder.stubs(:objects).returns([widget_one, widget_two])
-      instance = @class.new
-      instance.load_from_file("dummy", @builder)
-      instance.respond_to?(:my_name_one).should == true
-      instance.respond_to?(:my_name_two).should == true
+    it "should call connect_signals if file found" do
+      @builder.expects(:connect_signals)
+      @instance.load_from_file(:filename, @builder)
     end
-
-    it "should attach correct handler to widget if method is present" do
-      @class.send(:define_method, :on_widget_clicked) { }
-      @builder.stubs(:connect_signals).yields("on_widget_clicked")      
-      instance = @class.new
-      instance.expects(:method).with("on_widget_clicked")
-      instance.load_from_file("dummy", @builder)
-    end
-
-
+    
     
   end
 
