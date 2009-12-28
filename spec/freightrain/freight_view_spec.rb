@@ -6,22 +6,22 @@ describe FreightView do
   before :each do
     @class = Class.new(FreightView)
     File.stubs(:join).returns("nofile")
-    Freightrain::Toolkit = Module.new
-    Freightrain::Toolkit::InterfaceBuilder = Class.new
-    Freightrain::Toolkit::InterfaceBuilder.stubs(:new).returns(stub(:file_found? => false))
+    Freightrain.toolkit = :test
+    Freightrain.stubs(:get_interface_builder).returns(stub(:file_found? => false))
     @class.stubs(:instance_eval)
   end
 
   after :each do 
     #HACK: shouldn't be needed
     ContainerHookable.classes.clear #it avoids container specs to fail
+    Freightrain.toolkit = nil
   end
 
   it "should always include BindingHost" do
     @class.included_modules.include?(BindingHost).should == true
   end
 
-  it "should always include GtkBuilderHelper" do
+  it "should always include InterfaceBuilder" do
     @class.included_modules.include?(InterfaceBuilder).should == true
   end
 
@@ -44,19 +44,18 @@ describe FreightView do
   describe "ctor" do
 
     before :each do
-      @class.stubs(:instance_eval).with("include Toolkit::DialogHelper")
-      
+      @class.stubs(:instance_eval).with("include Toolkit::DialogHelper")      
     end
 
     it "should include Toolkit::DialogHelper if toolkit defined" do
       @class.stubs(:name).returns("myname")
-      @class.stubs(:instance_eval).with("include Toolkit::DialogHelper")
+      @class.expects(:instance_eval).with("include Toolkit::DialogHelper")
       @class.new()
     end
 
     it "should call load_from_file with right params if toolkit defined" do
       @class.stubs(:name).returns("myname")      
-      Freightrain::Toolkit::InterfaceBuilder.stubs(:new).returns(:builder)
+      Freightrain.stubs(:get_interface_builder).returns(:builder)
       @class.send(:define_method, :load_from_file) do |path, builder|
         @called = true if (path == "myname" && builder == :builder)
       end

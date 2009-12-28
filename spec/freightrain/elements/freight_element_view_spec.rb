@@ -9,6 +9,7 @@ describe FreightElementView do
 
   it "should always have a 'selected' signal" do
     klass = Class.new(FreightElementView)
+    p Freightrain.toolkit
     instance = klass.new
     instance.signals[:selected].should be_a_kind_of(FreightSignal)
   end

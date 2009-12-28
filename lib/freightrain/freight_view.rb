@@ -23,9 +23,9 @@ module Freightrain
 
     def initialize()
       @widgets = []
-      if defined?(Freightrain::Toolkit)
+      if(Freightrain.toolkit)
         self.class.instance_eval("include Toolkit::DialogHelper")
-        @builder = Toolkit::InterfaceBuilder.new
+        @builder = Freightrain.get_interface_builder
         load_from_file(self.class.name, @builder)
       end
       hook_to_layout_widgets()
