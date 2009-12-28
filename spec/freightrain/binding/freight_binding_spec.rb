@@ -89,7 +89,9 @@ describe FreightBinding do
       widget.stubs(:test=).with(:value)
       datasource = stub()
       datasource.stubs(:my_path).returns(:value)
-      options = {:property => :test, :path => :my_path, :force => true, :converter => mock(:from)}
+      converter = mock(:from)
+      ConverterFactory.stubs(:create).returns(converter)
+      options = {:property => :test, :path => :my_path, :force => true, :converter => :dummy}
       binding = FreightBinding.new(widget, options)
       binding.instance_variable_set(:@data_source, datasource)
       binding.update
@@ -108,7 +110,9 @@ describe FreightBinding do
     it "should call converter to" do
       widget = stub()
       widget.stubs(:my_prop).returns(:value)
-      options = {:property => :my_prop, :path => :my_path , :converter => mock(:to)}
+      converter = mock(:to)
+      ConverterFactory.stubs(:create).returns(converter)
+      options = {:property => :my_prop, :path => :my_path , :converter => :dummy}
       binding = FreightBinding.new(widget, options)
       binding.commit
     end

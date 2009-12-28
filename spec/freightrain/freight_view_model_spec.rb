@@ -83,21 +83,6 @@ describe FreightViewModel do
       @class.new
     end
 
-    it "should connect to region's signal if correct method is defined" do
-      @class.send(:define_method, :region_on_signal) do
-        #do nothing
-      end
-      signal = mock(:connect)
-      viewmodel = stub
-      viewmodel.stubs(:signals).returns({:signal => signal})
-      region = stub
-      region.stubs(:viewmodel => viewmodel)
-      @class.send(:define_method, :build_regions) do
-        @regions = {:region => region}
-      end      
-      @class.new
-    end
-
     it "should not connect to region's signal if no correct method defined" do
       signal = mock()
       signal.expects(:connect).never
@@ -116,14 +101,14 @@ describe FreightViewModel do
   describe "show" do
 
     it "should set visible to true on toplevel" do
-      toplevel = mock()
-      toplevel.expects(:visible=).with(true)
-      @view.stubs(:toplevel).returns(toplevel)
+      control = mock()
+      control.expects(:visible=).with(true)
+      @view.stubs(:control).returns(control)
       @class.new.show
     end
 
     it "should call on_show on each region passing view" do
-      @view.stubs(:toplevel).returns(stub(:visible= => nil))
+      @view.stubs(:control).returns(stub(:visible= => nil))
       region = stub
       region.stubs(:viewmodel => stub(:signals => {}))
       region.expects(:on_show).with(@view)
@@ -138,19 +123,12 @@ describe FreightViewModel do
   describe "hide" do
 
     it "should set visible to false on toplevel" do
-      toplevel = mock()
-      toplevel.expects(:visible=).with(false)
-      @view.stubs(:toplevel).returns(toplevel)
+      control = mock()
+      control.expects(:visible=).with(false)
+      @view.stubs(:control).returns(control)
       @class.new.hide
     end
-
-    it "should set view as nil" do
-      @view.stubs(:toplevel).returns(stub(:visible=))
-      instance = @class.new
-      instance.hide
-      instance.instance_variable_get(:@view).should == nil
-    end
-
+    
   end
 
 end
