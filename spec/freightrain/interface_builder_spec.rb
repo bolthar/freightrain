@@ -34,8 +34,7 @@ describe InterfaceBuilder do
     it "should call connect_signals if file found" do
       @builder.expects(:connect_signals)
       @instance.load_from_file(:filename, @builder)
-    end
-    
+    end   
     
   end
 
