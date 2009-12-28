@@ -1,6 +1,4 @@
 
-require 'rubygems'
-
 class String
 
   def to_convention

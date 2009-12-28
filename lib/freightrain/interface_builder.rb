@@ -1,5 +1,10 @@
 
 module Freightrain
+
+  def get_interface_builder
+    return Toolkit::InterfaceBuilder.new    
+  end
+  
   module InterfaceBuilder
 
     def load_from_file(file_name, builder)
