@@ -69,7 +69,6 @@ describe "Toolkit::DialogHelper" do
 
   end
 
-
   describe "yes/no dialog" do
 
     before :each do
