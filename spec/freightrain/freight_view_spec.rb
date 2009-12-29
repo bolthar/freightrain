@@ -43,10 +43,6 @@ describe FreightView do
   
   describe "ctor" do
 
-    before :each do
-      @class.stubs(:instance_eval).with("include Toolkit::DialogHelper")      
-    end
-
     it "should include Toolkit::DialogHelper if toolkit defined" do
       @class.stubs(:name).returns("myname")
       @class.expects(:instance_eval).with("include Toolkit::DialogHelper")
@@ -69,9 +65,7 @@ describe FreightView do
       @class.new.instance_variable_get(:@called).should == true
     end
 
-  end
-  
-  
+  end  
 
 end
 

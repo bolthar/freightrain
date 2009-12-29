@@ -1,11 +1,12 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-Freightrain.toolkit = :gtk
-Freightrain.load_extensions!
+describe "Toolkit::DialogHelper" do
 
-
-describe Toolkit::DialogHelper do
+  before :all do
+    Freightrain.toolkit = :gtk
+    Freightrain.load_extensions!
+  end
   
   describe "open file dialog" do
 
@@ -14,7 +15,9 @@ describe Toolkit::DialogHelper do
       @extender = stub()
       @extender.stubs(:respond_to?).with(:toplevel).returns(true)
       @extender.stubs(:toplevel)
-      @extender.class.class_eval("include Toolkit::DialogHelper")
+      @extender.class.instance_eval do
+        include Freightrain::Toolkit::DialogHelper
+      end
     end
 
     it "should raise if extender does not respond to toplevel" do
@@ -74,7 +77,9 @@ describe Toolkit::DialogHelper do
       @extender = stub()
       @extender.stubs(:respond_to?).with(:toplevel).returns(true)
       @extender.stubs(:toplevel)
-      @extender.class.class_eval("include Toolkit::DialogHelper")
+      @extender.class.instance_eval do
+        include Freightrain::Toolkit::DialogHelper
+      end
     end
 
     it "should raise if extender does not respond to toplevel" do
