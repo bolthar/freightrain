@@ -98,6 +98,26 @@ describe FreightViewModel do
 
   end
 
+  describe "dialog" do
+
+    before :each do 
+      @dialog = stub()
+      @dialog.stubs(:show_dialog)
+      Freightrain.stubs(:[]).with(:test_view_model).returns(@dialog)
+    end
+
+    it "should ask container for the right viewmodel" do
+      Freightrain.expects(:[]).with(:test_view_model).returns(@dialog)
+      @class.new.dialog(:test)
+    end
+
+    it "should call show_dialog on dialog viewmodel with right params" do
+      @dialog.expects(:show_dialog).with(:param1, :param2)
+      @class.new.dialog(:test, :param1, :param2)
+    end
+   
+  end
+
   describe "show" do
 
     it "should set visible to true on toplevel" do
