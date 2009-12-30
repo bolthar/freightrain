@@ -44,13 +44,13 @@ describe "bootstrapper" do
       Freightrain.stubs(:load_extensions!)
       Freightrain.stubs(:auto_require!)
       Freightrain.stubs(:configure_container!)
-      Toolkit = stub()
-      Toolkit.stubs(:start_main_loop)
+      Freightrain::Toolkit = stub()
+      Freightrain::Toolkit.stubs(:start_main_loop)
     end
 
     it "should call load extensions!" do
       Freightrain.expects(:load_extensions!)
-      Freightrain.start(nil)
+      Freightrain.start(:test)
     end
 
     it "should call auto require!" do
