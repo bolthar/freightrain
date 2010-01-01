@@ -4,7 +4,8 @@ module Gtk
   class Layout
     include Freightrain::LayoutWidget
 
-    attr_writer :viewmodel  
+    attr_writer :viewmodel
+    attr_reader :elements
     
     def setup
       @signals ||= {}
@@ -20,7 +21,7 @@ module Gtk
     end
 
     def elements=(enumerable)
-      setup if !@ready
+      setup unless @ready
       delta = enumerable.length - @elements.length
       @height_factor = Freightrain[@viewmodel].control.height_request unless @height_factor
       height = @elements.length
@@ -45,11 +46,7 @@ module Gtk
       end
     end
 
-    def elements
-      return @elements
-    end
-
-     def bind(options)
+    def bind(options)
       if options[:property].to_s == "elements"
         @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
         options[:force]     = true
