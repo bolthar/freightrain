@@ -28,9 +28,9 @@ module Freightrain
           @cache = value
         end
       rescue Exception => ex
-#        p @widget.name
-#        p ex.message
-#        p @path
+        p @widget.name
+        p ex.message
+        p @path
       end
     end
 

@@ -7,7 +7,11 @@ module Freightrain
     extend SignalHost
     extend ContainerHookable
 
-    attr_reader :widgets
+#    attr_reader :widgets
+
+    def widgets
+      return @widgets.select { |widget| widget.kind_of? Gtk::Widget}
+    end
 
     def self.container_options
       return {:model => :prototype}
