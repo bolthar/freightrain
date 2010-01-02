@@ -18,6 +18,10 @@ module Freightrain
       Gtk.main
     end
 
+    def self.quit
+      Gtk.main_quit
+    end
+
   end
 
 end
