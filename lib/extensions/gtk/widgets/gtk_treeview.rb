@@ -1,13 +1,9 @@
 
-
 module Gtk
 
   class TreeView
 
     def create_text_column(name, path, index)
-      p name
-      p path
-      p index
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new(name, renderer, :text => index)
       column.path = path
@@ -41,4 +37,5 @@ module Gtk
     end
 
   end
+  
 end

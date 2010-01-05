@@ -38,6 +38,15 @@ describe BindingLoader do
       end
     end
 
+    it "should not yield if YAML.load returns false" do
+      loader = BindingLoader.new("MyClass")
+      Dir.stubs(:glob).returns([1])
+      YAML.stubs(:load_file).returns(false)
+      loader.each_binding do
+        raise "never yield"
+      end
+    end
+
     it "should yield once if only one binding in file" do
       times = 0
       loader = BindingLoader.new("MyClass")

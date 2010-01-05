@@ -40,6 +40,7 @@ module Gtk
           @elements.delete_if {|element| element.control == item }
         end
       end
+      p "here!3"
       self.height = @elements.length * @height_factor
       (0...@elements.length).each do |index|
         @elements[index].value = enumerable[index]

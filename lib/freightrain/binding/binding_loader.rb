@@ -20,7 +20,7 @@ module Freightrain
     def each_binding
       return nil unless filename
       options = {}
-      binding_collection = YAML.load_file(filename)
+      binding_collection = YAML.load_file(filename) || []
       binding_collection.each do |widget, binding|
         binding = [binding] if binding.kind_of? Hash #needed if only 1 binding declared
         binding.each do |binding_options|

@@ -10,9 +10,11 @@ module Freightrain
         return Freightrain.const_get("#{name}Converter").new
       end
       #then, if not found, try to get a registered custom converter
-      converter = Freightrain["#{name}Converter".to_convention_sym] rescue nil
-      #if nothing found, give up (converter is nil if registry throws)
-      return converter
+      begin
+        return Freightrain["#{name}Converter".to_convention_sym]
+      rescue
+        return nil
+      end
     end
 
   end
