@@ -16,9 +16,23 @@ module Gtk
       return @bindings.values
     end
 
+    def color_from_rgb(string)
+      red   = (string[0..1].hex) * 256
+      green = (string[2..3].hex) * 256
+      blue  = (string[4..5].hex) * 256
+      return Gdk::Color.new(red, green, blue)
+    end
+
     def background=(color)
-      self.modify_bg(Gtk::STATE_NORMAL, Freightrain::Color.rgb(color)) if color.kind_of? String
-      self.modify_bg(Gtk::STATE_NORMAL, color) if color.kind_of? Gdk::Color
+      self.modify_bg(Gtk::STATE_NORMAL,color_from_rgb(color))
+    end
+
+    def foreground=(color)
+      self.modify_fg(Gtk::STATE_NORMAL,color_from_rgb(color))
+    end
+
+    def base_background=(color)
+      self.modify_fg(Gtk::STATE_NORMAL,color_from_rgb(color))
     end
 
     def plug_in(region_widget)
