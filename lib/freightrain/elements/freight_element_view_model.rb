@@ -32,7 +32,8 @@ module Freightrain
     end
 
     def set_selection(bool)
-      @view.set_ui_selection(bool)
+      @selected = bool
+      @view.update
     end
 
   end
