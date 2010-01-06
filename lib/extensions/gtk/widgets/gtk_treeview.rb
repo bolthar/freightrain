@@ -27,12 +27,8 @@ module Gtk
 
     def elements=(enumerable)
       types = [::Object]
-      types.concat @paths.map do |path|
-        if path["type"]
-          eval(path["type"])
-        else
-          String
-        end
+      @paths.length.times do
+        types << String #TODO: allow for different types
       end
       list_store = Gtk::ListStore.new(*types)
       enumerable.each do |item|
