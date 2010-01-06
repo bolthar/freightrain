@@ -6,7 +6,7 @@ module Gtk
 
     attr_writer :viewmodel
     attr_reader :elements
-    
+
     def setup
       @signals ||= {}
       selected_callback   = @signals[:selected]
@@ -16,31 +16,36 @@ module Gtk
                               end
                               selected_callback.call(value) if selected_callback
                             end
-      @elements ||= []      
+      @elements ||= []
+      #TODO: clean this mess
+      @display_logic = lambda do |widget, elements, enumerable|
+        height = elements.length
+        delta = enumerable.length - elements.length
+        delta.abs.times do
+          if delta > 0
+            item = widget.get_new_item
+            widget.put(item.control, 0, item.control.height_request * height)
+            elements << item
+            height += 1
+          else
+            item = self.children.last
+            self.remove(item)
+            elements.delete_if {|element| element.control == item }
+          end
+        end
+        height_factor = self.get_new_item.control.height_request
+        self.height = elements.length * height_factor
+      end
       @ready = true
     end
 
+    def display_logic(enumerable)
+      @display_logic.call(self, @elements, enumerable)
+    end
+
     def elements=(enumerable)
-      setup unless @ready
-      delta = enumerable.length - @elements.length
-      @height_factor = Freightrain[@viewmodel].control.height_request unless @height_factor
-      height = @elements.length
-      delta.abs.times do
-        if delta > 0
-          item = Freightrain[@viewmodel]
-          item.signals.each do |key, signal|           
-            signal.connect(@signals[key]) if @signals[key]
-          end
-          self.put(item.control, 0, item.control.height_request * height)
-          @elements << item
-          height += 1
-        else
-          item = self.children.last
-          self.remove(item)
-          @elements.delete_if {|element| element.control == item }
-        end
-      end
-      self.height = @elements.length * @height_factor
+      setup unless @ready      
+      display_logic(enumerable)
       (0...@elements.length).each do |index|
         @elements[index].value = enumerable[index]
       end
@@ -52,6 +57,14 @@ module Gtk
         options[:force]     = true
       end
       super(options)
+    end
+
+    def get_new_item
+      item = Freightrain[@viewmodel]
+      item.signals.each do |key, signal|
+       signal.connect(@signals[key]) if @signals[key]
+      end
+      return item
     end
       
   end
