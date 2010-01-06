@@ -1,7 +1,7 @@
 
 module Gtk
 
-  class Combo
+  class ComboBox
 
     def elements=(enumerable)
       list_store = Gtk::ListStore.new(Object, String)
