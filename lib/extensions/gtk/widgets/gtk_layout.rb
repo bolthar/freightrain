@@ -43,6 +43,12 @@ module Gtk
       @display_logic.call(self, @elements, enumerable)
     end
 
+    def set_display_logic
+      @display_logic = lambda do |widget, elements, enumerable|
+        yield(widget, elements, enumerable)
+      end
+    end
+
     def elements=(enumerable)
       setup unless @ready      
       display_logic(enumerable)
