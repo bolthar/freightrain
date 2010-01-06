@@ -28,7 +28,7 @@ module Freightrain
           @cache = value
         end
       rescue Exception => ex
-        p @widget.name
+        p "#{@widget.name} - update"
         p ex.message
         p @path
       end
@@ -36,11 +36,13 @@ module Freightrain
 
     def commit()
       begin
+        p "#{@widget.name}, #{@converter}"
         value = get(@widget, @property)
         set(@path, @converter.to(value), data_source)
       rescue Exception => ex
-#        p ex.message
-#        p ex.backtrace
+        p "#{@widget.name} - commit"
+        p ex.message
+        p @pathe
       end
     end
 

@@ -1,6 +1,9 @@
 
+#TODO: use require all
+
 require 'libglade2'
 require File.dirname(__FILE__) + "/widgets/gtk_image.rb"
+require File.dirname(__FILE__) + "/widgets/gtk_toggle_button.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_widget.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_calendar.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_treeview.rb"
