@@ -36,7 +36,6 @@ module Freightrain
 
     def commit()
       begin
-        p "#{@widget.name}, #{@converter}"
         value = get(@widget, @property)
         set(@path, @converter.to(value), data_source)
       rescue Exception => ex
