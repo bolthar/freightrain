@@ -7,6 +7,11 @@ module Gtk
     attr_writer :viewmodel
     attr_reader :elements
 
+    def initialize
+      super
+      
+    end
+
     def setup
       @signals ||= {}
       selected_callback   = @signals[:selected]
@@ -16,31 +21,40 @@ module Gtk
                               end
                               selected_callback.call(value) if selected_callback
                             end
-      @elements ||= []
-      #TODO: clean this mess
-      @display_logic = lambda do |widget, elements, enumerable|
-        height = elements.length
-        delta = enumerable.length - elements.length
-        delta.abs.times do
-          if delta > 0
-            item = widget.get_new_item
-            widget.put(item.control, 0, item.control.height_request * height)
-            elements << item
-            height += 1
-          else
-            item = self.children.last
-            self.remove(item)
-            elements.delete_if {|element| element.control == item }
-          end
-        end
-        height_factor = self.get_new_item.control.height_request
-        self.height = elements.length * height_factor
-      end
+      @elements ||= []      
       @ready = true
     end
 
+    #TODO:remove
+    def default_display_logic(elements, enumerable)
+      #TODO: clean this mess        
+      height = elements.length
+      delta = enumerable.length - elements.length
+      delta.abs.times do
+        if delta > 0
+          item = self.get_new_item
+          self.put(item.control, 0, item.control.height_request * height)
+          elements << item
+          height += 1
+        else
+          item = self.children.last
+          self.remove(item)
+          elements.delete_if {|element| element.control == item }
+        end
+      end
+      height_factor = self.get_new_item.control.height_request
+      self.height = elements.length * height_factor
+      (0...elements.length).each do |index|
+        elements[index].value = enumerable[index]
+      end
+    end
+
     def display_logic(enumerable)
-      @display_logic.call(self, @elements, enumerable)
+      if @display_logic
+        @display_logic.call(self, @elements, enumerable)
+      else
+        default_display_logic(@elements, enumerable)
+      end
     end
 
     def set_display_logic
@@ -51,10 +65,7 @@ module Gtk
 
     def elements=(enumerable)
       setup unless @ready      
-      display_logic(enumerable)
-      (0...@elements.length).each do |index|
-        @elements[index].value = enumerable[index]
-      end
+      display_logic(enumerable)      
     end
 
     def bind(options)
@@ -76,4 +87,3 @@ module Gtk
   end
 
 end
-

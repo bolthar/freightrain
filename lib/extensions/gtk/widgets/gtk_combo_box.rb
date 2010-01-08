@@ -14,7 +14,7 @@ module Gtk
     end
 
     def selected
-      iter = self.model.selection.selected
+      iter = self.active_iter
       return iter[0] if iter
     end
 
