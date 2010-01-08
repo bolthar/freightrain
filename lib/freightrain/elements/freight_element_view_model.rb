@@ -5,6 +5,8 @@ module Freightrain
   class FreightElementViewModel < FreightViewModel
     extend ContainerHookable
 
+    attr_reader :selected
+
     def self.container_options
       return { :model => :prototype }
     end
