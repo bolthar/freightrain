@@ -4,6 +4,7 @@
 require 'libglade2'
 require File.dirname(__FILE__) + "/widgets/gtk_image.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_toggle_button.rb"
+require File.dirname(__FILE__) + "/widgets/gtk_toggle_tool_button.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_widget.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_combo_box.rb"
 require File.dirname(__FILE__) + "/widgets/gtk_calendar.rb"

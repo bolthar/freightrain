@@ -31,7 +31,6 @@ module Freightrain
         p "#{@widget.name} - update"
         p ex.message
         p @path
-        p ex.backtrace
       end
     end
 

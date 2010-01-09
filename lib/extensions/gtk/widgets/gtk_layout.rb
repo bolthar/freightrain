@@ -68,6 +68,16 @@ module Gtk
       display_logic(enumerable)      
     end
 
+    def selected
+      return @elements.select { |element| element.selected == true}.first
+    end
+
+    def selected=(val)
+      @elements.each do |element|
+        element.set_selection(val == element.value)
+      end
+    end
+
     def bind(options)
       if options[:property].to_s == "elements"
         @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
