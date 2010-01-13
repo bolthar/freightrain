@@ -14,7 +14,7 @@ module Freightrain
     def dialog(viewmodel_name, *args)
       dialog = Freightrain["#{viewmodel_name}_view_model".to_sym]      
       dialog.show_dialog(*args) do |*params|
-        yield(*params)
+        yield(*params) if block_given?
       end
     end
 
