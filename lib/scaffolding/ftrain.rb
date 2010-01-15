@@ -1,13 +1,23 @@
 
+require "rubygems"
+require "require_all"
+
+require_all File.dirname(__FILE__) + "/commands"
+
 require File.dirname(__FILE__) + "/generator.rb"
 
-p "FREIGHTRAIN - SCAFFOLDING"
-
-if ARGV[0].to_s == "triad" 
-  name        = ARGV[1].to_s
-  current_dir = Dir.pwd
-  Generator.create_stub(File.join(current_dir, "views", "#{name}_view.rb"),"view",:name => name.capitalize)
-  Generator.create_stub(File.join(current_dir, "views", "#{name}_view.bnd.yml"),"view_bnd",:name => name)
-  Generator.create_stub(File.join(current_dir, "views", "#{name}_view.glade"),"view_control_glade",:name => name)
-  Generator.create_stub(File.join(current_dir, "viewmodels", "#{name}_view_model.rb"),"view_model",:name => name.capitalize)
+begin
+  klass = eval("#{ARGV[0].capitalize}Command")
+rescue
+  print "No command '#{ARGV[0]}'\n"
 end
+
+begin
+  command = klass.new(*ARGV[1...ARGV.length])
+  command.check
+  command.execute
+rescue Exception => ex
+  print ex.message + "\n"
+end
+
+
