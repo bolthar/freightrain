@@ -28,7 +28,8 @@ describe FreightElementView do
 
   end
 
-  describe "set_ui_selection" do
+  #TODO: complete spec coverage
+  describe "update" do
 
     before :each do
       Freightrain.app_path = "dummy"
@@ -47,18 +48,8 @@ describe FreightElementView do
       signal_two.stubs(:unleash)
       @instance.signals[:signal_one] = signal_one
       @instance.signals[:signal_two] = signal_two
-      @instance.set_ui_selection(nil)
-    end
-
-    it "should always call selected with param" do
-      value = mock(:called => nil)
-      @instance.class.class_eval do
-        def selected(value)
-          value.called
-        end
-      end
-      @instance.set_ui_selection(value)
-    end
+      @instance.update
+    end   
 
     it "should always unleash all signals" do
       signal_one = stub()
@@ -69,22 +60,8 @@ describe FreightElementView do
       signal_two.expects(:unleash)
       @instance.signals[:signal_one] = signal_one
       @instance.signals[:signal_two] = signal_two
-      @instance.set_ui_selection(nil)
-    end
-
-    it "should always call selected when all signal stifled" do
-      value = mock(:called => nil)
-      @instance.signals[:signal_one].connect(lambda {raise "laame!"})
-      @instance.signals[:signal_two].connect(lambda {raise "not cool!"})
-      @instance.class.class_eval do
-        def selected(value)
-          fire :signal_one
-          fire :signal_two
-          value.called
-        end
-      end
-      @instance.set_ui_selection(value)      
-    end
+      @instance.update
+    end  
 
   end
 
