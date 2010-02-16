@@ -1,5 +1,4 @@
 
-
 module Freightrain
 
   class FreightElementViewModel < FreightViewModel

@@ -77,12 +77,21 @@ describe FreightElementViewModel do
 
   describe "set_selection" do
 
-    it "should always call view.set_ui_selection with param" do
-      @view.expects(:set_ui_selection).with(1)
+    it "should always set @selected to param" do
+      @view.stubs(:update)
       TestElementViewModel = Class.new(FreightElementViewModel)
       view_model = TestElementViewModel.new
-      view_model.set_selection(1)
+      view_model.set_selection(true)
+      view_model.instance_variable_get(:@selected).should == true
     end
+
+    it "should always call view.update" do
+      @view.expects(:update)
+      TestElementViewModel = Class.new(FreightElementViewModel)
+      view_model = TestElementViewModel.new
+      view_model.set_selection(true)
+    end
+    
   end
 
   
