@@ -77,5 +77,41 @@ describe SignalHost do
 
   end
 
+  describe "hook to signals" do
+
+    it "should not call connect if host does not respond to correct method name" do
+      signal = mock()
+      signal.expects(:connect).never
+      host = stub(:respond_to? => false)
+      instance = @class.new
+      instance.instance_variable_set(:@signals, {:my_signal => signal})
+      instance.hook_to_signals(host)
+    end
+
+    it "should call connect on signals without prefix if not provided" do
+      signal = mock()
+      signal.expects(:connect).with(:okay)
+      host = stub()
+      host.stubs(:method).with("on_my_signal").returns(:okay)
+      host.stubs(:respond_to?).with("on_my_signal").returns(true)
+      instance = @class.new
+      instance.instance_variable_set(:@signals, {:my_signal => signal})
+      instance.hook_to_signals(host)
+    end
+
+    it "should call connect on signals with prefix if provided" do
+      signal = mock()
+      signal.expects(:connect).with(:okay)
+      host = stub()
+      host.stubs(:method).with("dummy_on_my_signal").returns(:okay)
+      host.stubs(:respond_to?).with("dummy_on_my_signal").returns(true)
+      instance = @class.new
+      instance.instance_variable_set(:@signals, {:my_signal => signal})
+      instance.hook_to_signals(host, :dummy)
+    end
+
+
+  end
+
 end
 

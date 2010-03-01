@@ -18,18 +18,18 @@ module Freightrain
         
         def create_signals
           @signals = {}
-          signals = self.class.instance_variable_get(:@signals)
-          signals ||= []
-          signals.each do |signal|
+          signal_keys = self.class.instance_variable_get(:@signals)
+          signal_keys ||= []
+          signal_keys.each do |signal|
             @signals[signal] = FreightSignal.new
           end
         end
 
         def hook_to_signals(host, prefix = nil)
-          host.signals.each do |signal_key, signal|
+          @signals.each do |signal_key, signal|
             method_name = "on_#{signal_key}"
             method_name = "#{prefix}_#{method_name}" if prefix
-            signal.connect(method(method_name)) if self.respond_to?(method_name)
+            signal.connect(host.method(method_name)) if host.respond_to?(method_name)
           end
         end
 

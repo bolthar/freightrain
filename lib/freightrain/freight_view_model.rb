@@ -28,7 +28,7 @@ module Freightrain
       end     
       services.each do |service_key|
         service = instance_variable_get("@#{service_key}")
-        hook_to_signals(service, service_key)
+        service.hook_to_signals(self, service_key)
       end
       @view.data_source = self     
     end
