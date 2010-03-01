@@ -15,7 +15,11 @@ module Freightrain
             service_instance = Freightrain["#{service}_service".to_sym]
             instance_variable_set("@#{service}".to_sym, service_instance)
           end
-        end      
+        end
+
+        def services
+          return self.class.instance_variable_get(:@services) || []
+        end
 
       end
     end
@@ -23,7 +27,7 @@ module Freightrain
     def service(name)
       @services ||= []
       @services << name.to_sym
-    end
+    end    
 
   end
 

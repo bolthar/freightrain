@@ -25,6 +25,10 @@ module Freightrain
       create_signals
       @view.signals.each do |key,signal|
         signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
+      end     
+      services.each do |service_key|
+        service = instance_variable_get("@#{service_key}")
+        hook_to_signals(service, service_key)
       end
       @view.data_source = self     
     end

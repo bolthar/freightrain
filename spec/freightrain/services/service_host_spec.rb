@@ -28,5 +28,27 @@ describe ServiceHost do
     instance.instance_variable_get(:@two).should == stub_service
   end
 
+  describe "services" do
+
+    it "should return an empty array if no service is defined" do
+      stub_service = stub(:signals => [])
+      Freightrain.stubs(:[]).returns(stub_service)
+      klass = Class.new(FreightService)
+      instance = klass.new
+      instance.services.empty?.should == true
+    end
+
+    it "should return the instance variable @services if defined" do
+      stub_service = stub(:signals => [])
+      Freightrain.stubs(:[]).returns(stub_service)
+      klass = Class.new(FreightService)
+      klass.service(:one)
+      klass.service(:two)
+      instance = klass.new
+      instance.services.length.should == 2
+    end
+
+  end
+
 end
 

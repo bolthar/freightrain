@@ -12,15 +12,10 @@ module Freightrain
 
     def initialize
       get_services
-      create_signals
-      services = self.class.instance_variable_get(:@services)
-      services ||= []
+      create_signals       
       services.each do |service_key|
         service = instance_variable_get("@#{service_key}")
-        service.signals.each do |signal_key, signal|
-          method_name = "#{service_key}_on_#{signal_key}"
-          signal.connect(method_name) if self.respond_to?(method_name)
-        end
+        hook_to_signals(service, service_key)        
       end
     end
 
