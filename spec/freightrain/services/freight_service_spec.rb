@@ -14,17 +14,17 @@ describe FreightService do
   describe "ctor" do
 
     it "should always instantiate services" do
-      service_stub = stub(:signals => [])
+      service_stub = stub(:hook_to_signals => nil)
       Freightrain.stubs(:[]).with(:test_service).returns(service_stub)
       @class.service(:test)
       service = @class.new
       service.instance_variable_get(:@test).should == service_stub
     end
 
-    it "should hook to service's signal if method is implemented" do
-      signal_mock  = mock(:connect => nil)
-      service_stub = stub(:signals => {:test_signal => signal_mock})
-      Freightrain.stubs(:[]).with(:test_service).returns(service_stub)
+    it "should call hook_to_signals on each service with right params" do      
+      service_mock = mock()
+      service_mock.expects(:hook_to_signals).with(anything, :test)
+      Freightrain.stubs(:[]).with(:test_service).returns(service_mock)
       @class.service(:test)
       @class.class_eval do
         def test_on_test_signal

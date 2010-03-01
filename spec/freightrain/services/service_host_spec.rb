@@ -9,8 +9,8 @@ describe ServiceHost do
   end
 
   it "should call container for each service registered" do
-    Freightrain.expects(:[]).with(:one_service).returns(stub(:signals => []))
-    Freightrain.expects(:[]).with(:two_service).returns(stub(:signals => []))
+    Freightrain.expects(:[]).with(:one_service).returns(stub(:hook_to_signals => nil))
+    Freightrain.expects(:[]).with(:two_service).returns(stub(:hook_to_signals => nil))
     klass = Class.new(FreightService)
     klass.service(:one)
     klass.service(:two)
@@ -18,7 +18,7 @@ describe ServiceHost do
   end
 
   it "should add one service for each service registered" do
-    stub_service = stub(:signals => [])
+    stub_service = stub(:hook_to_signals => nil)
     Freightrain.stubs(:[]).returns(stub_service)
     klass = Class.new(FreightService)
     klass.service(:one)
@@ -31,7 +31,7 @@ describe ServiceHost do
   describe "services" do
 
     it "should return an empty array if no service is defined" do
-      stub_service = stub(:signals => [])
+      stub_service = stub(:hook_to_signals => nil)
       Freightrain.stubs(:[]).returns(stub_service)
       klass = Class.new(FreightService)
       instance = klass.new
@@ -39,7 +39,7 @@ describe ServiceHost do
     end
 
     it "should return the instance variable @services if defined" do
-      stub_service = stub(:signals => [])
+      stub_service = stub(:hook_to_signals => nil)
       Freightrain.stubs(:[]).returns(stub_service)
       klass = Class.new(FreightService)
       klass.service(:one)

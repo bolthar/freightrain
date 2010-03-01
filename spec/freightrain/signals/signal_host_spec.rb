@@ -110,7 +110,6 @@ describe SignalHost do
       instance.hook_to_signals(host, :dummy)
     end
 
-
   end
 
 end
