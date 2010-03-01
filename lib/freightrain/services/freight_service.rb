@@ -4,6 +4,10 @@ module Freightrain
   class FreightService
     extend ContainerHookable
     extend ServiceHost
+    #WARNING! Service, as it is right now, are
+    #SINGLETONS by default. That means if you consume
+    #the same service from two different hosts, the LAST
+    #host hooking to the callback will actually get the calls.
     extend SignalHost
 
     def initialize
