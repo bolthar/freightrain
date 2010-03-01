@@ -20,11 +20,7 @@ module Freightrain
     end
 
     def connect_to(host)
-      @viewmodel.signals.each do |key, signal|
-        if host.respond_to? "#{@name.to_s}_on_#{key.to_s}".to_sym
-          signal.connect(host.method("#{@name.to_s}_on_#{key.to_s}".to_sym))
-        end
-      end
+      @viewmodel.hook_to_signals(host, @name.to_s)
     end
 
   end
