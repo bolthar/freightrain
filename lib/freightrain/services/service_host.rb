@@ -15,7 +15,7 @@ module Freightrain
             service_instance = Freightrain["#{service}_service".to_sym]
             instance_variable_set("@#{service}".to_sym, service_instance)
           end
-        end
+        end      
 
       end
     end

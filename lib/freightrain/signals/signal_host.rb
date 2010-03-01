@@ -24,6 +24,7 @@ module Freightrain
             @signals[signal] = FreightSignal.new
           end
         end
+
         
       end
     end

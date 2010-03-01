@@ -9,8 +9,8 @@ describe ServiceHost do
   end
 
   it "should call container for each service registered" do
-    Freightrain.expects(:[]).with(:one_service)
-    Freightrain.expects(:[]).with(:two_service)
+    Freightrain.expects(:[]).with(:one_service).returns(stub(:signals => []))
+    Freightrain.expects(:[]).with(:two_service).returns(stub(:signals => []))
     klass = Class.new(FreightService)
     klass.service(:one)
     klass.service(:two)
@@ -18,13 +18,14 @@ describe ServiceHost do
   end
 
   it "should add one service for each service registered" do
-    Freightrain.stubs(:[]).returns(true)
+    stub_service = stub(:signals => [])
+    Freightrain.stubs(:[]).returns(stub_service)
     klass = Class.new(FreightService)
     klass.service(:one)
     klass.service(:two)
     instance = klass.new
-    instance.instance_variable_get(:@one).should == true
-    instance.instance_variable_get(:@two).should == true
+    instance.instance_variable_get(:@one).should == stub_service
+    instance.instance_variable_get(:@two).should == stub_service
   end
 
 end
