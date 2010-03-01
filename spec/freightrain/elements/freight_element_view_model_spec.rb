@@ -5,7 +5,7 @@ describe FreightElementViewModel do
 
   before :each do
     @view = stub()
-    @view.stubs(:signals).returns([])
+    @view.stubs(:hook_to_signals)
     @view.stubs(:data_source=)
     Freightrain.stubs(:[]).with(:test_element_view).returns(@view)
   end

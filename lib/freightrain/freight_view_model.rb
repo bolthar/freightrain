@@ -23,9 +23,7 @@ module Freightrain
       get_services
       build_regions
       create_signals
-      @view.signals.each do |key,signal|
-        signal.connect(method("on_#{key}")) if self.respond_to? "on_#{key}"
-      end     
+      @view.hook_to_signals(self)
       services.each do |service_key|
         service = instance_variable_get("@#{service_key}")
         service.hook_to_signals(self, service_key)

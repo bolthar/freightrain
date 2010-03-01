@@ -5,7 +5,7 @@ describe FreightViewModel do
 
   before :each do
     @class = Class.new(FreightViewModel)
-    @view = stub(:signals => [], :data_source= => nil)
+    @view = stub(:hook_to_signals => nil, :data_source= => nil)
     Freightrain.stubs(:[]).returns(@view)
   end
 
@@ -62,12 +62,8 @@ describe FreightViewModel do
       @class.new
     end
     
-    it "should connect to view's signal if correct method is defined" do
-      @class.send(:define_method, :on_signal) do
-        #do nothing
-      end
-      signal = mock(:connect)
-      @view.stubs(:signals).returns({:signal => signal})
+    it "should always call view's hook_to_signals " do
+      @view.expects(:hook_to_signals).with(kind_of(FreightViewModel))
       @class.new
     end
     
