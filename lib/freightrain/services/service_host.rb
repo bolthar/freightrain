@@ -12,7 +12,8 @@ module Freightrain
           services = self.class.instance_variable_get(:@services)
           services ||= []
           services.each do |service|
-            eval "@#{service} = Freightrain[:#{service.to_s}_service]"
+            service_instance = Freightrain["#{service}_service".to_sym]
+            instance_variable_set("@#{service}".to_sym, service_instance)
           end
         end
 
