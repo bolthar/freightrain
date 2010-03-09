@@ -16,6 +16,7 @@ module Gtk
 
     def bind(options)
       if options[:property].to_sym == :elements
+        options[:force] = true
         columns = normalize_column_bindings(options[:columns])
         @paths  = get_paths(columns)
         columns.each do |column|
