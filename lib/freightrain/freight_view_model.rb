@@ -20,19 +20,23 @@ module Freightrain
 
     def self.new(*args, &block)
       viewmodel = allocate
-      view      = Freightrain[viewmodel.class.name.sub("Model", "").to_convention_sym]
-      viewmodel.get_services
-      viewmodel.build_regions
-      viewmodel.create_signals
-      view.hook_to_signals(viewmodel)
-      viewmodel.services.each do |service_key|
-        service = viewmodel.instance_variable_get("@#{service_key}")
-        service.hook_to_signals(self, service_key)
-      end
-      view.data_source = viewmodel
-      viewmodel.instance_variable_set(:@view, view)
+      viewmodel.bootstrap
       viewmodel.send(:initialize, *args, &block)
       return viewmodel
+    end
+
+    def bootstrap
+      view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]
+      self.get_services
+      self.build_regions
+      self.create_signals
+      view.hook_to_signals(self)
+      self.services.each do |service_key|
+        service = self.instance_variable_get("@#{service_key}")
+        service.hook_to_signals(self, service_key)
+      end
+      view.data_source = self
+      @view = view
     end
 
     def show      

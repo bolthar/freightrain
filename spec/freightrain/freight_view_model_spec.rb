@@ -30,7 +30,32 @@ describe FreightViewModel do
     @class.kind_of?(SignalHost).should == true
   end
 
-  describe "ctor" do
+  describe "self.new" do
+
+    it "should always call bootstrap" do
+      @class.send(:define_method, :bootstrap) do
+        @called = true
+      end
+      instance = @class.new
+      instance.instance_variable_get(:@called).should == true
+    end
+
+    it "should always forward the call to initialize" do
+      @class.send(:define_method, :initialize) do
+        @called = true
+      end
+      instance = @class.new
+      instance.instance_variable_get(:@called).should == true
+    end
+
+    it "should return an instance of the class" do
+      instance = @class.new
+      (instance.kind_of? @class).should == true
+    end
+
+  end
+
+  describe "ctor(self.new)" do
 
     it "should call get services" do
       @class.send(:define_method, :get_services) do
