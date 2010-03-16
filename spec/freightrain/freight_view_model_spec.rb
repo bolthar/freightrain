@@ -55,13 +55,26 @@ describe FreightViewModel do
 
   end
 
-  describe "ctor(self.new)" do
+  describe "bootstrap" do
+
+    before :each do
+
+      @class.class_eval do
+        def self.new(*args, &block)
+          obj = allocate
+          obj.send(:initialize, *args, &block)
+          return obj
+        end
+      end
+
+    end
 
     it "should call get services" do
       @class.send(:define_method, :get_services) do
         @called = true
       end
       instance = @class.new
+      instance.bootstrap
       instance.instance_variable_get(:@called).should == true
     end
 
@@ -70,6 +83,7 @@ describe FreightViewModel do
         @called = true
       end
       instance = @class.new
+      instance.bootstrap
       instance.instance_variable_get(:@called).should == true
     end
 
@@ -78,30 +92,31 @@ describe FreightViewModel do
         @called = true
       end
       instance = @class.new
+      instance.bootstrap
       instance.instance_variable_get(:@called).should == true
     end
     
     it "should ask container for correct view" do
       @class.stubs(:name).returns("TestViewModel")
       Freightrain.expects(:[]).with(:test_view).returns(@view)
-      @class.new
+      @class.new.bootstrap
     end
     
     it "should always call view's hook_to_signals " do
       @view.expects(:hook_to_signals).with(kind_of(FreightViewModel))
-      @class.new
+      @class.new.bootstrap
     end
     
     it "should not connect to view's signal if no correct method defined" do
       signal = mock()
       signal.expects(:connect).never
       @view.stubs(:signals).returns({:signal => signal})
-      @class.new
+      @class.new.bootstrap
     end
     
     it "should set view's datasource to self" do 
       @view.expects(:data_source=).with(kind_of(@class))
-      @class.new
+      @class.new.bootstrap
     end
 
     it "should not connect to region's signal if no correct method defined" do
@@ -114,7 +129,7 @@ describe FreightViewModel do
       @class.send(:define_method, :build_regions) do
         @regions = {:region => region}
       end
-      @class.new
+      @class.new.bootstrap
     end
 
   end
