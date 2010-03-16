@@ -3,6 +3,8 @@ module Freightrain
 
   class FreightBinding
 
+    attr_accessor :data_source
+
     def initialize(widget, options)
       @cache          = :__NOVALUE
       @widget         = widget
@@ -10,14 +12,6 @@ module Freightrain
       @path           = options[:path].to_s.split('.')
       @converter      = ConverterFactory.create(options[:converter]) || DefaultConverter.new
       @force          = options[:force]
-    end
-
-    def data_source
-      return @data_source
-    end
-
-    def data_source=(source)
-      @data_source = source
     end
 
     def update()
@@ -28,9 +22,9 @@ module Freightrain
           @cache = value
         end
       rescue Exception => ex
-        p "#{@widget.name} - update"
-        p ex.message
-        p @path
+#        p "#{@widget.name} - update"
+#        p ex.message
+#        p @path
       end
     end
 

@@ -18,17 +18,21 @@ module Freightrain
       end
     end
 
-    def initialize()     
-      @view = Freightrain[self.class.name.sub("Model", "").to_convention_sym]      
-      get_services
-      build_regions
-      create_signals
-      @view.hook_to_signals(self)
-      services.each do |service_key|
-        service = instance_variable_get("@#{service_key}")
+    def self.new(*args, &block)
+      viewmodel = allocate
+      view      = Freightrain[viewmodel.class.name.sub("Model", "").to_convention_sym]
+      viewmodel.get_services
+      viewmodel.build_regions
+      viewmodel.create_signals
+      view.hook_to_signals(viewmodel)
+      viewmodel.services.each do |service_key|
+        service = viewmodel.instance_variable_get("@#{service_key}")
         service.hook_to_signals(self, service_key)
       end
-      @view.data_source = self     
+      view.data_source = viewmodel
+      viewmodel.instance_variable_set(:@view, view)
+      viewmodel.send(:initialize, *args, &block)
+      return viewmodel
     end
 
     def show      
