@@ -40,6 +40,19 @@ describe FreightViewModel do
       instance.instance_variable_get(:@called).should == true
     end
 
+    #WARN: redundant
+    it "should call bootstrap even if initialize is overridden" do
+      @class.send(:define_method, :bootstrap) do
+        @called = true
+      end
+      @class.send(:define_method, :initialize) do
+        @my_init = true
+      end
+      instance = @class.new
+      instance.instance_variable_get(:@called).should == true
+      instance.instance_variable_get(:@my_init).should == true
+    end
+
     it "should always forward the call to initialize" do
       @class.send(:define_method, :initialize) do
         @called = true
