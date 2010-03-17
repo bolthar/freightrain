@@ -14,13 +14,12 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('needle', '>= 1.3.0')  
   s.has_rdoc = false
   s.homepage = "http://github.com/bolthar/freightrain"
-  s.executables = Dir.glob("{bin}/**/*")
-  s.bindir = "/usr/bin"
+  s.executables = ['ftrain']
   s.summary = 'ruby desktop development made easy'
   s.description = s.summary
   s.author = 'Andrea Dallera'
   s.email = 'andrea@andreadallera.com'
-  s.files = %w(README Rakefile) + Dir.glob("{bin,lib}/**/*")
+  s.files = %w(README Rakefile) + Dir.glob("{lib}/**/*")
   s.require_path = "lib"  
 end
 
