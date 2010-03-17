@@ -4,7 +4,7 @@
 Freightrain is a MVVM (model/view/viewmodel) framework for developing desktop applications in ruby
 
 == HOW DO I GET IT?
-gem install freightrain
+	gem install freightrain
 
 (also make sure you have the latest ruby/gnome2 bindings installed (=> 0.19.3) ) 
 
@@ -12,11 +12,11 @@ gem install freightrain
 For now, you should take a look at http://github.com/bolthar/rubydraulica 
 
 To get a working stub, install the gem and then:
-# ftrain app my_app
+	ftrain app my_app
 this will create a new directory 
-# my_app
+	my_app
 containing the application stub. To run it, cd into the directory and:
-# ruby my_app.rb
+	ruby my_app.rb
 
 
 Documentation coming soon.
