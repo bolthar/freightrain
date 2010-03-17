@@ -19,7 +19,7 @@ spec = Gem::Specification.new do |s|
   s.description = s.summary
   s.author = 'Andrea Dallera'
   s.email = 'andrea@andreadallera.com'
-  s.files = %w(README Rakefile) + Dir.glob("{lib}/**/*")
+  s.files = %w(README.rdoc Rakefile) + Dir.glob("{bin,lib}/**/*")
   s.require_path = "lib"  
 end
 
