@@ -11,14 +11,6 @@ gem install freightrain
 == HOW DO I USE IT?
 For now, you should take a look at http://github.com/bolthar/rubydraulica 
 
-To get a working stub, install the gem and then:
-# ftrain app my_app
-this will create a new directory 
-# my_app
-containing the application stub. To run it, cd into the directory and:
-# ruby my_app.rb
-
-
 Documentation coming soon.
 
 == WHERE DO I REPORT BUGS/FEATURE REQUESTS?
