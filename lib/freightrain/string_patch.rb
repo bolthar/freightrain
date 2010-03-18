@@ -6,7 +6,10 @@ class String
     clone = self.clone
     first_letter = clone.slice!(0)
     result = first_letter.chr.downcase
-    clone.each_char do |letter|
+    #fix, each_char seems not to be implemented
+    #before 1.8.7
+    (0...clone.length).each do |index|
+      letter = clone[index].chr
       if letter =~ /^[A-Z]/
         result += "_"
         result += letter.downcase
