@@ -15,14 +15,16 @@ module Freightrain
 
       def create_objects_from_file(file_name)
         @builder.add_from_file(get_glade_file(file_name))
-        @control = @builder.objects.first.toplevel
-        return @builder.objects.select do
-          |obj| obj.respond_to?(:name)
-        end.map
+        if @builder.objects.first.respond_to? :toplevel
+          @control = @builder.objects.first.toplevel
+        end
+        return @builder.objects.select do |obj|
+          obj.respond_to? :name
+        end
       end
 
       def create_object_accessors(widgets, view)
-        widgets.each do |widget|
+        widgets.select { |widget| widget.respond_to? :name }.each do |widget|
           name = widget.name
           view.instance_eval "def #{name}; @widgets.select { |w| w.name == '#{name}'  }.first ;end;"
         end

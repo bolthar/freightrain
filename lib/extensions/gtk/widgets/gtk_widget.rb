@@ -2,19 +2,7 @@
 module Gtk
 
   class Widget
-
-    def bind(binding_options)
-      @bindings ||= {}
-      binding = FreightBinding.new(self, binding_options)
-      #TODO: send out warning on override?
-      @bindings[binding_options[:property]] = binding
-      return binding
-    end
-
-    def bindings
-      @bindings ||= {}
-      return @bindings.values
-    end
+    include BindingBase
 
     def color_from_rgb(string)
       red   = ((string[0..1].hex.to_i + 1) * 256) - 1

@@ -10,7 +10,7 @@ module Freightrain
 #    attr_reader :widgets
 
     def widgets
-      return @widgets.select { |widget| widget.kind_of? Gtk::Widget}
+      return @widgets.select { |widget| widget.kind_of? BindingBase }
     end
 
     def self.container_options
