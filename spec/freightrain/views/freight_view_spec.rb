@@ -40,6 +40,11 @@ describe FreightView do
     end
 
   end
+
+  describe "get all callbacks" do
+
+    it "should be specced"
+  end
   
   describe "ctor" do
 
