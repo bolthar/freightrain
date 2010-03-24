@@ -13,6 +13,12 @@ module Freightrain
       return @widgets.select { |widget| widget.kind_of? BindingBase }
     end
 
+    def get_all_callbacks
+      return self.methods.select do |method_name|
+        method =~ /^on_/i
+      end.map { |method_name| CallbackWrapper.new(method(method_name)) }
+    end
+
     def self.container_options
       return {:model => :prototype}
     end
