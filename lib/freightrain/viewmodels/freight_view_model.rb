@@ -19,10 +19,10 @@ module Freightrain
     end
 
     def self.new(*args, &block)
-      viewmodel = allocate
-      viewmodel.bootstrap
-      viewmodel.send(:initialize, *args, &block)
-      return viewmodel
+      @viewmodel = allocate
+      @viewmodel.bootstrap
+      @viewmodel.send(:initialize, *args, &block)
+      return @viewmodel
     end
 
     def bootstrap
