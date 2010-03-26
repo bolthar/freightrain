@@ -32,6 +32,7 @@ module Freightrain
     end
 
     def initialize()
+      create_signals
       @widgets = []
       if(Freightrain.toolkit)
         self.class.instance_eval("include Toolkit::DialogHelper")
@@ -40,7 +41,7 @@ module Freightrain
       end
       hook_to_layout_widgets()
       load_bindings_from_file(@widgets)
-      create_signals
+      
     end
 
     def hook_to_layout_widgets

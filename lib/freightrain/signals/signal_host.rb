@@ -18,10 +18,19 @@ module Freightrain
         
         def create_signals
           @signals = {}
-          signal_keys = self.class.instance_variable_get(:@signals)
-          signal_keys ||= []
-          signal_keys.each do |signal|
+          signals = self.class.instance_variable_get(:@signals)
+          signals ||= {}
+          signals.keys.each do |signal|
+            create_forward_method(signals[signal], signal) if signals[signal]
             @signals[signal] = FreightSignal.new
+          end
+        end
+
+        def create_forward_method(target_description, signal)
+          target = target_description[:forwards].split(".")[0]
+          event  = target_description[:forwards].split(".")[1]
+          self.class.send(:define_method, "#{target}_on_#{event}") do
+            fire signal.to_sym
           end
         end
 
@@ -37,9 +46,9 @@ module Freightrain
       end
     end
 
-    def signal(signal_name)
-      @signals ||= []
-      @signals << signal_name.to_sym
+    def signal(signal_name, options = nil)
+      @signals ||= {}
+      @signals[signal_name.to_sym] = options
     end
     
   end
