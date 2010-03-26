@@ -9,6 +9,7 @@ describe InterfaceBuilder do
       klass = Class.new
       klass.instance_eval("include InterfaceBuilder")
       @instance = klass.new
+      @instance.stubs(:get_all_callbacks).returns([])
       @builder = stub()
       @builder.stubs(:file_found?).returns(true)
       @builder.stubs(:create_objects_from_file)
@@ -31,8 +32,8 @@ describe InterfaceBuilder do
       @instance.load_from_file(:filename, @builder)
     end
 
-    it "should call connect_signals if file found" do
-      @builder.expects(:connect_signals)
+    it "should call get all callbacks on instance if file found" do
+      @instance.expects(:get_all_callbacks).returns([])
       @instance.load_from_file(:filename, @builder)
     end   
     
