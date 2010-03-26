@@ -15,7 +15,7 @@ module Freightrain
 
     def get_all_callbacks
       return self.methods.select do |method_name|
-        method_name =~ /^on_/i
+        method_name =~ /_on_/i
       end.map { |method_name| CallbackWrapper.new(method(method_name)) }
     end
 

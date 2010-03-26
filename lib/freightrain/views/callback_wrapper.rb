@@ -7,14 +7,12 @@ class CallbackWrapper
     @method = method
   end
 
-  def matches_widget?(widget)
-    method_target_and_event = @method.name.sub("on_", "")
-    return method_target_and_event.scan(/^#{widget.name}/).any?
+  def target
+    return @method.name.split("_on_")[0]
   end
 
-  def event_name(widget)
-    event_name = @method.name.split(widget.name)[1]
-    return event_name.sub("_", "").gsub("_", "-")
+  def event
+    return @method.name.split("_on_")[1].gsub("_", "-")
   end
 
 end
