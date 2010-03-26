@@ -40,8 +40,7 @@ module Freightrain
         load_from_file(self.class.name, @builder)
       end
       hook_to_layout_widgets()
-      load_bindings_from_file(@widgets)
-      
+      load_bindings_from_file(@widgets)      
     end
 
     def hook_to_layout_widgets

@@ -21,14 +21,14 @@ module Freightrain
           signals = self.class.instance_variable_get(:@signals)
           signals ||= {}
           signals.keys.each do |signal|
-            create_forward_method(signals[signal], signal) if signals[signal]
+            create_forward_method(signals[signal][:forwards], signal) if signals[signal][:forwards]
             @signals[signal] = FreightSignal.new
           end
         end
 
         def create_forward_method(target_description, signal)
-          target = target_description[:forwards].split(".")[0]
-          event  = target_description[:forwards].split(".")[1]
+          target = target_description.split(".")[0]
+          event  = target_description.split(".")[1]
           self.class.send(:define_method, "#{target}_on_#{event}") do
             fire signal.to_sym
           end
