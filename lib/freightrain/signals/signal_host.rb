@@ -21,7 +21,7 @@ module Freightrain
           signals = self.class.instance_variable_get(:@signals)
           signals ||= {}
           signals.keys.each do |signal|
-            create_forward_method(signals[signal][:forwards], signal) if signals[signal][:forwards]
+            create_forward_method(signals[signal][:forwards], signal) if signals[signal]
             @signals[signal] = FreightSignal.new
           end
         end
