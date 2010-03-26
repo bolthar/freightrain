@@ -60,11 +60,11 @@ describe FreightView do
       view.get_all_callbacks
     end
 
-    it "should match only methods starting with 'on_'" do
+    it "should match only methods containing '_on_'" do
       view = @class.new
       methods_stub = stub()
       view.expects(:method).times(1)
-      view.stubs(:methods).returns(["on_test", "not_good", "one", "bla_on"])
+      view.stubs(:methods).returns(["on_test", "not_good", "one", "bla_on", "good_on_test"])
       view.get_all_callbacks
     end
 
