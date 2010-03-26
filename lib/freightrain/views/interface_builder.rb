@@ -11,10 +11,9 @@ module Freightrain
       if builder.file_found?(file_name)
         @widgets = builder.create_objects_from_file(file_name)
         builder.create_object_accessors(@widgets, self)
-        builder.connect_signals do |signal|
-          if self.respond_to? signal
-            method(signal)
-          end
+        self.get_all_callbacks.each do |callback|
+          target = @widgets.select { |widget| callback.matches_widget?(widget)}.first
+          builder.connect_to_callback(target, callback.event_name(target), callback.method) if target
         end
       end
     end

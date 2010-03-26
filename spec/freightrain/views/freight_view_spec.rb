@@ -43,7 +43,31 @@ describe FreightView do
 
   describe "get all callbacks" do
 
-    it "should be specced"
+    it "should call method for each of the methods matching" do
+      view = @class.new
+      methods_stub = stub(:select => [1,2,3])
+      view.expects(:method).times(3)
+      view.stubs(:methods).returns(methods_stub)
+      view.get_all_callbacks
+    end
+
+    it "should call CallbackWrapper's ctor for each of the methods matching" do
+      view = @class.new
+      methods_stub = stub(:select => [1,2,3])
+      CallbackWrapper.expects(:new).times(3)
+      view.stubs(:method).times(3)
+      view.stubs(:methods).returns(methods_stub)
+      view.get_all_callbacks
+    end
+
+    it "should match only methods starting with 'on_'" do
+      view = @class.new
+      methods_stub = stub()
+      view.expects(:method).times(1)
+      view.stubs(:methods).returns(["on_test", "not_good", "one", "bla_on"])
+      view.get_all_callbacks
+    end
+
   end
   
   describe "ctor" do
