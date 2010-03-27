@@ -30,15 +30,13 @@ module Freightrain
         end
       end
 
-#      def connect_signals()
-#        @builder.connect_signals do |signal|
-#          yield(signal)
-#        end
-#      end
-
       def connect_to_callback(widget, event_name, method)
+        begin
         widget.signal_connect(event_name) do |instance, *args|
           method.call(*args)
+        end
+        rescue Exception => ex
+          #TODO:handle this
         end
       end
 
