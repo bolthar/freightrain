@@ -41,7 +41,6 @@ module Freightrain
             signal.connect(host.method(method_name)) if host.respond_to?(method_name)
           end
         end
-
         
       end
     end

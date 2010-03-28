@@ -15,10 +15,11 @@ module Freightrain
 
       def create_objects_from_file(file_name)
         @builder.add_from_file(get_glade_file(file_name))
-        if @builder.objects.first.respond_to? :toplevel
-          @control = @builder.objects.first.toplevel
+        objects = @builder.objects
+        if objects.first.respond_to? :toplevel
+          @control = objects.first.toplevel
         end
-        return @builder.objects.select do |obj|
+        return objects.select do |obj|
           obj.respond_to? :name
         end
       end
