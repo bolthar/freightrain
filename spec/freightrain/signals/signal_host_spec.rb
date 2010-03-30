@@ -19,8 +19,7 @@ describe SignalHost do
     it "should add one signal each time it is called" do
       @class.signal(:signal)
       @class.signal(:another)
-      @class.signal(:signal) # to check that same signals are still added
-      @class.instance_variable_get(:@signals).length.should == 3
+      @class.instance_variable_get(:@signals).length.should == 2
     end
     
   end
@@ -28,7 +27,7 @@ describe SignalHost do
   describe "create signals" do
 
     it "should add a signal for each signal registered" do
-      @class.instance_variable_set(:@signals, [:first, :second])
+      @class.instance_variable_set(:@signals, {:first => nil, :second => nil})
       instance = @class.new
       instance.send(:create_signals)
       instance.signals.length.should == 2
@@ -43,7 +42,7 @@ describe SignalHost do
     end
 
     it "should not add the same signal twice" do
-      @class.instance_variable_set(:@signals, [:clone, :clone])
+      @class.instance_variable_set(:@signals, {:clone => nil, :clone => nil})
       instance = @class.new
       instance.send(:create_signals)
       instance.signals.length.should == 1
