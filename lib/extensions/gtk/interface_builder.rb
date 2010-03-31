@@ -34,7 +34,8 @@ module Freightrain
       def connect_to_callback(widget, event_name, method)
         begin
         widget.signal_connect(event_name) do |instance, *args|
-          method.call(*args)
+          arguments = [instance, *args].first(method.arity.abs)
+          method.call(*arguments)
         end
         rescue Exception => ex
           #TODO:handle this
