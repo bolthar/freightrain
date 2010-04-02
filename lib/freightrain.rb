@@ -5,4 +5,6 @@ require 'needle'
 require 'require_all'
 require 'tmpdir'
 
-require_all File.dirname(__FILE__) + '/freightrain'
+#HACK!!1!!
+require File.join(File.dirname(__FILE__), 'scaffolding', 'scaffolding.rb') if $scaffolding
+require_all File.join(File.dirname(__FILE__), 'freightrain')
