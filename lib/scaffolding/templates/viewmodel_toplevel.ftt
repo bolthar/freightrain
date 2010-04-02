@@ -1,4 +1,8 @@
 
 class $NAMEViewModel < FreightViewModel
 
+  def on_quit
+    Toolkit.quit
+  end
+
 end

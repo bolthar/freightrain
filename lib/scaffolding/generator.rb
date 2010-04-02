@@ -6,7 +6,9 @@ class Generator
     File.open(File.dirname(__FILE__) + "/templates/#{template}.ftt") do |file|
       template_content = file.lines.to_a.join
     end
-    template_content.gsub!("$NAME", options[:name])
+    options.keys.each do |param|
+      template_content.gsub!("$#{param}".upcase, "#{options[param]}")
+    end
     File.open(filename, 'w+') do |file|
       file << template_content
     end
