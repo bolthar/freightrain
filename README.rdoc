@@ -20,6 +20,7 @@ this will create a new directory
 containing the application stub. To run it, cd into the directory and:
 	ruby my_app.rb
 
+'ftrain' command not working? Look here => http://stackoverflow.com/questions/909673/gems-and-ubuntu-9-04
 Documentation coming soon.
 
 == WHERE DO I REPORT BUGS/FEATURE REQUESTS?
