@@ -9,7 +9,8 @@ Freightrain is a MVVM (model/view/viewmodel) framework for developing desktop ap
 (also make sure you have the latest ruby/gnome2 bindings installed (=> 0.19.3) ) 
 
 == HOW DO I USE IT?
-For now, you should take a look at http://github.com/bolthar/rubydraulica 
+For now, you should take a look at http://github.com/bolthar/rubydraulica
+
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
 To get a working stub, install the gem and then:
