@@ -1,4 +1,5 @@
-= freightrain - full speed ahead!
+= freightrain
+== full speed ahead!
 
 == WHAT IS IT?
 Freightrain is a MVVM (model/view/viewmodel) framework for developing desktop applications in ruby
