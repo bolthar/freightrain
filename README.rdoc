@@ -25,6 +25,13 @@ containing the application stub. To run it, cd into the directory and:
 Documentation coming soon.
 
 == WHERE DO I REPORT BUGS/FEATURE REQUESTS?
+
 andrea@andreadallera.com
+
+Would also be very appreciated:
+
+= Reports about installation issues (GTK2, ruby/gnome, ftrain)
+= Reports about different platforms (could you install on OSX? Let me know!)
+
 
 
