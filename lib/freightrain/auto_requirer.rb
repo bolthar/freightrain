@@ -10,15 +10,14 @@ module Freightrain
 
     require_all views_folder
     require_all viewmodels_folder
+    require_all services_folder if self.must_import?(services_folder)
+    require_all domain_folder   if self.must_import?(domain_folder)
+  
+  end
 
-    if File.directory?(services_folder) && Dir.entries(services_folder).length > 2
-      require_all services_folder
-    end
-    
-    if File.directory?(domain_folder) && Dir.entries(domain_folder).length > 2
-      require_all domain_folder
-    end
-    
+  private
+  def self.must_import?(directory)
+    return File.directory?(directory) && Dir.entries(directory).length > 2
   end
   
 end
