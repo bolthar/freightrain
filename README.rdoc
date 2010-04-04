@@ -30,8 +30,8 @@ andrea@andreadallera.com
 
 Would also be very appreciated:
 
-= Reports about installation issues (GTK2, ruby/gnome, ftrain)
-= Reports about different platforms (could you install on OSX? Let me know!)
+=== Reports about installation issues (GTK2, ruby/gnome, ftrain)
+=== Reports about different platforms (could you install on OSX? Let me know!)
 
 
 
