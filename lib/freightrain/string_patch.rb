@@ -24,4 +24,8 @@ class String
     return nil if self.to_convention.empty?
     return self.to_convention.to_sym
   end
+
+  def from_convention
+    return self.capitalize.gsub(/_./) { |s| s.delete("_").capitalize }
+  end
 end

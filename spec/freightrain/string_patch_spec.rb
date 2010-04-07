@@ -23,5 +23,21 @@ describe String do
     
   end
 
+  describe "from convention" do
+
+    it "should return empty string if string is empty" do
+      "".from_convention.should == ""
+    end
+
+    it "should return capitalized string if no underscore" do
+      "test".from_convention.should == "Test"
+    end
+
+    it "should replace each underscore and following letter with capitalized letter" do
+      "my_test_string".from_convention.should == "MyTestString"
+    end
+
+  end
+
 end
 

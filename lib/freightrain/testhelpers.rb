@@ -1,2 +1,3 @@
 
-require File.dirname(__FILE__) + '/testhelpers/container_helpers.rb'
+
+require_all File.join(File.dirname(__FILE__), 'testhelpers')
