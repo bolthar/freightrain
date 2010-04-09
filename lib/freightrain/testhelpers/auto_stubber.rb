@@ -25,5 +25,28 @@ module Freightrain
       return viewmodel
     end
     
+    def stub_service(name)
+      service_name  = "#{name}_service"
+      service_class = Object.const_get(service_name.from_convention)
+      service       = Freightrain[service_name.to_sym]
+      service_class.instance_variable_get(:@services).each do |subservice|
+        service_stub = stub_everything
+        service.instance_variable_set("@#{subservice}", service_stub)
+        service.class.send(:define_method, subservice) do
+          return instance_variable_get("@#{subservice}")
+        end
+      end
+      stub_signals = {}
+      service_class.instance_variable_get(:@signals).keys.each do |signal_name|
+        stub_signals[signal_name] = stub_everything
+      end
+      service.instance_variable_set(:@signals, stub_signals)
+      service_class.send(:define_method, :should_fire) do |signal_name|
+        return instance_variable_get(:@signals)[signal_name].expects(:fire)
+      end
+      return service
+    end
+
+    
   end
 end
