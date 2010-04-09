@@ -39,7 +39,10 @@ module Freightrain
     end
 
     def stub_services(service_host)
-      service_host.class.instance_variable_get(:@services).each do |service|
+      service_names = []
+      services      = service_host.class.instance_variable_get(:@services)
+      service_names = services.keys if services
+      service_names.each do |service|
         service_stub = stub_everything
         service_host.instance_variable_set("@#{service}", service_stub)
         service_host.class.send(:define_method, service) do
