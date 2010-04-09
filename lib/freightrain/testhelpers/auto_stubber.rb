@@ -33,7 +33,7 @@ module Freightrain
         end
       end
       region_host.instance_variable_set(:@regions, stub_regions)
-      region_host.send(:define_method, :should_change_region) do |region_name, viewmodel_name|
+      region_host.class.send(:define_method, :should_change_region) do |region_name, viewmodel_name|
         return region_host.expects(:change_region).with(region_name, viewmodel_name)
       end
     end
