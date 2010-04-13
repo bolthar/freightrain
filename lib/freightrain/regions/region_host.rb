@@ -15,7 +15,7 @@ module RegionHost
             return @regions[name].viewmodel
           end
           @regions[name].connect_to(self)
-        end        
+        end
       end
 
       def change_region(region_name, viewmodel_name)
@@ -26,7 +26,7 @@ module RegionHost
       end
 
     end
-    
+
   end
 
   def region(name, options = {})
@@ -35,3 +35,4 @@ module RegionHost
   end
 
 end
+
