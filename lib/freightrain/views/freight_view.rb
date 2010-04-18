@@ -27,6 +27,12 @@ module Freightrain
       return @builder.control
     end
 
+    def update
+      @signals.values.each { |signal| signal.stifle }
+      bindings.each { |binding| binding.update }
+      @signals.values.each { |signal| signal.unleash }
+    end
+
     def toplevel
       return control.toplevel
     end

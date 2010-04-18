@@ -8,12 +8,6 @@ module Freightrain
       return { :model => :prototype }
     end
 
-    def update
-      @signals.values.each { |signal| signal.stifle }
-      super
-      @signals.values.each { |signal| signal.unleash }
-    end
-    
     def initialize
       super
       @signals[:selected] = FreightSignal.new
