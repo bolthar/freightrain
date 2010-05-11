@@ -7,11 +7,6 @@ module Gtk
     attr_writer :viewmodel
     attr_reader :elements
 
-    def initialize
-      super
-      
-    end
-
     def setup
       @signals ||= {}
       selected_callback   = @signals[:selected]

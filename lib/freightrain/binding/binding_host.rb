@@ -27,9 +27,9 @@ module Freightrain
     end
 
     def update
-      bindings.each { |binding| binding.update}
+      bindings.each { |binding| binding.update }
     end
 
   end
-
+  
 end
