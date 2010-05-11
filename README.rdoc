@@ -8,10 +8,13 @@ Freightrain is a MVVM (model/view/viewmodel) framework for developing desktop ap
 == HOW DO I GET IT?
 	gem install freightrain
 
-(also make sure you have the latest ruby/gnome2 bindings installed (=> 0.19.3) ) 
+(also make sure you have the latest ruby/gnome2 bindings installed (=> 0.19.4) ) 
+WARNING! As of ruby/gnome2 0.19.4, the accessor "name", which freightrain depends on, is removed from Gtk::Widget.
+Long story short: you should get the latest version from the ruby/gnome2 svn. At the moment the problem is fixed in the ruby/gnome2 trunk. 
 
 == HOW DO I USE IT?
 For now, you should take a look at http://github.com/bolthar/rubydraulica
+(broken - callback handling doesn't work like that anymore. doc coming really really soon)
 
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
