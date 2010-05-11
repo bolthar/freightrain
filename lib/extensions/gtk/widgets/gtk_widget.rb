@@ -11,6 +11,10 @@ module Gtk
       return Gdk::Color.new(red, green, blue)
     end
 
+    def name
+      return self.builder_name
+    end
+
     def background=(color)
       self.modify_bg(Gtk::STATE_NORMAL, color_from_rgb(color))
     end
