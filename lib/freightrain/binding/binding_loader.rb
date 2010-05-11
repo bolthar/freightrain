@@ -17,6 +17,7 @@ module Freightrain
       return result[0] || nil
     end
 
+    #TODO: refactor, this needs a little cleanup, method does too much
     def each_binding
       return nil unless filename
       binding_collection = YAML.load_file(filename) || []

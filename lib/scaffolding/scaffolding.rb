@@ -1,4 +1,5 @@
 
+#TODO: find a good templating system to import and ditch this hack
 require "rubygems"
 require "require_all"
 

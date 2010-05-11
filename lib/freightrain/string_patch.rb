@@ -1,6 +1,7 @@
 
 class String
 
+  #TODO: maybe activesupport has something like this
   def to_convention
     return "" if self.empty?
     clone = self.clone

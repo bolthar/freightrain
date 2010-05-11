@@ -1,4 +1,5 @@
 
+#TODO: is this really necessary?
 class CallbackWrapper
 
   attr_reader :method

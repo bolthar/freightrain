@@ -1,6 +1,7 @@
 
 module Freightrain
 
+  #TODO: make this an extension
   class FreightElementViewModel < FreightViewModel
     extend ContainerHookable
 

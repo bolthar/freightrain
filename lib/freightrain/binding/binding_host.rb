@@ -14,7 +14,7 @@ module Freightrain
     def data_source=(source)
       bindings.each do |binding|
         binding.data_source = source
-        binding.update
+        binding.update #TODO: is this necessary?
       end
     end
     

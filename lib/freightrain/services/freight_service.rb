@@ -8,6 +8,7 @@ module Freightrain
     #SINGLETONS by default. That means if you consume
     #the same service from two different hosts, the LAST
     #host hooking to the callback will actually get the calls.
+    #TODO: make it transient?
     extend SignalHost
 
     def initialize

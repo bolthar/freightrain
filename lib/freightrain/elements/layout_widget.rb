@@ -1,4 +1,5 @@
 
+#TODO: remove this
 module Freightrain
   module LayoutWidget
     

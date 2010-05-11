@@ -1,6 +1,7 @@
 
 module Freightrain
 
+  #TODO: give this more responsibility
   class FreightSignal
 
     def fire(*args)

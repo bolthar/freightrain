@@ -5,6 +5,7 @@ module RegionHost
 
     klass.class_eval do
 
+      #TODO: too much stuff here
       def build_regions
         region_definitions = self.class.instance_variable_get(:@regions)
         region_definitions ||= []

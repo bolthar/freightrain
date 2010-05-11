@@ -1,5 +1,4 @@
 
-
 module Freightrain
 
   module ServiceHost
