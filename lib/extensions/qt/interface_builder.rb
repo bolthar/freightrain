@@ -33,6 +33,21 @@ module Freightrain
         end
       end
 
+      def connect_to_callback(widget, event_name, method)
+        begin          
+        @lightning_rod = Class.new(Qt::Widget)
+        @lightning_rod.slots("1" + event_name.name + "()")
+        @lightning_rod.send(:define_method, "1" + event_name.name) do
+#          arguments = [instance, *args].first(method.arity.abs)
+          method.call
+        end
+        decoy = @lightning_rod.new
+        widget.connect(SIGNAL("#{event_name}()"), decoy, SLOT(widget.name))
+        rescue Exception => ex
+          #TODO:handle this
+        end
+      end
+
       def connect_signals()
         @lightning_rod = Class.new(Qt::Widget)
         actions = get_all_objects(@toplevel).select { |action| action.kind_of? Qt::Action}
