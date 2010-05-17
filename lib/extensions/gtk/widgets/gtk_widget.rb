@@ -2,7 +2,7 @@
 module Gtk
 
   class Widget
-    include BindingBase
+    include Freightrain::BindingBase
 
     def color_from_rgb(string)
       red   = ((string[0..1].hex.to_i + 1) * 256) - 1

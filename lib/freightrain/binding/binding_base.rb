@@ -1,17 +1,19 @@
 
-module BindingBase
+module Freightrain
+  module BindingBase
 
-  def bind(binding_options)
-    @bindings ||= {}
-    binding = FreightBinding.new(self, binding_options)
-    #TODO: send out warning on override?
-    @bindings[binding_options[:property]] = binding
-    return binding
+    def bind(binding_options)
+      @bindings ||= {}
+      binding = FreightBinding.new(self, binding_options)
+      #TODO: send out warning on override?
+      @bindings[binding_options[:property]] = binding
+      return binding
+    end
+
+    def bindings
+      @bindings ||= {}
+      return @bindings.values
+    end
+
   end
-
-  def bindings
-    @bindings ||= {}
-    return @bindings.values
-  end
-
 end

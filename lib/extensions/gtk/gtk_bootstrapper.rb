@@ -1,6 +1,5 @@
 
 #TODO: use require all
-#TODO: use File.join for god's sake!
 
 require 'libglade2'
 require File.join(File.dirname(__FILE__), "widgets/gtk_image.rb")
