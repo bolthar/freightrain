@@ -75,7 +75,7 @@ module Freightrain
         return results.first
       end
 
-      def toplevel
+      def control
         return @toplevel
       end
 

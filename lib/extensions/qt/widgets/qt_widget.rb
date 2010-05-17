@@ -4,10 +4,6 @@ module Qt
 
   class Widget
 
-    def name
-      return self.objectName
-    end
-    
     def elements=(enumerable)
       delta = enumerable.length - @elements.length
       @height_factor = @control.new.control.height unless @height_factor
