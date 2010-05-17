@@ -1,5 +1,4 @@
 
-#TODO: move in freightrain
 module BindingBase
 
   def bind(binding_options)
