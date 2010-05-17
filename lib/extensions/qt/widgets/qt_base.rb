@@ -12,6 +12,14 @@ module Qt
     def name
       return self.objectName
     end
+
+    def signals
+      return {}
+    end
+
+    def get_event_signature(event_name)
+      return signals[event_name.to_sym] || "#{event_name}()"
+    end
     
   end
 
