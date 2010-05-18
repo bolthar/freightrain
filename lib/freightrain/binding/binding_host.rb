@@ -19,7 +19,7 @@ module Freightrain
     end
     
     def bindings
-      return widgets.each.map { |widget| widget.bindings }.flatten
+      return widgets.map { |widget| widget.bindings }.flatten
     end
 
     def commit
