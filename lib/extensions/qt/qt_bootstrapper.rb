@@ -1,6 +1,7 @@
 
 require 'Qt4'
-#require 'qtuitools'
+require 'qtuitools' unless RUBY_PLATFORM =~ /windows/
+
 require File.join(File.dirname(__FILE__), "widgets/qt_base.rb")
 require File.join(File.dirname(__FILE__), "widgets/qt_widget.rb")
 require File.join(File.dirname(__FILE__), "widgets/qt_abstract_button.rb")
