@@ -21,6 +21,19 @@ module Qt
       return signals[event_name.to_sym] || "#{event_name}()"
     end
     
+    def foreground=(val)
+      palette = self.palette
+      palette.setColor(Qt::Palette.Foreground, Qt::Color.new(val[0], val[1], val[2]))
+      self.palette = palette
+    end
+
+    def background=(val)
+      palette = self.palette
+      palette.setColor(Qt::Palette.Background, Qt::Color.new(val[0], val[1], val[2]))
+      self.palette = palette
+    end
+
+    
   end
 
 end

@@ -3,7 +3,7 @@ module Qt
 
   class Widget
     include Freightrain::LayoutWidget
-    
+
     def setup
       @signals ||= {}
       selected_callback   = @signals[:selected]
