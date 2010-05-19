@@ -74,7 +74,6 @@ module Qt
     def bind(options)
       if options[:property].to_sym == :elements
         @viewmodel          = (options[:element].to_s + "_element_view_model").to_sym
-        @signals            = options[:signals]
         options[:force]     = true
       end
       super(options)
