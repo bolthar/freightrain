@@ -19,10 +19,10 @@ module Qt
 
     def elements=(enumerable)
       setup unless @ready
-      delta = enumerable.length - @elements.length
+      delta = enumerable.count - @elements.count
       @height_factor = self.get_new_item.control.height unless @height_factor
-      height = @elements.length
-      delta.abs.times do
+      height = @elements.count
+      delta.abs.times do        
         if delta > 0
           item = self.get_new_item
           item.control.geometry = Qt::Rect.new(
