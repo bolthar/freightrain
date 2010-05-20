@@ -4,10 +4,10 @@ module Gtk
   class Widget
     include Freightrain::BindingBase
 
-    def color_from_rgb(string)
-      red   = ((string[0..1].hex.to_i + 1) * 256) - 1
-      green = ((string[2..3].hex.to_i + 1) * 256) - 1
-      blue  = ((string[4..5].hex.to_i + 1) * 256) - 1
+    def color_from_rgb(rgb_array)
+      red   = rgb_array[0] * 255
+      green = rgb_array[1] * 255
+      blue  = rgb_array[2] * 255
       return Gdk::Color.new(red, green, blue)
     end
 
