@@ -20,10 +20,9 @@ module Freightrain
         file.open(Qt::File::ReadOnly)
         @toplevel = @builder.load(file)
         file.close
-        widgets = get_all_objects(@toplevel).select do |widget|
+        return get_all_objects(@toplevel).select do |widget|
           widget.objectName && widget.objectName != ""
-        end.map
-        return widgets
+        end
       end
 
       def create_object_accessors(widgets, view)
@@ -33,17 +32,9 @@ module Freightrain
         end
       end
 
-      def connect_to_callback(widget, event_name, method)
-        begin
-        decoy_class = Class.new(Qt::Widget)
-        decoy_class.slots("#{widget.name}()")
-        decoy_class.send(:define_method, widget.name) do |*args|
-          method.call(*args)
-        end
-        decoy = decoy_class.new        
-        widget.connect(SIGNAL(widget.get_event_signature(event_name)), decoy, widget.name.to_sym)
-        rescue Exception => ex
-#          p ex
+      def connect_to_callback(widget, event_name, callback)
+        widget.connect(SIGNAL(widget.get_event_signature(event_name))) do |*args|
+          callback.call(*args)
         end
       end
 

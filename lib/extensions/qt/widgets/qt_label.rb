@@ -12,6 +12,10 @@ module Qt
       self.pixmap = image
       self.resize(self.pixmap.size)
     end
+
+    def text=(value)
+      super(value) unless value == nil
+    end
     
   end
 

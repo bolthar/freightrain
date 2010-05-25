@@ -1,8 +1,8 @@
 
 module Qt
 
-  class Widget
-    include Freightrain::LayoutWidget
+  class VBoxLayout
+   include Freightrain::LayoutWidget
 
     def setup
       @signals ||= {}
@@ -19,33 +19,21 @@ module Qt
 
     def elements=(enumerable)
       setup unless @ready
-      delta = enumerable.count - @elements.count
-      @height_factor = self.get_new_item.control.height unless @height_factor
-      height = @elements.count
-      delta.abs.times do        
-        if delta > 0
-          item = self.get_new_item
-          item.control.geometry = Qt::Rect.new(
-            0,
-            item.control.height * height,
-            item.control.width,
-            item.control.height
-          )
-          item.control.setParent(self)
-          item.control.show
-          @elements << item
-          height += 1
-        else
-          item = self.children.last
-          item.control.setParent(nil)
-          @elements.delete_if {|element| element.control == item }
-          item.control = nil
-        end
+      #with datamapper+qt #length doesn't work properly (freeze), while #count does.
+      #no problems at all when using gtk+
+      #TODO: find out why this happens
+#      @height_factor = self.get_new_item.control.height unless @height_factor
+      @elements.each do |item|
+        self.removeWidget(item.control)
+        item.control.dispose
       end
-      self.setMinimumHeight(@elements.length * @height_factor)
-      self.show
-      @elements.each do |element|
-        element.value = enumerable[@elements.index(element)]
+      @elements.clear
+      enumerable.each do |value|
+        item = self.get_new_item
+        item.value = value
+        self.addWidget(item.control)
+        item.control.show
+        @elements << item
       end
     end
 
@@ -80,5 +68,4 @@ module Qt
     end
 
   end
-
 end

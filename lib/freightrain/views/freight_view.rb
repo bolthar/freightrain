@@ -7,9 +7,6 @@ module Freightrain
     extend SignalHost
     extend ContainerHookable
 
-#    attr_reader :widgets
-
-    #TODO: CRITICAL make it toolkit-agnostic
     def widgets
       return @widgets.select { |widget| widget.kind_of? BindingBase }
     end
