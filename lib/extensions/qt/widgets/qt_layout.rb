@@ -19,10 +19,6 @@ module Qt
 
     def elements=(enumerable)
       setup unless @ready
-      #with datamapper+qt #length doesn't work properly (freeze), while #count does.
-      #no problems at all when using gtk+
-      #TODO: find out why this happens
-#      @height_factor = self.get_new_item.control.height unless @height_factor
       @elements.each do |item|
         self.removeWidget(item.control)
         item.control.dispose

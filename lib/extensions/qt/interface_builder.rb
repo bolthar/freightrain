@@ -7,10 +7,6 @@ module Freightrain
 
       attr_reader :toplevel
 
-      def initialize
-        @builder = Qt::UiLoader.new
-      end
-
       def file_found?(file_name)
         return get_ui_files(file_name)
       end
@@ -18,7 +14,9 @@ module Freightrain
       def create_objects_from_file(file_name)
         file = Qt::File.new(get_ui_files(file_name))
         file.open(Qt::File::ReadOnly)
-        @toplevel = @builder.load(file)
+        builder = Qt::UiLoader.new
+        @toplevel = builder.load(file)
+        builder.dispose
         file.close
         return get_all_objects(@toplevel).select do |widget|
           widget.objectName && widget.objectName != ""
