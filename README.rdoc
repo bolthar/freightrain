@@ -27,6 +27,7 @@ containing the application stub. To run it, cd into the directory and:
 
 'ftrain' command not working? Look here => http://stackoverflow.com/questions/909673/gems-and-ubuntu-9-04
 
+
 Documentation coming soon.
 
 == WHERE DO I REPORT BUGS/FEATURE REQUESTS?
@@ -38,5 +39,7 @@ Would also be very appreciated:
 === Reports about installation issues (GTK2, ruby/gnome, ftrain)
 === Reports about different platforms (could you install on OSX? Let me know!)
 
-
+= THANKS TO:
+== Jan Pliz 
+For his help with the qtruby bindings
 
