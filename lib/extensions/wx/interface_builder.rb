@@ -29,7 +29,7 @@ module Freightrain
 
       def create_object_accessors(widgets, view)
         widgets.each do |widget|
-          view.instance_eval "def #{name}; @widgets.select { |w| w.name == '#{widget.name}'  }.first ;end;"
+          view.instance_eval "def #{widget.name}; @widgets.select { |w| w.name == '#{widget.name}'  }.first ;end;"
         end
       end
 
