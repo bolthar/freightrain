@@ -4,6 +4,15 @@ module Gtk
   class Widget
     include Freightrain::BindingBase
 
+    #made for easier compatibility (other toolkits use show/hide)
+    def show
+      self.visible = true
+    end
+
+    def hide
+      self.visible = false
+    end
+
     def color_from_rgb(rgb_array)
       red   = rgb_array[0] * 255
       green = rgb_array[1] * 255

@@ -40,7 +40,7 @@ module Freightrain
     end
 
     def show      
-      @view.control.visible = true
+      @view.control.show
       @regions.values.each do |region|
         region.on_show(@view)
       end
@@ -48,7 +48,7 @@ module Freightrain
     end
 
     def hide
-      @view.control.visible = false
+      @view.control.hide
     end
 
   end
