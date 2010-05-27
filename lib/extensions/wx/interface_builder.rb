@@ -1,3 +1,4 @@
+require 'rexml/document'
 
 module Freightrain
   module Toolkit
@@ -21,8 +22,9 @@ module Freightrain
       end
 
       def create_objects_from_file(file_name)
-        builder = Wx::XmlResource.new(get_xrc_files(file_name))
-        toplevel_name = get_toplevel_name(file_name)
+        xrc_file = get_xrc_files(file_name)
+        builder = Wx::XmlResource.new(xrc_file)
+        toplevel_name = get_toplevel_name(xrc_file)
         @toplevel = builder.load_frame(nil, toplevel_name)
         return get_all_objects(@toplevel)
       end
@@ -34,10 +36,13 @@ module Freightrain
       end
 
       def connect_to_callback(widget, event_name, callback)
-        connector_method = widget.method("evt_#{event_name}".to_sym)
-        args = [widget]
-        connector_method.call(*args.take(connector_method.arity)) do |event|
-          callback.call(*[event].take(callback.arity))
+        connector_method_name = "evt_#{event_name}".to_sym
+        if widget.respond_to? connector_method_name
+          connector_method = widget.method(connector_method_name)
+          args = [widget]
+          connector_method.call(*args.take(connector_method.arity.abs - 1)) do |event|
+            callback.call(*[event].take(callback.arity))
+          end
         end
       end
 
@@ -55,7 +60,10 @@ module Freightrain
       end
 
       def get_toplevel_name(file_name)
-        return "my_frame"
+        File.open(file_name, "r") do |file|
+          doc = REXML::Document.new(file)
+          return doc.root.children[1].attributes['name']
+        end
       end
 
     end
