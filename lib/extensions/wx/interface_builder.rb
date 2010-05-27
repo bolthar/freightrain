@@ -34,9 +34,11 @@ module Freightrain
       end
 
       def connect_to_callback(widget, event_name, callback)
-#        widget.connect(SIGNAL(widget.get_event_signature(event_name))) do |*args|
-#          callback.call(*args)
-#        end
+        connector_method = widget.method("evt_#{event_name}".to_sym)
+        args = [widget]
+        connector_method.call(*args.take(connector_method.arity)) do |event|
+          callback.call(*[event].take(callback.arity))
+        end
       end
 
       def control
