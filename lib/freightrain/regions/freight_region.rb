@@ -16,7 +16,7 @@ module Freightrain
 
     def on_show(view)
       container = view.send(@container)
-      container.plug_in(@viewmodel.show)
+      container.plug_in(@viewmodel.view.control)
     end
 
     def connect_to(host)

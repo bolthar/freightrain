@@ -43,6 +43,7 @@ module Freightrain
       @view.control.show
       @regions.values.each do |region|
         region.on_show(@view)
+        region.viewmodel.show
       end
       return @view.control
     end
@@ -51,5 +52,9 @@ module Freightrain
       @view.control.hide
     end
 
+    def view
+      return @view
+    end
+    
   end
 end

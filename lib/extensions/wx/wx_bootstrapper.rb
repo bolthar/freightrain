@@ -3,6 +3,7 @@ require 'wx'
 
 require File.join(File.dirname(__FILE__), "interface_builder.rb")
 require File.join(File.dirname(__FILE__), "dialog_helper.rb")
+require File.join(File.dirname(__FILE__), "widgets", "wx_sizer.rb")
 
 module Freightrain
 
