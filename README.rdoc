@@ -15,7 +15,7 @@ Long story short: you should get the latest version from the ruby/gnome2 svn. At
 == HOW DO I USE IT?
 For now, you should take a look at http://github.com/bolthar/rubydraulica
 (broken - callback handling doesn't work like that anymore. doc coming really really soon)
-
+An up to date example : http://github.com/bolthar/intersect
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
 To get a working stub, install the gem and then:
