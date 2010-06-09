@@ -11,7 +11,7 @@ module Freightrain
     return base_path
   end
 
-  def load_extensions!()
+  def load_extensions!
     begin
       require File.dirname(__FILE__) + "/../extensions/#{@toolkit.to_s}/#{@toolkit.to_s}_bootstrapper.rb"
     rescue Exception => ex
