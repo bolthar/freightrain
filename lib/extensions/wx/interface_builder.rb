@@ -25,7 +25,12 @@ module Freightrain
         xrc_file = get_xrc_files(file_name)
         builder = Wx::XmlResource.new(xrc_file)
         toplevel_name = get_toplevel_name(xrc_file)
-        @toplevel = builder.load_frame(nil, toplevel_name)
+        if toplevel_name == "panel_1"
+          @toplevel = builder.load_panel(Wx::Frame.new(nil), "panel_1")
+        else
+          @toplevel = builder.load_frame(nil, toplevel_name)
+        end
+        
         return get_all_objects(@toplevel)
       end
 
