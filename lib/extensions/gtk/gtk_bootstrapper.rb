@@ -1,7 +1,7 @@
 
 #TODO: use require all
 
-require 'libglade2'
+require 'gtk2'
 require File.join(File.dirname(__FILE__), "widgets/gtk_image.rb")
 require  File.join(File.dirname(__FILE__), "widgets/gtk_toggle_button.rb")
 require  File.join(File.dirname(__FILE__), "widgets/gtk_toggle_tool_button.rb")
