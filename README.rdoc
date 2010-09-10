@@ -6,11 +6,16 @@ full speed ahead!
 Freightrain is a MVVM (model/view/viewmodel) framework for developing desktop applications in ruby
 
 == HOW DO I GET IT?
+
+If you plan to use the gtk+ extensions (the best supported at the moment), you should also have the gtk2 gem installed. Before installing the gem you should also have the dev library for pango, cairo, glib and gtk2 installed. On ubuntu you can get all you need with:
+
+	sudo apt-get install libgnome2-dev
+	gem install gtk2
+
+When you're done with that you can install freightrain with:
+
 	gem install freightrain
 
-(also make sure you have the latest ruby/gnome2 bindings installed (=> 0.19.4) ) 
-WARNING! As of ruby/gnome2 0.19.4, the accessor "name", which freightrain depends on, is removed from Gtk::Widget.
-Long story short: you should get the latest version from the ruby/gnome2 svn. At the moment the problem is fixed in the ruby/gnome2 trunk. 
 
 == HOW DO I USE IT?
 For now, you should take a look at http://github.com/bolthar/rubydraulica
