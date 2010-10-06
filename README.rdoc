@@ -23,15 +23,15 @@ For now, you should take a look at http://github.com/bolthar/rubydraulica
 An up to date example : http://github.com/bolthar/intersect
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
-To get a working stub, install the gem and then:
+After installing the freightrain gem using the above instructions, to get a working stub open a terminal and type in:
 	ftrain app my_app
 this will create a new directory 
 	my_app
-containing the application stub. To run it, cd into the directory and:
+containing the application stub. To run the stub application, cd into the directory and type:
 	ruby my_app.rb
+this should pop up an empty window with the title 'my_app'.
 
 'ftrain' command not working? Look here => http://stackoverflow.com/questions/909673/gems-and-ubuntu-9-04
-
 
 Documentation coming soon.
 
