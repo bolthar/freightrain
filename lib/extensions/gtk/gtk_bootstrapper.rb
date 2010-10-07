@@ -3,17 +3,17 @@
 
 require 'gtk2'
 require File.join(File.dirname(__FILE__), "widgets/gtk_image.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_toggle_button.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_toggle_tool_button.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_widget.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_combo_box.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_calendar.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_treeview.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_treeviewcolumn.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_layout.rb")
-require  File.join(File.dirname(__FILE__), "widgets/gtk_statusicon.rb")
-require  File.join(File.dirname(__FILE__), "interface_builder.rb")
-require  File.join(File.dirname(__FILE__), "dialog_helper.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_toggle_button.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_toggle_tool_button.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_widget.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_combo_box.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_calendar.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_treeview.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_treeviewcolumn.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_layout.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_statusicon.rb")
+require File.join(File.dirname(__FILE__), "interface_builder.rb")
+require File.join(File.dirname(__FILE__), "dialog_helper.rb")
 
 module Freightrain
   
