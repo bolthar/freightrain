@@ -18,9 +18,8 @@ When you're done with that you can install freightrain with:
 
 
 == HOW DO I USE IT?
-For now, you should take a look at http://github.com/bolthar/rubydraulica
-(broken - callback handling doesn't work like that anymore. doc coming really really soon)
-An up to date example : http://github.com/bolthar/intersect
+There are small examples in the /examples repository folder
+An up to date larger example : http://github.com/bolthar/intersect
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
 After installing the freightrain gem using the above instructions, to get a working stub open a terminal and type in:
