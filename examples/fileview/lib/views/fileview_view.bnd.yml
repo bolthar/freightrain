@@ -1,0 +1,4 @@
+
+file:
+  property : buffer.text
+  path     : file_content

@@ -1,0 +1,5 @@
+
+count:
+  property  : label
+  path      : count
+  converter : integer
