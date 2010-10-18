@@ -9,7 +9,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'freightrain'
-  s.version = '0.6.9'
+  s.version = '0.6.10'
   s.add_dependency('require_all', '>= 1.1.0')
   s.add_dependency('needle', '>= 1.3.0')
   s.has_rdoc = false

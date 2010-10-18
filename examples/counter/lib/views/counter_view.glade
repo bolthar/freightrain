@@ -21,7 +21,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="up">
+          <object class="GtkButton" id="increase">
             <property name="label" translatable="yes">Up!</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
