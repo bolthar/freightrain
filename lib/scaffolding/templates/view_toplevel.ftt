@@ -1,6 +1,6 @@
 
 class $NAMEView < FreightView
 
-  signal :quit, :forwards => "$TOPLEVEL.destroy"
+  signal :quit, :forwards => "$TOPLEVEL_window.destroy"
 
 end
