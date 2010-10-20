@@ -50,5 +50,5 @@ Would also be very appreciated:
 For his help with the qtruby bindings
 
 == Eric Cunningham
-For bug reports and fixing the instructions
+For bug reports, fixing the instructions, troubleshooting and building the tutorial at http://sites.google.com/site/freightrainlib
 
