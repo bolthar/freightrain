@@ -19,7 +19,8 @@ When you're done with that you can install freightrain with:
 
 
 == HOW DO I USE IT?
-There are small examples in the /examples repository folder
+There are small examples in the /examples repository folder. There is also a tutorial (under construction, by Eric Cunningham) here : http://sites.google.com/site/freightrainlib
+
 An up to date larger example : http://github.com/bolthar/intersect
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
