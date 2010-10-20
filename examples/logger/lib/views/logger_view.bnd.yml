@@ -1,0 +1,11 @@
+
+execute:
+  - property : sensitive
+    path     : idle
+  - property : label
+    path     : state
+  
+output:
+  property : buffer.text
+  path     : program_output
+  
