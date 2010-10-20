@@ -1,7 +1,7 @@
 
 class OutputService < FreightService
-  
-  signal :write 
+
+  signal :write
   
   attr_reader :program_output
   

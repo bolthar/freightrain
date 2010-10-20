@@ -8,4 +8,3 @@ execute:
 output:
   property : buffer.text
   path     : program_output
-  

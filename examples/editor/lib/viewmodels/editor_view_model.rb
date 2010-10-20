@@ -1,5 +1,5 @@
 
-class LoggerViewModel < FreightViewModel
+class EditorViewModel < FreightViewModel
 
   service :output
   service :program
@@ -18,13 +18,15 @@ class LoggerViewModel < FreightViewModel
     Toolkit.quit
   end
   
-  def on_run
+  def on_run(code)
+    @program.code = code
     @output.reset
     @idle = false
     @state = "Running..."
     @view.update    
     Thread.new do 
       @program.run
+      @view.update
     end
   end
   
@@ -41,6 +43,5 @@ class LoggerViewModel < FreightViewModel
   def program_output
     return @output.program_output
   end
-    
 
 end
