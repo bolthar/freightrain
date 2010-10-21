@@ -9,11 +9,11 @@ class CallbackWrapper
   end
 
   def target
-    return @method.name.split("_on_")[0]
+    return @method.name.to_s.split("_on_")[0]
   end
 
   def event
-    return @method.name.split("_on_")[1].gsub("_", "-")
+    return @method.name.to_s.split("_on_")[1].gsub("_", "-")
   end
 
 end
