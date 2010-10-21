@@ -12,7 +12,7 @@
         <property name="border_width">5</property>
         <property name="spacing">5</property>
         <child>
-          <object class="GtkLabel" id="count">
+          <object class="GtkLabel" id="counterLabel">
             <property name="visible">True</property>
             <property name="label" translatable="yes">0</property>
           </object>
@@ -21,7 +21,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="increase">
+          <object class="GtkButton" id="upButton">
             <property name="label" translatable="yes">Up!</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>

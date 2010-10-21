@@ -12,7 +12,7 @@ class CounterViewModel < FreightViewModel
     Toolkit.quit
   end
 
-  def on_up
+  def on_up_signal
     @count += 1
     @view.update
   end
