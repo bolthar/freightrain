@@ -15,6 +15,11 @@ require File.join(File.dirname(__FILE__), "widgets/gtk_statusicon.rb")
 require File.join(File.dirname(__FILE__), "interface_builder.rb")
 require File.join(File.dirname(__FILE__), "dialog_helper.rb")
 
+module Gtk
+
+  
+end
+
 module Freightrain
   
   module Toolkit
