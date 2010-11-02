@@ -10,6 +10,7 @@ Freightrain is a MVVM (model/view/viewmodel) framework for developing desktop ap
 If you plan to use the gtk+ extensions (the best supported at the moment), you should also have the gtk2 gem installed. Before installing the gem you should also have the dev library for pango, cairo, glib and gtk2 installed. On ubuntu you can get all you need with:
 
 	sudo apt-get install libgtk2.0-dev
+	sudo apt-get install libruby1.8 ruby1.8-dev
 	gem install gtk2
 
 When you're done with that you can install freightrain with:
@@ -18,9 +19,9 @@ When you're done with that you can install freightrain with:
 
 
 == HOW DO I USE IT?
-For now, you should take a look at http://github.com/bolthar/rubydraulica
-(broken - callback handling doesn't work like that anymore. doc coming really really soon)
-An up to date example : http://github.com/bolthar/intersect
+There are small examples in the /examples repository folder. There is also a tutorial (under construction, by Eric Cunningham) here : http://sites.google.com/site/freightrainlib
+
+An up to date larger example : http://github.com/bolthar/intersect
 Note that the project is currently in ALPHA state. Use it in production at your own risk :-) 
 
 After installing the freightrain gem using the above instructions, to get a working stub open a terminal and type in:
@@ -49,5 +50,5 @@ Would also be very appreciated:
 For his help with the qtruby bindings
 
 == Eric Cunningham
-For bug reports and fixing the instructions
+For bug reports, fixing the instructions, troubleshooting and building the tutorial at http://sites.google.com/site/freightrainlib
 

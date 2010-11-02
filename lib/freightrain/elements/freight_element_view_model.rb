@@ -20,8 +20,9 @@ module Freightrain
       return @value
     end
 
-    def on_selected
+    def on_selected      
       fire :selected, @value
+      @view.update
     end
 
     def control

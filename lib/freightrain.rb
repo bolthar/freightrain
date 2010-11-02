@@ -1,7 +1,6 @@
 
 require 'rubygems'
 
-require 'needle'
 require 'require_all'
 require 'tmpdir'
 

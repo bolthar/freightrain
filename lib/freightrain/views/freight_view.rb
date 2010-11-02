@@ -51,7 +51,7 @@ module Freightrain
       @widgets.select{ |widget| widget.is_a? LayoutWidget }.each do |widget|
         method_prefix = widget.name + "_on_"
         self.methods.select { |method_name| method_name =~ /#{method_prefix}/}.each do |method_name|
-          signal_name = method_name.sub(method_prefix, "")
+          signal_name = method_name.to_s.sub(method_prefix, "")
           widget.add_signal_callback(signal_name.to_sym, method(method_name))
         end
       end
