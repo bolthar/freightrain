@@ -1,5 +1,5 @@
 
-class Color
+class FreightColor
 
   @@colors = {}
   @@colors[:red]   = [255, 0, 0]

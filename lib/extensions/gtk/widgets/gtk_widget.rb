@@ -32,7 +32,7 @@ module Gtk
 
     def get_color(symbol_or_array)
       if symbol_or_array.kind_of? Symbol
-        rgb_array = Color[symbol_or_array]
+        rgb_array = FreightColor[symbol_or_array]
       else
         rgb_array = symbol_or_array
       end
