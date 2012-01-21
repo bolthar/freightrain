@@ -53,7 +53,13 @@ module Gtk
 
     def plug_in(region_widget)
       self.remove(self.children.first) unless self.children.empty?
-      self << region_widget
+      target = nil
+      if region_widget.class == Gtk::Window
+        target = region_widget.children.first
+      else
+        target = region_widget
+      end
+      self << target 
     end
 
   end
