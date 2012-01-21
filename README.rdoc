@@ -17,8 +17,18 @@ When you're done with that you can install freightrain with:
 
 	gem install freightrain
 
+== QUICK START
+
+	gem install freightrain
+	gem install gtk2
+	ftrain app testapp
+	cd testapp
+	ruby testapp.rb
+
+	after that, you should see an empty window.
 
 == HOW DO I USE IT?
+
 There are small examples in the /examples repository folder. There is also a tutorial (under construction, by Eric Cunningham) here : http://sites.google.com/site/freightrainlib
 
 An up to date larger example : http://github.com/bolthar/intersect
