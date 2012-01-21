@@ -20,10 +20,15 @@ When you're done with that you can install freightrain with:
 == QUICK START
 
 	gem install freightrain
+
 	gem install gtk2
+
 	ftrain app testapp
+
 	cd testapp
+
 	ruby testapp.rb
+
 
 	after that, you should see an empty window.
 
