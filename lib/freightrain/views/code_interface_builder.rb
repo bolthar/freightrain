@@ -14,7 +14,8 @@ module Freightrain
     def create_objects_from_file(file_name)
       code_widgets = eval_script(file_found?(file_name))
       code_widgets.each do |k, v|
-        v.builder_name = k
+        v.builder_name = k.to_s
+        v.show
       end #HACK - gtk only
       @widgets = code_widgets.values
       @builder.instance_variable_set(:@control, @widgets.first.toplevel) ##HACK: breaking toolkit agnostic
