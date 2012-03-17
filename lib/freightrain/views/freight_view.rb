@@ -43,13 +43,8 @@ module Freightrain
       return self.class.instance_variable_get(:@builder_to_use) || Freightrain::Toolkit.default_builder
     end
 
-    def define_interface
-      #none by default
-    end
-
     def initialize()
       create_signals
-      define_interface
       @widgets = []
       if(Freightrain.toolkit)
         self.class.instance_eval("include Toolkit::DialogHelper")
