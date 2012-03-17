@@ -8,7 +8,7 @@ module Gtk
       @defaults = {} unless @defaults
       return @defaults
     end
-    
+
     #made for easier compatibility (other toolkits use show/hide)
     def show
       self.visible = true

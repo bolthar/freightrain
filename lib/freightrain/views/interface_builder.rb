@@ -12,7 +12,10 @@ module Freightrain
         @widgets = builder.create_objects_from_file(file_name)
         builder.create_object_accessors(@widgets, self)
         self.get_all_callbacks.each do |callback|
+          p callback.target, callback.event, callback.method
           target = @widgets.select { |widget| callback.target == widget.name }.first
+          p @widgets
+          p target
           builder.connect_to_callback(target, callback.event, callback.method) if target
         end
       end

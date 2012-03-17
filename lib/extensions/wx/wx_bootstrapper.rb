@@ -30,6 +30,10 @@ module Freightrain
       app.main_loop
     end
 
+    def self.default_toolkit
+      return :none
+    end
+
   end
 
 end

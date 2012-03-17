@@ -20,6 +20,10 @@ module Freightrain
       yield
       app.exec
     end
+
+    def self.default_toolkit
+      return :none
+    end
     
   end
 

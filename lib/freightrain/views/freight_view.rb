@@ -35,12 +35,29 @@ module Freightrain
       return control.toplevel
     end
 
+    def self.builder(config_value)
+      @builder_to_use = config_value
+    end
+
+    def builder
+      return self.class.instance_variable_get(:@builder_to_use) || Freightrain::Toolkit.default_builder
+    end
+
+    def define_interface
+      #none by default
+    end
+
     def initialize()
       create_signals
+      define_interface
       @widgets = []
       if(Freightrain.toolkit)
         self.class.instance_eval("include Toolkit::DialogHelper")
-        @builder = Freightrain.get_interface_builder
+        if builder != :none
+          @builder = Freightrain.get_interface_builder
+        else 
+          @builder = CodeInterfaceBuilder.new
+        end  
         load_from_file(self.class.name, @builder)
       end
       hook_to_layout_widgets()

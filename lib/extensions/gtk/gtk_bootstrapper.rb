@@ -33,6 +33,10 @@ module Freightrain
       Gtk.main_quit
     end
 
+    def self.default_builder
+      return :glade
+    end
+
   end
 
 end
