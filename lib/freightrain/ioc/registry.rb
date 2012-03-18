@@ -14,6 +14,7 @@ module Freightrain
     end
     
     def resolve(class_name)
+      raise "Could not instance class #{class_name}" unless @classes.has_key?(class_name)
       return @cache[class_name] || @classes[class_name].new
     end
     
