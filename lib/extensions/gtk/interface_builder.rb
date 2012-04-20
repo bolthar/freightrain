@@ -58,7 +58,7 @@ module Freightrain
       def replace_faulty_gtkboxes(xml)
         document = REXML::Document.new(xml)
         document.elements.each("//object[@class='GtkBox']") do |box|
-          substitute_class = nil
+          substitute_class = "GtkHBox"
           box.elements.each("property[@name='orientation']") do |orientation|
             substitute_class = orientation == "vertical" ? "GtkVBox" : "GtkHBox"
           end
