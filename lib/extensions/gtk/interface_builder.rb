@@ -1,3 +1,4 @@
+require 'rexml/document'
 
 module Freightrain
 
@@ -14,7 +15,9 @@ module Freightrain
       end
 
       def create_objects_from_file(file_name)
-        @builder.add_from_file(get_glade_file(file_name))
+        file = get_glade_file(file_name)
+        corrected_xml = replace_faulty_gtkboxes(File.read(file))
+        @builder.add_from_string(corrected_xml)
         objects = @builder.objects        
         if objects.first.respond_to? :toplevel
           @control = objects.first.toplevel
@@ -50,6 +53,19 @@ module Freightrain
           file_name.to_convention + ".glade")
         results = Dir.glob(search_path)
         return results.first
+      end
+      
+      def replace_faulty_gtkboxes(xml)
+        document = REXML::Document.new(xml)
+        document.elements.each("//object[@class='GtkBox']") do |box|
+          substitute_class = nil
+          box.elements.each("property[@name='orientation']") do |orientation|
+            substitute_class = orientation == "vertical" ? "GtkVBox" : "GtkHBox"
+          end
+          p "here3"
+          box.attributes["class"] = substitute_class
+        end
+        return document.to_s
       end
 
       def control
