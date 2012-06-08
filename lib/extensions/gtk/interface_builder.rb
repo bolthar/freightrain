@@ -16,7 +16,8 @@ module Freightrain
 
       def create_objects_from_file(file_name)
         file = get_glade_file(file_name)
-        corrected_xml = replace_faulty_gtkboxes(File.read(file))
+        corrected_xml = replace_faulty_containers(File.read(file), "GtkBox", "GtkHBox", "GtkVBox")
+        corrected_xml = replace_faulty_containers(corrected_xml, "GtkPaned", "GtkHPaned", "GtkVPaned")
         @builder.add_from_string(corrected_xml)
         objects = @builder.objects        
         if objects.first.respond_to? :toplevel
@@ -55,14 +56,13 @@ module Freightrain
         return results.first
       end
       
-      def replace_faulty_gtkboxes(xml)
+      def replace_faulty_containers(xml, abstract_class, hclass, vclass)
         document = REXML::Document.new(xml)
-        document.elements.each("//object[@class='GtkBox']") do |box|
-          substitute_class = "GtkHBox"
+        document.elements.each("//object[@class='#{abstract_class}']") do |box|
+          substitute_class = hclass 
           box.elements.each("property[@name='orientation']") do |orientation|
-            substitute_class = orientation == "vertical" ? "GtkVBox" : "GtkHBox"
+            substitute_class = orientation == "vertical" ? vclass : hclass 
           end
-          p "here3"
           box.attributes["class"] = substitute_class
         end
         return document.to_s
