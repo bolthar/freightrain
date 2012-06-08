@@ -18,10 +18,14 @@ module Freightrain
         file = get_glade_file(file_name)
         corrected_xml = replace_faulty_containers(File.read(file), "GtkBox", "GtkHBox", "GtkVBox")
         corrected_xml = replace_faulty_containers(corrected_xml, "GtkPaned", "GtkHPaned", "GtkVPaned")
+        corrected_xml = replace_faulty_containers(corrected_xml, "GtkScale", "GtkHScale", "GtkVScale")
         @builder.add_from_string(corrected_xml)
         objects = @builder.objects        
         if objects.first.respond_to? :toplevel
           @control = objects.first.toplevel
+        end
+        objects.each do |obj|
+          obj.created_callback if obj.respond_to? :created_callback
         end
         return objects.select do |obj|
           obj.respond_to? :name

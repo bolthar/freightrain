@@ -8,7 +8,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'freightrain'
-  s.version = '0.8.4'
+  s.version = '0.8.5'
   s.add_dependency('require_all', '>= 1.1.0')
   s.has_rdoc = false
   s.homepage = "http://github.com/bolthar/freightrain"

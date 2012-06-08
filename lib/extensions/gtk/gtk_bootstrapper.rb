@@ -12,6 +12,7 @@ require File.join(File.dirname(__FILE__), "widgets/gtk_treeview.rb")
 require File.join(File.dirname(__FILE__), "widgets/gtk_treeviewcolumn.rb")
 require File.join(File.dirname(__FILE__), "widgets/gtk_layout.rb")
 require File.join(File.dirname(__FILE__), "widgets/gtk_statusicon.rb")
+require File.join(File.dirname(__FILE__), "widgets/gtk_scale.rb")
 require File.join(File.dirname(__FILE__), "interface_builder.rb")
 require File.join(File.dirname(__FILE__), "dialog_helper.rb")
 
